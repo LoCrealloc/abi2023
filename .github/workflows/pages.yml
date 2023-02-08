@@ -1,19 +1,5 @@
 name: Build for Github pages
 
-inputs:
-  name:
-    description: "Artifact name"
-    required: false
-    default: "abi2023"
-  path:
-    description: "Path of the directory containing the static assets."
-    required: true
-    default: "."
-  retention-days:
-    description: "Duration after which artifact will expire in days."
-    required: false
-    default: "1"
-
 on:
   push:
     branches:
@@ -38,24 +24,8 @@ jobs:
           root_file: |
             Informatik/informatik.tex
 
-      - name: Create archive
-        shell: sh
-        run: |
-          tar \
-            --dereference --hard-dereference \
-            --directory "$INPUT_PATH" \
-            -cvf "$RUNNER_TEMP/artifact.tar" \
-            --exclude=.git \
-            --exclude=.github \
-        env:
-          INPUT_PATH: ${{ inputs.path }}
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@main
-        with:
-          name: ${{ inputs.name }}
-          path: ${{ runner.temp }}/artifact.tar
-          retention-days: ${{ inputs.retention-days }}
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v1.0.7
 
   deploy:
     runs-on: ubuntu-latest
