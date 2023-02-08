@@ -23,6 +23,7 @@ jobs:
         with:
           root_file: |
             Informatik/informatik.tex
+            Englisch/englisch.tex
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v1.0.7
