@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1.0.7
 
         with:
-          INPUT_PATH: "."
+          path: "."
 
   deploy:
     runs-on: ubuntu-latest
