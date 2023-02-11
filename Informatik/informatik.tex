@@ -2,12 +2,11 @@
 
 \usepackage{graphicx}
 \usepackage{amsfonts,amsmath,amssymb,amsthm}
-\usepackage{stmaryrd}
 \usepackage[inner=3cm, outer=3cm]{geometry}
 
 \title{Informatik}
 \date{Q2 2022/2023}
-\author{Paul SK}
+\author{Paul SK \& Sophie}
 
 \begin{document}
 	\pagenumbering{gobble}
@@ -29,6 +28,68 @@
 	\section{Nicht-Lineare Datenstrukturen}
 
 	\section{Formale Sprachen, Grammatiken und Automaten}
+	
+	\subsection{Formale Sprachen}
+	
+	\subsubsection{Definition}
+	
+	\begin{itemize}
+		\item Menge von Symbolanordnungen
+		\item vorgegebene Regeln
+		\item Syntax: erlaubte Ausdrücke
+		\item Semantik: Bedeutung von Ausdrücken (in formalen Sprachen nicht definiert)
+	\end{itemize}
+	
+	\subsubsection{Alphabet}
+	
+	\begin{itemize}
+		\item Menge zulässiger Zeichen für eine Sprache
+		\item Bezeichnung: $\Sigma$
+	\end{itemize}
+	
+	\subsubsection{Wort}
+	
+	\begin{itemize}
+		\item beliebige endliche Aneinanderreihung von Zeichen des Alphabets
+		\item leeres Wort ($\epsilon$): Wort ohne Buchstaben
+		\item Menge aller Worte aus dem Alphabet $\Sigma$ inklusive $\epsilon$: $\Sigma$*
+		\item $\Sigma$* kann Worte mit unendlicher Länge enthalten und enthält daher unendlich viele Worte
+	\end{itemize}
+	
+	\subsubsection{Syntaxdiagramme}
+	
+	\begin{itemize}
+		\item mehrere Symbole hintereinander
+		\item Iteration (0 - $\infty$)
+		\item Iteration (1 - $\infty$)
+		\item Alternativen
+		\item Nichts als Alternative
+		\item Bezug auf andere Syntaxdiagramme
+	\end{itemize}
+	
+	\subsection{Grammatiken}
+	
+	\begin{itemize}
+		\item Grammatik $G = (N, \Sigma, S, P)$
+		\item $N$: Menge der Nichtterminalsymbole ("Variablen")
+		\item $\Sigma$: Menge der Terminalsymbole / Alphabet
+		\item $S$: Startsymbol mit $S \in N$
+		\item $P$: Menge der Produktionsregeln \\
+		Beispiele:
+		\begin{itemize}
+			\item A $\rightarrow$ B
+			\item A $\rightarrow$ B, B $\rightarrow$ A
+			\item A $\rightarrow$ 0 $\mid$ 1
+			\item A $\rightarrow$ 0B $\mid$ 100B $\mid$ $\epsilon$
+		\end{itemize}
+		\item $N \cap \Sigma = \varnothing$ (nichts ist gleichzeitig Terminal- und Nichtterminalsymbol)
+	\end{itemize}
+	
+	\subsubsection{Reguläre Grammatiken}
+	
+	
+	
+	\subsection{Automaten}
 
 	\section{Datenschutz}
 
