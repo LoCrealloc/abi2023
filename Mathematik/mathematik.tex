@@ -1,0 +1,615 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\title{Mathematik}
+\date{11.02.2023}
+\author{Sophie}
+
+\begin{document}
+  \pagenumbering{gobble}
+  \maketitle
+  \newpage
+  \pagenumbering{arabic}
+  
+  \section{Analysis}
+  
+  \subsection{Einführung}
+  
+  \subsubsection{Definition: Ganzrationale Funktion}
+  Es seien $a_0, a_1, a_2 \ldots a_n \in \mathbb{R}$. Ferner sei $a_n \ne 0$. Dann heißen Funktionen der Form
+  \begin{equation*}
+  	f(x) = a_n x² + a_{n - 1} x^{n-1} + \ldots + a_1 x + a_0
+  \end{equation*}
+  ganzrationale Funktionen vom Grade n.
+  
+  \subsubsection{Definition: Zweite Ableitung}
+  Es sei $f$ eine differenzierbare Funktion una auch $f'$ sei wiederum differenzierar. Dann heißt
+  \begin{equation*}
+  	f''(x) \coloneqq (f'(x))'
+  \end{equation*}
+  zweite Ableitung von $f$.
+  
+  \subsubsection{Satz: Krümmung und zweite Ableitung}
+  Es seien $f$ und $x_0 \in \mathbb{D}_f$ gegeben. $f$ sei in $x_0$ zweifach differenzierbar. Dann gilt: 
+  \begin{align}
+  	f''(x_0) &> 0 \\
+  	f''(x_0) &< 0 \\
+  	f''(x_0) &= 0
+  \end{align}
+  (1) Der Graph von $f$ ist in $x_0$ linksgekrümmt. \\
+  (2) Der Graph von $f$ ist in $x_0$ rechtsgekrümmt. \\
+  (3) Der Graph von $f$ ändert hier seine Krümmung.
+  
+  \subsubsection{Untersuchung des Krümmungsverhaltens}
+  $\implies$ Die Krümmung ändert sich genau dann, wenn gilt: $f''(x) = 0$
+  
+  \subsubsection{Satz: Hinreichende Bedingung für Extremstellen}
+  Es sei $f$ eine zweifach differenzierbare Funktion und $x_0 \in \mathbb{D}_f$. Dann gilt:
+  \begin{equation*}
+  	f'(x_0) = 0 \land f''(x_o) < 0
+  \end{equation*}
+  $\implies f$ hat in $x_0$ einen lokalen Hochpunkt.
+  \newline
+  \newline
+  bzw.
+  \begin{equation*}
+  	f'(x_0) = 0 \land f''(x_0) > 0
+  \end{equation*}
+  $\implies f$ hat in $x_0$ einen lokalen Tiefpunkt.
+  \newline
+  \newline
+  Wir betrachten den Fall, dass auch $f''$ gleich $0$ wird. Bei $f'(x_0) = 0 \land f''(x_0) = 0$ können Hochpunkt, Tiefpunkt oder Sattelpunkt vorliegen. Dann muss das Vorzeichenwechselkriterium verwendet werden.
+  
+  \subsubsection{Bestimmen von Extremstellen}
+  \begin{enumerate}
+  	\item notwendige Bedingung $f'(x) = 0$
+  	\item hinreichende Bedingung $f'(x) = 0 \land$Vorzeichenwechsel \\
+  	hinreichende Bedingung $f'(x) = 0 \land f''(x) \neq 0$
+  	\item Randwerte beachten!
+  \end{enumerate}
+  
+  \subsubsection{Definition: Wendestelle}
+  Es sei $f$ zweifach differenzierbar und $x_0 \in \mathbb{D}_f$. Geht in $x_0$ die Krümmung vom Graphen $f$ von Links- zu Rechtsgekrümmt über oder umgekehrt, so heißt $x_0$ Wendestelle von $f$.
+  
+  \subsubsection{Satz: Notwendige und hinreichende Bedingung für Wendestellen}
+  \begin{enumerate}
+  	\item notwendige Bedungung: $f''(x_0) = 0$
+  	\item hinreichende Bedingung: 
+  	\begin{enumerate}
+  		\item $f''(x_0) = 0 \land f'''(x_0) \neq 0$
+  		\newline
+  		$\implies x_0$ ist eine Wendestelle von $f$.
+  		\item $f''(x_0) = 0 \land f'''(x_0) = 0 \land$ Vorzeichenwechsel
+  		\newline
+  		$\implies x_0$ ist eine Wendestelle von $f$.
+  	\end{enumerate}
+  \end{enumerate}
+  
+  \subsubsection{Bestimmen von Wendestellen}
+  \begin{enumerate}
+  	\item notwendige Bedingung $f''(x) = 0$
+  	\item hinreichende Bedingung $f''(x) = 0 \land$Vorzeichenwechsel \\
+  	hinreichende Bedingung $f''(x) = 0 \land f'''(x) \neq 0$
+  \end{enumerate}
+  
+  \subsubsection{Bestimmen der Wendetangente}
+  \begin{enumerate}
+  	\item $t(x) = m x + n$
+  	\item $W(a|b)$
+  	\item $t(x) = b; x = a$
+  	\item $m = f'(a)$
+  	\item auflösen nach $n$
+  \end{enumerate}
+  
+  \subsection{Extremwertprobleme}
+  
+  \subsubsection{Begriffserklärungen}
+  \begin{enumerate}
+  	\item Zielfunktion: Funktion, die die Größe abbildet, die extremal werden soll
+  	\item Nebenbedingung: weitere Bedingungen
+  \end{enumerate}
+  
+  \subsubsection{Herangehensweise}
+  \begin{enumerate}
+  	\item gegebene und gesuchte Größe(n), Nebenbedingung(en) und Zielfunktion klären
+  	\item Nebenbedingung(en) umformen und in Zielfunktion einsätzen, sodass nur noch eine unbekannte bleibt.
+  	\item notwendige Bedingung für Extrema auf Zielfunktion anwenden
+  	\item hinreichende Bedingung für Extrema auf Zielfunktion anwenden
+  	\item erhaltenen $x$-Wert der Extremstelle in Nebenbedingung(en) einsätzen, um übrige Werte zu ermitteln
+  \end{enumerate}
+  
+  \subsection{Steckbriefaufgaben}
+  
+  \subsubsection{Konzept}
+  Man schließt von gegebenen Informationen über graphische Eigenschaften auf die zugrunde liegende Funktion.
+  
+  \subsubsection{Verfahren zur Lösung von Gleichungssystemen}
+  \begin{enumerate}
+  	\item Einsetzungsverfahren
+  	\begin{enumerate}
+  		\item alle Gleichungen außer einer nach unterschiedlichen Unbekannten auflösen
+  		\item in die verbliebene Gleichung einsätzen
+  		\item verbliebene Gleichung nach verbliebener Variable auflösen
+  		\item Wert für diese Variable einsetzen und von vorne beginnen, bis keine Variable mehr unbekannt ist
+  	\end{enumerate}
+  	\item Gleichsetzungsverfahren \\
+  	Jeweils zwei Gleichungen werden nach der selben Variable aufgelöst und gleichgesetzt. Ist nur noch eine Variable in der Gleichung, kann sie gelöst werden. Für restliche Variablen wird genauso vorgegangen.
+  	\item Gauß-Algorithmus / Gauß-Verfahren
+  	\begin{enumerate}
+  		\item Gleichungen so aufschreiben, dass die selben Variablen untereinander stehen
+  		\item in der unteren linken Ecke (unterste Gleichung, erste Variable) eine Null erzeugen, indem diese Gleichung oder ein Vielfaches von ihr mit einer anderen Gleichung oder einem Vielfachen davon addiert oder subtrahiert wird
+  		\item in der Gleichung darüber an erster Stelle auf gleiche Weise eine Null erzeugen
+  		\item in der untersten Gleichung an zweiter Stelle eine Null erzeugen
+  		\item fortfahren bis in einer Gleichung nur noch eine Variable vorhanden ist
+  		\item diese Gleichung dann auflösen und die Lösung in die nächste Gleichung einsetzen, in der noch zwei Variablen verblieben sind
+  		\item fortfahren bis für alle Variablen Werte ermittelt sind
+  	\end{enumerate}
+  \end{enumerate}
+  
+  \subsubsection{Herangehensweise}
+  \begin{enumerate}
+  	\item Grad der Funktion bestimmen
+  	\item Anzahl der Variablen (eine mehr als der Grad der Funktion) bestimmen
+  	\item entsprechend viele Gleichungen aus gegebenen Informationen ablesen, zum Beispiel
+  	\begin{enumerate}
+  		\item Extremum \\
+  		$\implies$ Punkt \\
+  		$\implies$ Ableitung an der Stelle gleich Null
+  		\item Nullstelle \\
+  		$\implies$ Punkt
+  		\item $y$-Achsen-Abschnitt \\
+  		$\implies$ Punkt $\implies$ Variable ohne $x$
+  		\item Punkt \\
+  		$\implies$ Punkt
+  		\item Wendepunkt \\
+  		$\implies$ Punkt \\
+  		$\implies$ zweite Ableitung an der Stelle gleich Null
+  		\item Tangente \\
+  		$\implies$ Punkt am Schnittpunkt von Funktion und Tangente \\
+  		$\implies$ Steigung am Schnittpunkt, also wert der Ableitung an diesem 
+  		\item Punktsymmetrie (zum Ursprung) \\
+  		$\implies f(x) = -f(-x) \implies$ nur ungerade Exponenten von $x$ (inklusive $1$)
+  		\item Achsensymmetrie (zur $x$-Achse) \\
+  		$\implies f(x) = f(-x) \implies$ nur gerade Exponenten von $x$ (inklusive $0$)
+  	\end{enumerate}
+  \end{enumerate}
+  
+  \subsection{Funktionenscharen}
+  
+  \subsubsection{Einleitung}
+  Wir betrachten die folgenden Funktionen: 
+  \begin{align*}
+  	f_1(x) &= 2x^3 + x^2 + x + 17 \\
+  	f_2(x) &= 2x^3 + x^2 + 2x + 17 \\
+  	f_3(x) &= 2x^3 + x^2 + 3x + 17
+  \end{align*}
+  Statt für alle derartigen Funktionen einzeln beispielsweise die Extremstellen zu berechnen würde man die gleiche "Form" ausnutzen. 
+  
+  \subsubsection{Definition: Parameter, Funktionsschar}
+  Kommt in einer Funktion $f(x)$ eine oder mehrere unbekannte Größen vor, so sprechen wir von einer Funktionsschar. Beispiel: 
+  \begin{equation*}
+  	f_a(x) = ax²
+  \end{equation*}
+  $a$ heißt Parameter. Ein Parameter ist eine unbekannte Konstante. Weitere Beispiele: 
+  \begin{enumerate}
+  	\item $f_a(x) = ax² \implies f_a'(x) = 2ax$
+  	\item $f_x(a) = ax² \implies f_x'(a) = x²$
+  	\item $f_t(x) = tx² + tx + 17t$
+  	\item $f_{a, b}(x) = ax² + bx - 17$
+  \end{enumerate}
+  Der Graph einer Funktionsschar heißt Kurvenschar.
+  
+  \subsection{Ortskurven}
+  
+  \subsubsection{Einleitung}
+  Bei einer Kurbenschar können die charakteristischen Punkte (also beispielsweise Hochpunkte, Tiefpunkte oder Wendepunkte) wiederum auf einer Kurve liegen. Diese Kurve heißt Ortskurve der Hochpunkte / Tiefpunkte / Wendepunkte oder Ähnliches. 
+  
+  \subsubsection{Bestimmung einer Ortskurve}
+  \begin{enumerate}
+  	\item gesuchten charakteristischen Punkt (in Abhängigkeit der Konstanten) bestimmen
+  	\item $x$-Wert des Punktes nach Konstante auflösen
+  	\item in $y$-Wert einsetzen, wodurch eine "normale" Geradengleichung (nur $x$ und $x$ als Unbekannte) entsteht 
+  \end{enumerate}
+  
+  \subsubsection{Besonderheiten bei Ortskurven}
+  Kommt es bei der Bestimmung der Geradengleichung dazu, dass der $x$-Wert des charakteristischen Punktes nicht ver der / den Konstanten abhängig ist, kann keine Ortskurve gefunden werden. 
+  
+  \subsection{Integralrechnung}
+  
+  \subsubsection{Orientierter und nicht orientierter Flächeninhalt}
+  Beim nicht orientierten Flächeninhalt wird nur die absolute Maßzahl des Flächeninhalts betrachtet, er ist somit immer positiv. Beim orientierten Flächeninhalt kann die Maßzahl sehrwohl negativ sein.
+  
+  \subsubsection{Definition: Integral}
+  $f$ sei eine Funktion, die über dem Intervall $[a; b]$ mit der $x$-Achse eine Fläche einschließt. $U_n$ sei die Untersumme und $O_n$ die Obersumme von $f$ bei der Unterteilung in $n$ breite Teilflächen. Dann heißt
+  \begin{equation*}
+  	\lim\limits_{n \to \infty} U_n = \lim\limits_{n \to \infty} O_n
+  \end{equation*}
+  Integral der Funktion $f$ in den Grenzen v $a$ bis $b$. In Zeichen: 
+  \begin{equation*}
+  	\int^b_a f(x) dx
+  \end{equation*}
+  
+   \subsubsection{Definition: Stammfunktion}
+  Für eine Funktion $f$ heißt eine Funktion $F$ Stammfunktion von $f$, wenn gilt:
+  \begin{equation*}
+  	F'(x) = f(x)
+  \end{equation*}
+  
+  \subsubsection{Satz: Hauptsatz der Differenzial- und Integralrechnung}
+  Es sei $f$ eine auf dem Intervall $[a; b]$ stetige Funktion und $F$ sei die Stammfunktion von $f$. Dann gilt: 
+  \begin{equation*}
+  	\int^b_a f(x) dx = F(b) - F(a)
+  \end{equation*}
+  
+  \subsubsection{Schreibweisen}
+  \begin{enumerate}
+  	\item Fehlen bei der Integralschreibweise die Grenzen, so "fordert" der Integraloperator zum Bilden der Stammfunktion auf. 
+  	\item Klammerschreibweise beim Berechnen eines Integrals: 
+  	\begin{equation*}
+  		\int^b_a f(x) dx = [F(x)]^b_a = F(b) - F(a)
+  	\end{equation*}
+  \end{enumerate}
+  
+  \subsubsection{Bilden von Stammfunktionen}
+  \begin{enumerate}
+  	\item "rückwärts ableiten" $\implies$ Summand für Summand; Potenz um $1$ erhöhen und Faktor durch vorherige Potenz teilen
+  	\item Brüche in negative Potenzen umschreiben
+  	\item Wurzeln in gebrochene Potenzen umschreiben
+  	\item Brüche mit Summe im Zähler aufteilen in Summe von zwei Brüchen mit gleichem Nenner
+  	\item $\frac{1}{x} \implies \ln{x} + c$
+  	\item $\sin{x} \implies -\cos{x} \implies -\sin{x} \implies \cos{x} \implies \sin{x}$
+  \end{enumerate}
+  
+  \subsubsection{Satz: Linearität des Integrals}
+  Für $k \in \mathbb{R}$ sowie Funktionen $f$ und $g$ gilt: 
+  \begin{align*}
+  	k \cdot \int^b_a f(x) dx &= \int^b_a k \cdot f(x) dx \\
+  	\int^b_a f(x) + g(x) dx &= \int^b_a f(x) dx + \int^b_a g(x) dx
+  \end{align*}
+  
+  \subsubsection{Satz: Vertauschen der Integrationsgrenzen}
+  Für $a < b$ gilt:
+  \begin{equation*}
+  	\int^b_a f(x) dx = - \int^a_b f(x) dx
+  \end{equation*}
+  
+  \subsubsection{Satz:}
+  Für $a < b < c$ gilt:
+  \begin{equation*}
+  	\int^b_a f(x) dx + \int^c_b f(x) dx = \int^c_a f(x) dx
+  \end{equation*}
+  
+  \subsubsection{Integrale und Flächeninhalte}
+  Ist der Flächeninhalt zu berechnen, so ist dies im geometrischen Sinne gemeint, also der nichtorientierte Flächeninhalt. Das Integral berechnet allerdings den orientierten Flächeninhalt. 
+  
+  \subsubsection{Satz: Flächeninhalt mit Integralberechnung}
+  Eine Funktion $f$ habe die Nullstellen $x_1$ und $x_2 \in [a;b]$. Gesucht ist der Flächeninhalt, den der Graph von $f$ über dem Intervall $[a;b]$ mit der $x$-Achse einschließt. Es gilt:
+  \begin{equation*}
+  	A = |\int^{x_1}_a f(x) dx| + |\int^{x_2}_{x_1} f(x) dx| + |\int^b_{x_2} f(x) dx|
+  \end{equation*}
+  
+  \subsubsection{Berechnung von Flächen, die von zwei Funktionen eingeschlossen werden}
+  Werden über $[a;b]$ eine Fläche von zwei Funktionsgraphen der Funktionen $f$ und $g$ eingeschlossen, so gilt: 
+  \begin{equation*}
+  	A = |\int^b_a f(x) - g(x) dx|
+  \end{equation*}
+  
+  \subsubsection{Definition: Integralfunktion}
+  Es sei $f$ eine auf dem Intervall $I$ stetige Funktion. Man definiert für $u \in I$: 
+  \begin{equation*}
+  	J_u(x) = \int^x_u f(t) dt
+  \end{equation*}
+  $J_u$ heißt Integralfunktion zur unteren Grenze $u$.
+  
+  \subsubsection{Satz: Rotationsvolumen}
+  Rotiert der Graph einer Funktion $f$ über $[a;b]$ um die $x$-Achse, so gilt für sein Volumen: 
+  \begin{equation*}
+  	V = \pi \cdot \int^b_a (f(x))^2 dx
+  \end{equation*}
+  
+  \subsubsection{Grenzwerte}
+  $I$ heißt Grenzwert einer Funktion $f$ für $x \rightarrow \infty$, wenn gilt: Für alle $\epsilon > 0$ gibt es ein $x_0$, sodass für alle $x > x_0$ gilt: $ |f(x) - I| < \epsilon$
+  
+  \subsubsection{Definition: Uneigentliches Integral}
+  Als uneigentliches Integral bezeichnet man ein Integral, bei dem mindestens eine der Grenzen $\pm \infty$ ist.
+  
+  \subsubsection{Weitere uneigentliche Integrale}
+  Wie beispielsweise bei der Fläche im Intervall $[0;1]$ der Funktion $\frac{1}{x}$ können Integrale bzw. ihre Grenzwerte (positiv oder negativ) unendlich sein. Auch in diesem Fall spricht man von einem uneigentlichem Integral. 
+  
+  \subsubsection{Mittelwert einer Funktion}
+  Ist $f$ eine Funktion und $[a;b]$ ein Intervall, so heißt die Zahl
+  \begin{equation*}
+  	\overline{\rm m} = \frac{1}{b - a} \int^b_a f(x) dx
+  \end{equation*}
+  Mittelwert von $f$ über $[a;b]$.
+  
+  \subsection{Exponentialfunktionen}
+  
+  \subsubsection{Logarithmenrechengesetze}
+  \begin{enumerate}
+  	\item $\log_a{(x \cdot y)} = \log_a{x} + \log_a{y}$
+  	\item $\log_a{\frac{x}{y}} = \log_a{x} - \log_a{y}$
+  	\item $\log_a{x^n} = n \cdot \log_a{x}$
+  \end{enumerate}
+  
+  \subsubsection{Definition: Eulersche Zahl}
+  Die Zahlenfolge $(1 + \frac{1}{n})^n$ hat für $n \rightarrow \infty$ einen endlichen Grenzwert, der als Eulersche Zahl $e$ bezeichnet wird.
+  
+  \subsubsection{Definition: Natürlicher Logarithmus}
+  Der Logarithmus zur Basis $e$ wird natürlicher Logarithmus genannt, in Zeichen:
+  \begin{equation*}
+  	\log_e{x} = \ln{x}
+  \end{equation*}
+  
+  \subsubsection{Satz: Ableiten von Exponentialfunktionen}
+  Für $a > 0$ sei $f(x) = a^x$ gegeben. Dann gilt: 
+  \begin{equation*}
+  	f'(x) = \ln{a} \cdot a^x
+  \end{equation*}
+  
+  \subsubsection{Definition: Zusammengesetzte Funktionen}
+  Zusammengesetzte Funktionen entstehen durch Addition, Multiplikation oder auch Komposition von Grundfunktionen (ganzrationale Funktionen, Potenzfunktionen, Esponentialfunktionen usw.).
+  
+  \subsubsection{Produktregel}
+  Es seien $u$ und $v$ defferenzierbare Funktionen und $f(x) = u(x) \cdot v(x)$. Dann gilt:
+  \begin{equation*}
+  	f'(x) = u'(x) \cdot v(x) + u(x) \cdot v'(x)
+  \end{equation*}
+  
+  \subsubsection{Kettenregel}
+  Es seien $u$ und $v$ differenzierbare Funktionen. Dann ist auch 
+  \begin{equation*}
+  	f(x) \coloneqq (u \circ v)(x) = u(v(x))
+  \end{equation*}
+  defferenzierbar und es gilt: 
+  \begin{equation*}
+  	f'(x) = u'(v(x)) \cdot v'(x)
+  \end{equation*}
+  $u'(v(x))$ heißt äußere Ableitung und $v'(x)$ innere Ableitung.
+  
+  \subsubsection{Partielle Integration}
+  Für differenzierbare Funktionen $u$ und $v$ gilt:
+  \begin{equation*}
+  	\int u'v = u v - \int u v'
+  \end{equation*}
+  
+  \section{Analytische Geometrie}
+  
+  \section{Stochastik}
+  
+  \subsection{Einführung}
+  
+  \subsubsection{Definition: Mittelwert}
+  Es sei $x_1, x_2 \ldots x_n$ eine Urliste. Dann heißt $\overline{\rm x} \coloneqq \frac{1}{n} \cdot (x_1 + x_2 + \ldots + x_n)$ (arithmetischer) Mittelwert (der Urliste).
+  
+  \subsubsection{Definition: Empirische Standardabweichung}
+  ES seien $x_1,x_2 \ldots x_n$ eine Urliste und $\overline{\rm x}$ ihr Mittelwert. Man definiert die empirische Standardabweichung $s$ wiefolgt: 
+  \begin{equation*}
+  	s \coloneqq \sqrt{\frac{1}{n} \cdot ((x_1 - \overline{\rm x})^2 + (x_2 - \overline{\rm x})^2 + \ldots + (x_n - \overline{\rm x})^2)}
+  \end{equation*}
+  
+  \subsubsection{Definition: Erwartungswert}
+  $X$ sei eine Zufallsgröße mit den Werten $x_1 \ldots x_n$. Man definiert den Erwartungswert von $X$ als
+  \begin{equation*}
+  	\mu = x_1 \cdot P(X = x_1) + \ldots + x_n \cdot P(X = x_n)
+  \end{equation*}
+  Der Erwartungswert gibt an, welchen Wert $X$ langfristig im Schnitt annimmt.
+  
+  \subsubsection{Definition: Varianz}
+  Die Varianz $\sigma^2$ einer Zufallsgröße $X$ bemisst die Streuung der Werde von $X$ um dem Erwartungswert $\mu$. 
+  \begin{equation*}
+  	\sigma^2 \coloneqq (x_1 - \mu)^2 \cdot p_1 +  (x_2 - \mu)^2 \cdot p_2 + \ldots + (x_n - \mu)^2 \cdot p_n
+  \end{equation*}
+  
+  \subsubsection{Definition: Standardabweichung}
+  Die Wurzel $\sigma$ der Varianz $\sigma^2$ heißt (theoretische) Standardabweichung.
+  
+  \subsection{Kombinatorische Grundbegriffe}
+  
+  \subsubsection{Definition: Fakultät}
+  Es sei $x \in \mathbb{N}$. Dann heißt die Zahl 
+  \begin{equation*}
+  	x! \coloneqq x \cdot (x - 1) \cdot (x - 2) \cdot \ldots \cdot 1
+  \end{equation*}
+  die Fakultät von $x$.
+  
+  \subsubsection{Definition: Binomialkoeffizient}
+  Es seien $n, k \in \mathbb{N}$ mit $k \leqslant n$. Die Zahl 
+  $\begin{pmatrix}
+  	n \\
+  	k
+  \end{pmatrix}$
+  heißt Binomialkoeffizient. Man definiert: 
+  \begin{equation*}
+  	\begin{pmatrix}
+  		n \\
+  		k
+  	\end{pmatrix}
+  	\coloneqq \frac{n!}{k! \cdot (n-k)!}
+  \end{equation*}
+  
+  \subsubsection{Definition: Bernoulli-Experiment}
+  Ein Zufallsexperiment mit genau zwei Ergebnissen (Erfolg / Misserfolg) heißt Bernoulli-Experiment.
+  
+  \subsubsection{Definition: Bernoulli-Kette}
+  Die $n$-fache Wiederholung eines Bernoulli-Experiments heißt Bernoulli-Kette der Länge $n$.
+  
+  \subsubsection{Definition: Binomialverteilung}
+  $B_{n;p}(r)$ bezeichnet die Wahrscheinlichkeit, bei einer Bernoulli-Kette der Länge $n$ mit einer Erfolgswahrscheinlichkeit $p$ genau $r$ Erfolge zu erzielen. Es gilt:
+  \begin{equation*}
+  	B_{n;p}(r) = 
+  	\begin{pmatrix}
+  		n \\
+  		r
+  	\end{pmatrix}
+  	\cdot p^r\cdot (1-p)^{n-r}
+  \end{equation*}
+  
+  \subsubsection{Satz: Erwartungswert und Standardabweichung der Binomialverteilung}
+  Es sei $X \sim B_{n;p}$. Es gilt: 
+  \begin{align*}
+  	\mu &= n \cdot p \\
+  	\sigma &= \sqrt{n \cdot p \cdot (1-p)}
+  \end{align*}
+  
+  \subsubsection{Definition: $\frac{1}{\sqrt{n}}$-Gesetz für Schwankungsintervalle}
+  Bei einer Bernoulli-Kette mit Länge $n$ und Trefferwahrscheinlichkeit $p$ liegen fast alle (ca. $95,4\%$) der relativen Häufigkeiten im Schwankungsintervall
+  \begin{equation*}
+  	\begin{bmatrix}
+  		p - 2 \frac{\sqrt{p \cdot (1 - p)}}{\sqrt{n}}; p + 2 \frac{\sqrt{p \cdot (1 - p)}}{\sqrt{n}}
+  	\end{bmatrix}
+  \end{equation*}
+  Die Länge des Intervalls halbiert (drittelt...) sich, wenn man den Versuchsumfang vervierfacht (verneunfacht...). Diese Intervalle lassen sich für !!!!!!!!!!
+  
+  \subsubsection{Definition: Vertrauensintervall}
+  Wenn bei eier Bernoulli-Kette der Länge $n$ die relative Trefferhäufigkeit $h$ beobachtet wird, bestimmt man die Grenzen des Vertrauensintervalls $I = [a;b]$, indem man die Gleichungen
+  \begin{equation*}
+  	p \pm 2 \sqrt{\frac{p \cdot (1 - p)}{n}} = h
+  \end{equation*}
+  nach $p$ auflöst.
+  
+  \subsubsection{Satz: $2$-$\sigma$-Regel}
+  Für $X \sim B_{n;p}$ gilt: 
+  \begin{equation*}
+  	P(\mu - 2\sigma \leqslant X \leqslant \mu + 2\sigma) \approx 95,4%
+  \end{equation*}
+  
+  \subsection{Kontinuierliche Wahrscheinlichkeitsverteilung}
+  
+  \subsubsection{Definition: Wahrscheinlichkeitsdichte}
+  Eine Funktion $f$ heißt Wahrscheinlichkeitsdichte über dem Intervall $I = [a;b]$, falls gilt: 
+  \begin{enumerate}
+  	\item $f(x) \geqslant 0$ für alle $x \in I$
+  	\item $\int^b_a f(x) dt = 1$
+  \end{enumerate}
+  
+  \subsubsection{Satz: Erwartungswert und Standardabweichung}
+  Es gilt: 
+  \begin{align*}
+  	\mu &= \int^b_a x \cdot f(x) dx \\
+  	\sigma &= \sqrt{\int^b_a (x - \mu)^2 \cdot f(x) dx}
+  \end{align*}
+  
+  \subsubsection{Definition: Gaußsche Glockenfunktion}
+  Die Funktion 
+  \begin{equation*}
+  	\varphi_{\mu;\sigma}(x) = \frac{1}{\sigma \sqrt{2\pi}} \cdot e^{-\frac{(x \cdot \mu)^2}{2 \sigma^2}} 
+  \end{equation*}
+  	heißt Gaußsche Glockenfunktion. 
+  	
+  	\subsubsection{Definition: Standardglockenfunktion}
+  	Ist $\varphi_{\mu; \sigma}$ die Glockenfunktion, so nennt man $\varphi \coloneqq \varphi_{0;1}$ die Standardglockenfunktion.
+  	
+  	\subsubsection{Definition: Normalverteilung}
+  	Eine Zufallsgröße $X$ heißt normalverteilt zu den Parametern $\mu$ und $\sigma$, wenn sie $\varphi_{\mu;\sigma}$ als Dichtefunktion hat. 
+  	
+  	\subsubsection{Satz: Satz von Noivre-Laplace}
+  Es sei $X \sim B_{n;p}$. Wir wissen: 
+  \begin{align*}
+  	\mu &= n \cdot p \\
+  	\sigma &= \sqrt{n \cdot p \cdot (1 - p)}
+  \end{align*}
+  Dann gilt:
+  \begin{align*}
+  	P(X=k) = B_{n;p}(k) &\approx \varphi_{\mu;\sigma}(k) \\
+  	P(a \leqslant X \leqslant b) &\approx \int^{b+0,5}_{a-0,5} \varphi_{\mu;\sigma}(x) dx
+  \end{align*}
+  
+  \subsubsection{Stetigkeitskorrektur}
+  
+  \begin{enumerate}
+  	\item Fall: \\
+  	Ist $X \sim B_{n;p}$ und soll $X$ mit Hilfe der Normalverteilung angenähert werden, so ist eine Stetigkeitskorrektur notwendig. Allgemein ist sie bei diskreten Verteilungen notwendig, wenn sie durch die Normalverteilung angenähert werden sollen.
+  	\item Fall: \\
+  	Bei stetigen Verteilungen (zum Beispiel der Normalverteilung) ist keine Stetigkeitskorrektur anzuwenden. 
+  \end{enumerate}
+  
+  \subsection{Matrizen}
+  	
+  	\subsubsection{Definition: Matrix}
+  	Eine Matrix ist eine Zahlenkolonne mit $m$ Zeilen und $n$ Spalten. Sind alle Zahlen einer Matrix $M$ reelle Zahlen, so schreibt man: 
+  	\begin{equation*}
+  		M \in \mathbb{R}^{m \times n}
+  	\end{equation*}
+  	
+  	\subsubsection{Definition: Einheitsmatrix}
+  	Stehen auf der Hauptdiagonalen einer Matrix $M$ nur Einsen und sonst Nullen, so heißt $M$ Einheitsmatrix. Man schreibt statt $M$ dann häufig $E$. 
+  	
+  	\subsubsection{Definition: Quadratische Matrix}
+  	Gilt $M \in \mathbb{R}^{m \times m}$, so heißt $M$ quadratische Matrix. 
+  	
+  	\subsubsection{Definition: Matrix-Zahl-Multiplikation}
+  	Es sei $M \in \mathbb{R}^{a \times b}$ und $k \in \mathbb{R}$. Man definiert: 
+  	\begin{equation*}
+  		k \cdot M = k \cdot 
+  		\begin{pmatrix}
+  			m_{11}&m_{12}&\ldots&m_{1b} \\
+  			m_{21}&\ddots&&\vdots \\
+  			\vdots&&& \\
+  			m_{a1}&\ldots&&m_{ab}
+  		\end{pmatrix}
+  		\coloneqq
+  		\begin{pmatrix}
+  			k \cdot m_{11}&k \cdot m_{12}&\ldots&k \cdot m_{1b} \\
+  			k \cdot m_{21}&\ddots&&\vdots \\
+  			\vdots&&& \\
+  			k \cdot m_{a1}&\ldots&&k \cdot m_{ab}
+  		\end{pmatrix}
+  	\end{equation*}
+  	
+  	\subsubsection{Definition: Matrix-Matrix-Addition}
+  	Es seien $M, N \in \mathbb{R}^{a \times b}$. Man definiert: 
+  	\begin{equation*}
+  		M + N = 
+  		\begin{pmatrix}
+  			m_{11}&m_{12}&\ldots&m_{1b} \\
+  			m_{21}&\ddots&&\vdots \\
+  			\vdots&&& \\
+  			m_{a1}&\ldots&&m_{ab}
+  		\end{pmatrix}
+  		+
+  		\begin{pmatrix}
+  			n_{11}&n_{12}&\ldots&n_{1b} \\
+  			n_{21}&\ddots&&\vdots \\
+  			\vdots&&& \\
+  			n_{a1}&\ldots&&n_{ab}
+  		\end{pmatrix}
+  		\coloneqq
+  		\begin{pmatrix}
+  			m_{11} + n_{11}&m_{12} + n_{12}&\ldots&m_{1b} + n_{1b} \\
+  			m_{21} + n_{21}&\ddots&&\vdots \\
+  			\vdots&&& \\
+  			m_{a1} + n_{a1}&\ldots&&m_{ab} + n_{ab}
+  		\end{pmatrix}
+  	\end{equation*}
+  	
+  	\subsubsection{Definition: Matrix-Vektor-Multiplikation}
+  	Es sei $M \in \mathbb{R}^{a \times b}$ und $\overrightarrow{\rm v} \in \mathbb{R}^b$. Man definiert: 
+  	\begin{equation*}
+  		M \cdot \overrightarrow{\rm v} = 
+  		\begin{pmatrix}
+  			m_{11}&m_{12}&\ldots&m_{1b} \\
+  			m_{21}&\ddots&&\vdots \\
+  			\vdots&&& \\
+  			m_{a1}&\ldots&&m_{ab}
+  		\end{pmatrix}
+  		\cdot
+  		\begin{pmatrix}
+  			v_1 \\
+  			v_2 \\
+  			\vdots \\
+  			v_b
+  		\end{pmatrix}
+  		\coloneqq
+  		\begin{pmatrix}
+  			m_{11} \cdot v_1&m_{12} \cdot v_2&\ldots&m_{1b} \cdot v_b \\
+  			m_{21} \cdot v_1&\ddots&&\vdots \\
+  			\vdots&&& \\
+  			m_{a1} \cdot v_1&\ldots&&m_{ab} \cdot v_b
+  		\end{pmatrix}
+  	\end{equation*}
+  
+\end{document}
