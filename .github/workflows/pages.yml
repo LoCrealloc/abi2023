@@ -24,6 +24,7 @@ jobs:
           root_file: |
             Informatik/informatik.tex
             Englisch/englisch.tex
+            Mathematik/mathematik.tex
           work_in_root_file_dir: true
 
       - name: Upload GitHub Pages artifact
