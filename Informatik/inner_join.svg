@@ -1,0 +1,12 @@
+<svg viewBox="0 0 200 200">
+	<clipPath id="clip">
+		<use xlink:href="#c"  />
+	</clipPath>
+	<g fill="none" stroke="black" >
+		<circle id="c" cx="125" cy="100" r="30" />
+		<circle id="r" cx="165" cy="100" r="30" />
+		<text x="120" y="100" fill="#000000" text-anchor="middle">Tabelle 1</text>
+		<text x="170" y="100" fill="#000000" text-anchor="middle">Tabelle 2</text>
+	</g>
+	<use xlink:href="#r" clip-path="url(#clip)" fill="#0edaed" />
+</svg>
