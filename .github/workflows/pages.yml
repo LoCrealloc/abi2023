@@ -5,12 +5,6 @@ on:
     branches:
       - "master"
 
-  pull_request:
-    types:
-      - "closed"
-    branches:
-      - "master"
-
 jobs:
   build_pages:
     runs-on: ubuntu-latest
