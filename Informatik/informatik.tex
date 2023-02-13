@@ -450,6 +450,77 @@
 
 	Für DELETE FROM können die gleichen WHERE-Klauseln verwendet werden, die wir schon für SELECT erläutert haben.
 
+	\subsection{Der DatabaseConnector}
+Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir im Schulrahmen die Klassen "DatabaseConnector" und "QueryResult". Die Dokumentation dieser Klassen findet ihr \href{https://www.schulentwicklung.nrw.de/lehrplaene/upload/klp\_SII/if/Dokumentation\_ZA-IF\_GK-LK\_ab\_2018\_2021\_12\_22.pdf#page=31}{\underline{hier für den DatabaseConnector}} und \href{https://www.schulentwicklung.nrw.de/lehrplaene/upload/klp\_SII/if/Dokumentation\_ZA-IF\_GK-LK\_ab\_2018\_2021\_12\_22.pdf#page=32}{\underline{hier für das QueryResult}}
+
+	\subsubsection{Beispiel}
+	Ein Beispielprogramm zur Interaktion mit einer Datenbank in Java könnte wie folgt aussehen:
+
+	\begin{lstlisting}[language=Java]
+	public class Beispiel {
+		DatabaseConnector connector;
+
+		public Beispiel() {
+			this.connector = DatabaseConnector(
+				pIp="localhost",
+				pPort="5432",
+				pDatabase="kundendb",
+				pUsername="admin",
+				pPassword="admin"
+			);
+		}
+
+		public void neuerKunde(String pVorname, String pNachname, int pPlz) {
+			if (!checkPlzExists(pPlz)) {
+				throw new SQLException("PLZ existiert nicht; bitte hinzufuegen");
+			}
+
+			this.connector.executeStatement(
+				"INSERT INTO kunden (vorname, nachname, bestellungen, plz) \
+				VALUES ('"+ pVorname +"', '"+ pNachname +"', 0, "+ pPlz +");"
+			);
+		}
+
+		public String[] holAlleKunden() {
+			this.connector.executeStatement("SELECT * FROM kunden;");
+		
+			// Prueft auf Fehler
+			String error = this.connector.getErrorMessage();
+			if (error != null) {
+				throw new SQLException("Irgendwas ging schief: " + error);
+			}
+
+			QueryResult result = this.connector.getCurrentQueryResult();
+			String[][] data = result.getData();
+			String[] out = new String[data.length];
+		
+			for (int i = 0; i< data.length; i++) {
+				out[i] = data[i][0];
+			}
+			return out;
+		}
+
+		public void fuegeOrtHinzu(int pPlz, String pName) {
+			if (checkPlzExists(pPlz)) {
+				throw new SQLException("PLZ existiert bereits");
+			}
+			this.connector.executeStatement(
+				"INSERT INTO orte (plz, name) \
+				VALUES "+ pPlz +"'"+ pName +"');"
+			);
+		}
+
+		public boolean checkPlzExists(int plz) {
+			this.connector.executeStatement("SELECT plz FROM orte WHERE plz = " + String.valueOf(plz) + ";");
+
+			if (this.connector.getErrorMessage() != null) {
+				throw new SQLException("Irgendwas ging schief");
+			}
+			return this.connector.getCurrentQueryResult() != null; // Wenn ein Eintrag gefunden wurde, return wir true
+		}
+	}
+	\end{lstlisting}
+
 
 	\section{Nicht-Lineare Datenstrukturen}
 
