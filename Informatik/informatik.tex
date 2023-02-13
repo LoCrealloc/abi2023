@@ -7,6 +7,10 @@
 \usepackage{float}
 \usepackage[inner=3cm, outer=3cm]{geometry}
 
+\hbadness=10001
+\hfuzz=4pt
+\vfuzz=4pt
+
 \title{Informatik}
 \date{Q2 2022/2023}
 \author{Paul SK}
@@ -30,6 +34,7 @@
 	\subsection{Das Entity-Relationship-Modell}
 	\subsubsection{Verschiedene Elemente}
 	\paragraph{Entität}
+	Durch eine Entität werden generelle "Dinge" abstrahiert, wie zum Beispiel Menschen, Räume, Computer usw.
 
 	\begin{figure}[h!]
 		\centering
@@ -37,14 +42,102 @@
 		\caption{Eine Entität wird mit einem Rechteck dargestellt}
 	\end{figure}	
 
-
 	\paragraph{Attribut}
+	Attribute beschreiben die Eigenschaften einer Entität. Wenn ein Attribut ein sogenannter Primärschlüssel ist, der eindeutig der Instanz einer Entität zuzuordnen ist, wird dieser unterstrichen.
 
 	\begin{figure}[h!]
 		\centering
 		\includesvg[width=3.0cm]{attribute}
 		\caption{Ein Attribut wird in einer Ellipse geschrieben}
 	\end{figure}	
+
+	\paragraph{Relation}
+	Mithilfe von Relationen werden die Beziehungen zwischen zwei Entitäten beschrieben. Wenn ich beispielsweise sagen möchte, dass einem Menschen ein Auto gehört, stelle ich eine Relation zwischen den Entitäten "Mensch" und "Auto" her. Darüber hinaus kann eine Relation auch Attribute haben, die die Beziehung in irgendeiner Form beschreiben.
+	Relationen haben immer sogenannte "Kardinalitäten". Damit wird die Menge der Beziehungen beschrieben, die zwei Entitäten haben. Davon gibt es drei Stück:
+
+	\subparagraph{1-zu-1-Relation}
+	Bei 1 zu 1 Relationen hat eine Instanz einer Entität exakt eine Beziehung zu der Instanz einer anderen Entität. Beispielsweise hat ein Mitarbeiter genau einen Firmenwagen, und jeder Firmenwagen gehört auch nur zu einem Mitarbeiter.
+
+	\subparagraph{1-zu-n-Beziehung}
+	Eine 1 zu n Beziehung beschreibt Umstände, bei denen die Instanz einer Entität mehrere Beziehungen zu verschiedenen Instanzen einer anderen Entität hat. Die Instanzen der zweiten Entität wiederum haben aber jeweils nur eine Beziehung zu der ersten Entität. Beispielsweise gehören hat die Schulklasse "7b" 20 Schüler, und jeder diese Schüler gehört zu der einen Schulklasse "7b".
+
+	\subparagraph{n-zu-m-Beziehung}
+	n zu m Relationen beschreiben Beziehungen, in denen eine Entität sich auf mehrere Instanzen anderer Entitäten beziehen kann und eine Instanz der zweiten Entität sich auch wieder auf mehrere Instanzen aus der ersten Entität bezieht. Ein Bespiel hierfür wäre eine Entität "Lehrer", deren Instanz viele Schüler unterricht (n) und Instanzen der Klasse Schüler, die von vielen verschiedenen Lehrern unterrichtet werden (m).
+
+	Die Kardinalitäten stehen im ER-Diagramm immer von der einen Entität in Richtung einer zweiten Entität auf der Rautenseite bei der zweiten Entität.
+
+	\begin{figure}[h!]
+		\centering
+		\includesvg[width=3.0cm]{relation}
+		\caption{Ein Relation wird durch eine Raute repräsentiert}
+	\end{figure}
+
+	\subsubsection{Transformation}
+	Bei der Transformation überführen wir ein ER-Diagramm in eine Tabellenform, die wir für eine relationale Datenbank verwenden können.
+	Eine Tabelle wird wie folgt dargstellt:
+	\begin{center}
+		Mensch(\underline{MenschId}, Name, Geschlecht) \\
+		Auto(\underline{AutoId}, Modell, Kennzeichen, $\uparrow$ MenschId)
+	\end{center}
+	Unterstrichene Attribute sind Primärschlüssel, Attribute mit einem nach oben zeigenden Pfeil sind Fremdschlüssel.
+
+	\paragraph{Tranformationsregeln}
+	Ein ER-Diagramm wird anhand von festen Regeln in eine Tabellenform tranformiert.
+
+	\subparagraph{Regel 1}
+	Jede Entität wird als eigene Tabelle mit Primärschlüssel dargestellt.
+
+	\subparagraph{Regel 2}
+	Jede n:m-Beziehung wird als eigene Tabelle dargestellt.
+
+	\subparagraph{Regel 3}
+	Jede 1:n- und 1:1-Beziehung mit eigenen Attributen wird wie bei Regel 2 durch eine eigene Tabelle repräsentiert.
+
+	\subparagraph{Regel 4a}
+	Jede 1:n-Beziehung ohne eigene Attribute wird so dargstellt, dass der Primärschlüssel der 1-Entität Fremdschlüssel der n-Entität wird.
+
+	\subparagraph{Regel 4b}
+	Jede 1:1-Beziehung ohne eigene Attribute wird so dargstellt, dass der Primärschlüssel der ersten Entität bei der zweiten Entität Primär- und Fremdschlüssel zugleich wird.
+
+	\subparagraph{Regel 4c}
+	Sind Regel 4a und 4b nicht anwendbar, dann wird für die Beziehung eine gesonderte Tabelle angelegt. Diese Fälle müssen aus dem Kontext abgeleitet werden.
+	Beispielsweise kann eine 1:1-Relation "verheiratet mit" zwischen zwei Menschen nicht durch Regel 4b gelöst werden, da sonst eine "Heiratspflicht" bestehen würde.
+
+
+	\subsection{Normalisierung}
+	Wenn man einfach die Tabellen verwendet, die aus der Transformation eines ER-Diagrammes resultieren, kann es zu verschiedenen Problemen kommen. Insbesondere können sogenannte "Anomalien" auftreten:
+
+	\paragraph{Einfügeanomalie}
+	Das hinzufügen eines Eintrages in eine Tabelle kann zu einem unvollständigen Datensatz führen (unerwünschte null-werte).
+
+	\paragraph{Änderungsanomalie}
+	Wenn ein Wert, der mehrfach auftritt, nur an einer Stelle geändert wird, kann diese Änderung zu einem inkonsistenten Datensatz führen.
+
+	\paragraph{Löschanomalie}
+	Das Löschen eines Datensatzes führt aufgrund von Abhängigkeiten zur (unabsichtlichen) Löschung eines weiteren Datensatzes.
+
+	Aus diesem Grund führen wir sogenannte Normalisierungen durch, durch die solche Anomalien verhindert werden.
+
+	\subsubsection{Erste Normalform}
+	Um die erste Normalform zu erreichen, müssen alle Attribute normalisiert werden. Das bedeutet, dass alle Attribute so weit wie möglich zerlegt werden.
+	Beispielsweise könnte das Attribut "Name" in "Vorname" und "Nachname" zerlegt werden.
+
+	\subsubsection{Zweite Normalform}
+	Für die zweite Normalform ordnen wir verschiedene Attribute einzelnen festen Schlüsseln zu. Dadurch könnte es notwendig sein, Relationen zu zerlegen. Die zweite Normalform ist dann gegeben, wenn die erste Normalform vorliegt und jedes Attribut, das nicht zum Primärschlüssel gehört, von diesem voll funktional abhängig ist. Jeder Datensatz bildet dann exakt einen Sachverhalt ab.
+
+	\subsubsection{Dritte Normalform}
+	Im Zuge der Normalisierung werden zuletzt sogenannte "transitive Abhängigkeiten" aufgelöst. Das bedeutet, dass wir Abhängigkeiten auflösen, bei denen ein Nichtschlüsselattribut von einem anderen Nichtschlüsselattribut und somit nur indirekt vom Primärschlüssel abhängt. Diese Abhängigkeiten werden dann auch in eine neue Tabelle ausgelagert. Ein Beispiel wäre die Abhängigkeit von einer Postleitzahl zu einem Ort.
+
+	\subsection{Funktionale Abhängigkeiten}
+	Eine funktionale Abhängigkeit liegt vor, wenn ein Attribut eindeutig ein anderes Attribut bestimmt. Geschrieben wird so eine Abhängigkeit
+
+	\begin{equation*}
+		A \rightarrow B
+	\end{equation*}
+
+	Wenn $A$ also in zwei Zelle auftritt, muss $B$ auch übereinstimmen
+	Wenn es also mehrere Zellen mit dem Wer $A$ auftreten, entstehen Redundanzen. Ein Primärschlüssel bestimmt jedes Attribut eindeutig. Dementsprechend müssen zwei Zeilen identisch sein, wenn sie den gleichen Schlüssel haben. Bei einem Datenbankentwurf ist es wichtig festzulegen, welche funktionalen Abhängigkeiten gelten sollen.
+
 
 	\section{Nicht-Lineare Datenstrukturen}
 
