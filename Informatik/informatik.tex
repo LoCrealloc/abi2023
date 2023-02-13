@@ -516,7 +516,7 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 			if (this.connector.getErrorMessage() != null) {
 				throw new SQLException("Irgendwas ging schief");
 			}
-			return this.connector.getCurrentQueryResult() != null; // Wenn ein Eintrag gefunden wurde, return wir true
+			return this.connector.getCurrentQueryResult() != null;
 		}
 	}
 	\end{lstlisting}
