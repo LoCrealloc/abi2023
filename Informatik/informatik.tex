@@ -2,8 +2,39 @@
 
 \usepackage{graphicx}
 \usepackage{amsfonts,amsmath,amssymb,amsthm}
-\usepackage{stmaryrd}
-\usepackage[inner=3cm, outer=3cm]{geometry}
+\usepackage{svg}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage[inner=3cm, outer=3cm, top=2cm, bottom=2.5cm]{geometry}
+
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+
+\lstdefinestyle{mystyle}{
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4
+}
+
+\lstset{style=mystyle}
+
+\hbadness=10001
+\hfuzz=4pt
+\vfuzz=4pt
 
 \title{Informatik}
 \date{Q2 2022/2023}
@@ -17,6 +48,8 @@
 	\pagenumbering{arabic}
 
 	\section{Allgemeines}
+	\subsection{Dokumentationen}
+	Eine vollständige Dokumentation sämtlicher Abiturrelevanter Klassen kann \href{https://www.schulentwicklung.nrw.de/lehrplaene/upload/klp\_SII/if/Dokumentation\_ZA-IF\_GK-LK\_ab\_2018\_2021\_12\_22.pdf}{\underline{hier gefunden werden}}.
 
 	\section{OOP mit Java}
 
@@ -25,6 +58,469 @@
 	\section{Algorithmen}
 
 	\section{Datenbanken}
+	\subsection{Das Entity-Relationship-Modell}
+	\subsubsection{Verschiedene Elemente}
+	\paragraph{Entität}
+	Durch eine Entität werden generelle "Dinge" abstrahiert, wie zum Beispiel Menschen, Räume, Computer usw.
+
+	\begin{figure}[h!]
+		\centering
+		\includesvg[width=3.0cm]{entity}
+		\caption{Eine Entität wird mit einem Rechteck dargestellt}
+	\end{figure}	
+
+	\paragraph{Attribut}
+	Attribute beschreiben die Eigenschaften einer Entität. Wenn ein Attribut ein sogenannter Primärschlüssel ist, der eindeutig der Instanz einer Entität zuzuordnen ist, wird dieser unterstrichen.
+
+	\begin{figure}[h!]
+		\centering
+		\includesvg[width=3.0cm]{attribute}
+		\caption{Ein Attribut wird in einer Ellipse geschrieben}
+	\end{figure}	
+
+	\paragraph{Relation}
+	Mithilfe von Relationen werden die Beziehungen zwischen zwei Entitäten beschrieben. Wenn ich beispielsweise sagen möchte, dass einem Menschen ein Auto gehört, stelle ich eine Relation zwischen den Entitäten "Mensch" und "Auto" her. Darüber hinaus kann eine Relation auch Attribute haben, die die Beziehung in irgendeiner Form beschreiben.
+	Relationen haben immer sogenannte "Kardinalitäten". Damit wird die Menge der Beziehungen beschrieben, die zwei Entitäten haben. Davon gibt es drei Stück:
+
+	\subparagraph{1-zu-1-Relation}
+	Bei 1 zu 1 Relationen hat eine Instanz einer Entität exakt eine Beziehung zu der Instanz einer anderen Entität. Beispielsweise hat ein Mitarbeiter genau einen Firmenwagen, und jeder Firmenwagen gehört auch nur zu einem Mitarbeiter.
+
+	\subparagraph{1-zu-n-Beziehung}
+	Eine 1 zu n Beziehung beschreibt Umstände, bei denen die Instanz einer Entität mehrere Beziehungen zu verschiedenen Instanzen einer anderen Entität hat. Die Instanzen der zweiten Entität wiederum haben aber jeweils nur eine Beziehung zu der ersten Entität. Beispielsweise gehören hat die Schulklasse "7b" 20 Schüler, und jeder diese Schüler gehört zu der einen Schulklasse "7b".
+
+	\subparagraph{n-zu-m-Beziehung}
+	n zu m Relationen beschreiben Beziehungen, in denen eine Entität sich auf mehrere Instanzen anderer Entitäten beziehen kann und eine Instanz der zweiten Entität sich auch wieder auf mehrere Instanzen aus der ersten Entität bezieht. Ein Bespiel hierfür wäre eine Entität "Lehrer", deren Instanz viele Schüler unterricht (n) und Instanzen der Klasse Schüler, die von vielen verschiedenen Lehrern unterrichtet werden (m).
+
+	Die Kardinalitäten stehen im ER-Diagramm immer von der einen Entität in Richtung einer zweiten Entität auf der Rautenseite bei der zweiten Entität.
+
+	\begin{figure}[h!]
+		\centering
+		\includesvg[width=3.0cm]{relation}
+		\caption{Ein Relation wird durch eine Raute repräsentiert}
+	\end{figure}
+
+	\subsubsection{Transformation}
+	Bei der Transformation überführen wir ein ER-Diagramm in eine Tabellenform, die wir für eine relationale Datenbank verwenden können.
+	Eine Tabelle wird wie folgt dargstellt:
+	\begin{center}
+		Mensch(\underline{MenschId}, Name, Geschlecht) \\
+		Auto(\underline{AutoId}, Modell, Kennzeichen, $\uparrow$ MenschId)
+	\end{center}
+	Unterstrichene Attribute sind Primärschlüssel, Attribute mit einem nach oben zeigenden Pfeil sind Fremdschlüssel.
+
+	\paragraph{Tranformationsregeln}
+	Ein ER-Diagramm wird anhand von festen Regeln in eine Tabellenform tranformiert.
+
+	\subparagraph{Regel 1}
+	Jede Entität wird als eigene Tabelle mit Primärschlüssel dargestellt.
+
+	\subparagraph{Regel 2}
+	Jede n:m-Beziehung wird als eigene Tabelle dargestellt.
+
+	\subparagraph{Regel 3}
+	Jede 1:n- und 1:1-Beziehung mit eigenen Attributen wird wie bei Regel 2 durch eine eigene Tabelle repräsentiert.
+
+	\subparagraph{Regel 4a}
+	Jede 1:n-Beziehung ohne eigene Attribute wird so dargstellt, dass der Primärschlüssel der 1-Entität Fremdschlüssel der n-Entität wird.
+
+	\subparagraph{Regel 4b}
+	Jede 1:1-Beziehung ohne eigene Attribute wird so dargstellt, dass der Primärschlüssel der ersten Entität bei der zweiten Entität Primär- und Fremdschlüssel zugleich wird.
+
+	\subparagraph{Regel 4c}
+	Sind Regel 4a und 4b nicht anwendbar, dann wird für die Beziehung eine gesonderte Tabelle angelegt. Diese Fälle müssen aus dem Kontext abgeleitet werden.
+	Beispielsweise kann eine 1:1-Relation "verheiratet mit" zwischen zwei Menschen nicht durch Regel 4b gelöst werden, da sonst eine "Heiratspflicht" bestehen würde.
+
+	\subsection{Normalisierung}
+	Wenn man einfach die Tabellen verwendet, die aus der Transformation eines ER-Diagrammes resultieren, kann es zu verschiedenen Problemen kommen. Insbesondere können sogenannte "Anomalien" auftreten:
+
+	\paragraph{Einfügeanomalie}
+	Das hinzufügen eines Eintrages in eine Tabelle kann zu einem unvollständigen Datensatz führen (unerwünschte null-werte).
+
+	\paragraph{Änderungsanomalie}
+	Wenn ein Wert, der mehrfach auftritt, nur an einer Stelle geändert wird, kann diese Änderung zu einem inkonsistenten Datensatz führen.
+
+	\paragraph{Löschanomalie}
+	Das Löschen eines Datensatzes führt aufgrund von Abhängigkeiten zur (unabsichtlichen) Löschung eines weiteren Datensatzes.
+
+	Aus diesem Grund führen wir sogenannte Normalisierungen durch, durch die solche Anomalien verhindert werden.
+
+	\subsubsection{Erste Normalform}
+	Um die erste Normalform zu erreichen, müssen alle Attribute normalisiert werden. Das bedeutet, dass alle Attribute so weit wie möglich zerlegt werden.
+	Beispielsweise könnte das Attribut "Name" in "Vorname" und "Nachname" zerlegt werden.
+
+	\subsubsection{Zweite Normalform}
+	Für die zweite Normalform ordnen wir verschiedene Attribute einzelnen festen Schlüsseln zu. Dadurch könnte es notwendig sein, Relationen zu zerlegen. Die zweite Normalform ist dann gegeben, wenn die erste Normalform vorliegt und jedes Attribut, das nicht zum Primärschlüssel gehört, von diesem voll funktional abhängig ist. Jeder Datensatz bildet dann exakt einen Sachverhalt ab.
+
+	\subsubsection{Dritte Normalform}
+	Im Zuge der Normalisierung werden zuletzt sogenannte "transitive Abhängigkeiten" aufgelöst. Das bedeutet, dass wir Abhängigkeiten auflösen, bei denen ein Nichtschlüsselattribut von einem anderen Nichtschlüsselattribut und somit nur indirekt vom Primärschlüssel abhängt. Diese Abhängigkeiten werden dann auch in eine neue Tabelle ausgelagert. Ein Beispiel wäre die Abhängigkeit von einer Postleitzahl zu einem Ort.
+
+	\subsection{Funktionale Abhängigkeiten}
+	Eine funktionale Abhängigkeit liegt vor, wenn ein Attribut eindeutig ein anderes Attribut bestimmt. Geschrieben wird so eine Abhängigkeit
+
+	\begin{equation*}
+		A \rightarrow B
+	\end{equation*}
+
+	Wenn $A$ also in zwei Zelle auftritt, muss $B$ auch übereinstimmen
+	Wenn es also mehrere Zellen mit dem Wer $A$ auftreten, entstehen Redundanzen. Ein Primärschlüssel bestimmt jedes Attribut eindeutig. Dementsprechend müssen zwei Zeilen identisch sein, wenn sie den gleichen Schlüssel haben. Bei einem Datenbankentwurf ist es wichtig festzulegen, welche funktionalen Abhängigkeiten gelten sollen.
+
+	\subsection{SQL}
+	SQL ist die Sprache, über die wir mit einer Datenbank interagieren können. Mit SQL können wir die klassichen CRUD-Operationen (Create, Read, Update, Delete) sowie weitere Aktionen durchführen. SQL hier komplett abzubilden würde den Rahmen sprengen, daher hier nur die "Basics". Weiterführende Infos sind beispielsweise bei w3schools.com zu finden: https://www.w3schools.com/sql/
+
+	\subsubsection{SELECT-Queries}
+	Mit den SELECT-Queries können wir Daten aus der Datenbank abfragen
+	
+	\paragraph{Syntax}
+	\begin{lstlisting}[language=SQL]
+	SELECT [spalten] FROM [tabelle]; 
+	\end{lstlisting}
+	Das Semikolon ist in manchen Datenbanken optional. Dennoch schreiben wir es hier der Vollständigkeit halber dazu. Ein Beispiel für eine Query unter der angegebenen Synatx wäre
+
+	\begin{lstlisting}[language=SQL]
+	SELECT vorname, nachname, beruf FROM menschen;
+	\end{lstlisting}
+
+	Diese Query fragt die Spalten "Name", "Alter" und "Beruf" aus der Tabelle "Mensch" ab.
+	Statt der Attribute können wir auch ein Sternchen (*) verwenden. Dadurch fragen wir direkt alle Spalten ab.
+
+	\paragraph{WHERE-Bedingungen}
+	Bei den Queries, die wir uns bisher angesehen haben, fragen wir immer direkt alle Zeilen ab. Eventuell wollen wir aber nur bestimmte Zeilen abfragen, in denen bestimmte Bedingungen erfüllt werden. Beispielsweise wollen wir aus einer Tabelle mit Kunden nur diejenigen Kunden erhalten, die mit Vornamen "Jürgen" heißen. Dies können wir einfach mit einer WHERE-Klausel realisieren:
+
+	\begin{lstlisting}[language=SQL]
+	SELECT * FROM kunden WHERE vorname = 'Juergen';
+	\end{lstlisting}
+
+	Bei WHERE-Klauseln müssen Textwerte in einzelnen Anführungszeichen angegeben werden. Numerische Werte benötigen diese nicht:
+
+	\begin{lstlisting}[language=SQL]
+	SELECT * FROM kunden WHERE plz = 52349;
+	\end{lstlisting}
+
+	Neben dem Gleichheitszeichen gibt es eine Vielzahl weiterer sogenannter Vergleichsoperatoren:
+
+	\begin{center}
+		\def\arraystretch{1.1}
+		\begin{tabular}{ | c | c |}
+			\hline 
+			\textbf{Operator} & \textbf{Beschreibung} \\
+			\hline
+			\hline
+			\textbf{$=$} & Ist gleich \\
+			\textbf{$>$} & Größer als \\
+			\textbf{$<$} & Kleiner als \\
+			\textbf{$>=$} & Größer oder gleich \\
+			\textbf{$<=$} & Kleiner oder gleich \\
+			\textbf{$<>$} & Nicht gleich \\
+			\hline
+		\end{tabular}
+	\end{center}
+
+	Darüber hinaus gibt es noch drei Sonderoperatoren:
+
+	\subparagraph{LIKE-Operator}
+	Mit dem LIKE-Operator können quasi Schemata bzw. Vorlagen abgefragt werden. Beispielsweise möchten wir alle Kunden abfragen, deren Vorname mit "a" beginnt.
+	Um den LIKE-Operator verwenden zu können, müssen wir Platzhalter (engl. wildcards) verwenden:
+	
+	\begin{center}
+		\def\arraystretch{1.1}
+		\begin{tabular}{ | c | c |}
+			\hline
+			\textbf{Symbol} & \textbf{Beschreibung} \\
+			\hline
+			\hline
+			\textbf{\%} & Eines oder mehrere zeichen \\
+			\textbf{\_} & Ein einzelnes Zeichen \\
+			\textbf{[ ]} & Irgendeines der Zeichen in den Klammern \\
+			\textbf{\^ [  ]} & Ein Zeichen, das nicht in den Klammern steht \\
+			\textbf{[x-y]} & Ein Zeichen in dem angegebenen Bereich \\
+			\hline
+		\end{tabular}
+	\end{center}
+
+	Wenn wir also alle Kunden finden wollen, deren Vorname mit "a" beginnt, nutzen wir folgende Abfrage:
+
+	\begin{lstlisting}[language=SQL]
+	SELECT * FROM kunden WHERE vorname LIKE 'a%';
+	\end{lstlisting}
+
+	Für alle Kunden, deren Vorname an zweiter Stelle ein a, b oder c hat, sagen wir:
+
+	\begin{lstlisting}[language=SQL]
+	SELECT * FROM kunden WHERE vorname LIKE '_[a-c]%';
+	\end{lstlisting}
+
+	\subparagraph{IN-Operator}
+	Mit dem IN-Operator können wir abfragen, ob ein Wert in einer bestimmten Menge liegt. Wenn wir also alle Kunden haben möchten, die in den Orten mit den Postleitzahlen 52349, 52399 oder 52351 wohnen, fragen wir:
+
+	\begin{lstlisting}[language=SQL]
+	SELECT * FROM kunden WHERE plz IN (52349, 52399, 52351);
+	\end{lstlisting}
+
+	\subparagraph{BETWEEN-Operator}
+	Mit dem BETWEEN-Operator können wir fragen, ob ein Wert zwischen zwei anderen Werten liegt. Die beiden Werte sind dabei inklusiv:
+
+	\begin{lstlisting}[language=SQL]
+	SELECT * FROM kunden WHERE kundennummer BETWEEN 69 AND 420;
+	\end{lstlisting}
+
+	Darüber hinaus können wir mehrere WHERE-Klauseln kombinieren:
+
+	\subparagraph{AND-Operator}
+	Über AND können wir zwei WHERE-Abfragen so kombinieren, dass die Zeile dann ausgegeben wird, wenn \underline{alle} Bedingungen zutreffen:
+
+	\begin{lstlisting}[language=SQL, caption=Abfrage aller Kunden namens "Jürgen" in 52399]
+	SELECT * FROM kunden WHERE vorname = 'Juergen' AND plz = 52399;
+	\end{lstlisting}
+
+	\subparagraph{OR-Operator}
+	Bei OR werden alle Zeilen ausgegeben, in denen \underline{eine} der Bedingungen zutrifft :
+
+	\begin{lstlisting}[language=SQL, caption=Abfrage aller Kunden mit Vorname "Jürgen" oder PLZ 52341]
+	SELECT * FROM kunden WHERE vorname = 'Juergen' OR plz = 52341;
+	\end{lstlisting}
+
+	\subparagraph{NOT-Operator}
+	Der NOT-Operator ist dann erfüllt, wenn eine WHERE-Bedingung nicht zutrifft:
+
+	\begin{lstlisting}[language=SQL]
+	SELECT * FROM kunden WHERE NOT vorname = 'Jurgen';
+	\end{lstlisting}
+
+	\paragraph{DISTINCT}
+	Das DISTINCT-Statement sorgt dafür, dass wir nur untunterschiedliche Werte aus den angegebenen Spalten bekommen:
+
+	\begin{lstlisting}[language=SQL, caption=Postleitzahlen aller Orte mit registrierten Kunden]
+	SELECT DISTINCT plz FROM kunden;
+	\end{lstlisting}
+
+	\paragraph{ORDER BY}
+	Über das ORDER BY-Statement können wir eine Reihenfolge angeben, in der wir die Daten sortieren möchten. Die Reihenfolge ist je nach Zusatz ASC (ascending) oder DESC (descending) aufsteigend oder absteigend:
+
+	\begin{lstlisting}[language=SQL, caption=Vorname und PLZ aller Kunden absteigend sortiert anhand der PLZ]
+	SELECT vorname, plz FROM kunden ORDER BY plz DESC;
+	\end{lstlisting}
+
+	\paragraph{Aggregatfunktionen}
+	Mit Aggregatfunktionen können wir bestimmte Operationen auf unsere abgefragten Daten anwenden. Diese Funktionen rufen wir auf bestimmte Spalten in unserer Tabelle auf:
+
+	\subparagraph{COUNT()}
+	Mit COUNT() können wir die Anzahl der abgefragten Zeilen zählen:
+
+	\begin{lstlisting}[language=SQL, caption=Anzahl aller Kunden mit dem Vornamen "Jürgen"]
+	SELECT COUNT(*) FROM kunden WHERE vorname = 'Juergen';
+	\end{lstlisting}
+
+	\subparagraph{AVG()}
+	AVG() berechnet den Durchschnitt der Werte in der angegebenen Spalte.
+
+	\begin{lstlisting}[language=SQL, caption=Durchschnittliche Bestellungen eines Kunden]
+	SELECT AVG(bestellungen) FROM kunden;
+	\end{lstlisting}
+
+	\subparagraph{SUM()}
+	SUM() summiert alle Werte in der angegebenen Spalte auf:
+
+	\begin{lstlisting}[language=SQL, caption=Anzahl der Bestellungen aller Kunden]
+	SELECT SUM(bestellungen) FROM kunden;
+	\end{lstlisting}
+
+	\subparagraph{MIN()}
+	MIN() findet den kleinsten Wert in der angegebenen Spalte:
+
+	\begin{lstlisting}[language=SQL, caption=Kleinste Anzahl an Bestellungen eines Kunden]
+	SELECT MIN(bestellungen) FROM kunden;
+	\end{lstlisting}
+
+	\subparagraph{MAX()}
+	MAX() findet dementsprechend den größten Wert in der angegebenen Spalte:
+
+	\begin{lstlisting}[language=SQL, caption=Einzelner Kunde mit den meisten Bestellungen]
+	SELECTMAX(bestellungen) FROM kunden;
+	\end{lstlisting}
+
+	\paragraph{Aliasse}
+	Wir können Spalten mit dem "AS"-Statement einen temporären, individuellen Namen geben:
+
+	\begin{lstlisting}[language=SQL, caption=Benennt die Spalte "plz" in "postleitzahl" um]
+	SELECT plz AS postleitzahl FROM kunden;
+	\end{lstlisting}
+
+	\paragraph{GROUP BY}
+	Durch das GROUP BY-Statement können wir Zeilen mit denselben Werten gruppieren. Diese Statements werden häufig mit Aggregatfunktionen zusammen verwendet:
+
+	\begin{lstlisting}[language=SQL, caption=Nennt die Zahl der Kunden in den einzelnen Orten]
+	SELECT COUNT(kundennummer), plz FROM kunden GROUP BY plz;
+	\end{lstlisting}
+
+	\paragraph{HAVING}
+	Das HAVING-Statement ist quasi ein WHERE-Statement für GROUP-BY-Abfragen, da WHERE nicht mit Aggregatfunktionen arbeiten kann:
+
+	\begin{lstlisting}[language=SQL, caption=Orte mit mehr als 5 Kunden]
+	SELECT COUNT(kundennummer), plz 
+	FROM kunden 
+	GROUP BY plz 
+	HAVING COUNT(kundennummer) > 5;
+	\end{lstlisting}
+
+	\paragraph{Joins}
+	Mit den Join-Statements können wir mehrere Tabellen miteinander verknüpfen. Um das zu verdeutlichen, erstellen wir uns zunächst zwei Tabellen "Kunden" und "Orte":
+
+	\begin{center}
+		Kunden(\underline{Kundennummer}, Vorname, Name, Bestellungen, $\uparrow$ PLZ) \\
+		Orte(\underline{PLZ}, Name)
+	\end{center}
+
+	PLZ ist also für "Kunden" ein Fremdschlüssel, der auf die Tabelle "Orte" verweist. Darüber können wir die beiden Tabellen verknüpfen:
+
+	\begin{lstlisting}[language=SQL, caption=Wir erhalten Vornamen sowie Kundennummern und dazugehörige Ortsnamen]
+	SELECT kunden.vorname, kunden.kundennummer 
+	FROM kunden
+	INNER JOIN orte ON kunden.plz = orte.plz;
+	\end{lstlisting}
+
+	Hierbei gibt es allerdings mehrere Arten von JOIN-Statements:
+
+	\begin{figure}[h!]
+		\centering
+		\includesvg[width=5.5cm]{inner_join}
+		\caption{INNER JOIN gibt Einträge mit zutreffenden Werten in beiden Tabellen zurück}
+	\end{figure}
+
+	\begin{figure}[h!]
+		\centering
+		\includesvg[width=5.5cm]{left_join}
+		\caption{LEFT JOIN gibt alle Einträge aus der linken Tabelle und Einträge mit zutreffenden Werten aus der rechten Tabelle zurück}
+	\end{figure}
+
+	\begin{figure}[h!]
+		\centering
+		\includesvg[width=5.5cm]{right_join}
+		\caption{RIGHT JOIN funktioniert wie LEFT JOIN, nur umgekehrt}
+	\end{figure}
+
+	\begin{figure}[h!]
+		\centering
+		\includesvg[width=5.5cm]{full_join}
+		\caption{FULL JOIN gibt alle Einträge aus der linken und rechten Tabelle zurück, wenn es in einer der Tabellen einen zutreffenden Wert gibt}
+	\end{figure}
+
+	\paragraph{SELECT IN SELECT}
+	Wir können SELECT-Abfragen nicht nur auf Tabellen, sondern auch auf andere SELECT-Abfragen ausführen:
+
+	\begin{lstlisting}[language=SQL]
+	SELECT kundennummer from (
+		SELECT * FROM kunden
+	);
+	\end{lstlisting}
+
+	\paragraph{UNION}
+	Mit dem UNION-Statement können wir die Ergebnisse zweier SELECT-Abfragen kombinieren. Beide SELECT-Statements müssen dabei gleich viele Spalten mit gleichen Datentypen angeben.
+	Als Beispiel fügen wir zu unseren Tabellen "Kunden" und "Orte" eine Tabelle "Zulieferer" hinzu:
+
+	\begin{center}
+		Zulieferer(\underline{ZuliefererId}, Firmenname, Produkt, $\uparrow$ PLZ) \\
+	\end{center}
+
+	Nun könnten wir die PLZs aus den Tabellen "Kunden" und "Zulieferer" zusammenführen:
+
+	\begin{lstlisting}[language=SQL, caption=Wir sammeln sämtliche momentan benutzten PLZs in unserer Datenbank ein]
+	SELECT plz FROM kunden
+	UNION
+	SELECT plz FROM zulieferer;
+	\end{lstlisting}
+
+	Dies unterscheidet sich von einer einfachen SELECT-Abfrage sämtlicher Postleitzahlen in "Orte" insofern, dass "Orte" auch Postleitzahlen enthalten kann, deren zugehörige Kunden und Zuliefrer schon gelöscht wurden. Dadurch erhalten wir nur die PLZs, die momentan wirklich verwendet werden.
+
+	\subsubsection{INSERT INTO}
+	Mit dem INSERT INTO-Statement können wir neue Einträge zu unserer Datenbank hinzufügen:
+
+	\begin{lstlisting}[language=SQL, caption=Wir fügen neue Einträge zu der Kunden-Tabelle hinzu]
+	INSERT INTO kunden (vorname, name, bestellungen, plz) 
+	VALUES ('Juergen', 'Mustermann', 0, 52341);
+	\end{lstlisting}
+
+	Innerhalb der ersten Klammern geben wir die Spalten ein, die wir befüllen möchten. Die zweite Klammer enthält die tatsächlichen Werte, die wir einfügen möchten. Eine Kundennummer fügen wir nicht hinzu, da wir davon ausgehen, dass unsere Tabelle so konfiguriert ist, dass sie automatisch neue Primärschlüssel hinzufügt. Wichtig ist, dass wir sicherstellen, dass es für unsere PLZ bereits einen Eintrag in der "Orte"-Tabelle gibt.
+
+	\subsection{DELETE FROM}
+	Mit dem DELETE FROm-Statement können wir Einträge aus unserer Tabelle entfernen:
+
+	\begin{lstlisting}[language=SQL, caption=Wir entfernen alle Jürgens aus unserer Kundentabelle]
+	DELETE FROM kunden WHERE vorname = 'Juergen';
+	\end{lstlisting}
+
+	Für DELETE FROM können die gleichen WHERE-Klauseln verwendet werden, die wir schon für SELECT erläutert haben.
+
+	\subsection{Der DatabaseConnector}
+Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir im Schulrahmen die Klassen "DatabaseConnector" und "QueryResult". Die Dokumentation dieser Klassen findet ihr \href{https://www.schulentwicklung.nrw.de/lehrplaene/upload/klp\_SII/if/Dokumentation\_ZA-IF\_GK-LK\_ab\_2018\_2021\_12\_22.pdf#page=31}{\underline{hier für den DatabaseConnector}} und \href{https://www.schulentwicklung.nrw.de/lehrplaene/upload/klp\_SII/if/Dokumentation\_ZA-IF\_GK-LK\_ab\_2018\_2021\_12\_22.pdf#page=32}{\underline{hier für das QueryResult}}
+
+	\subsubsection{Beispiel}
+	Ein Beispielprogramm zur Interaktion mit einer Datenbank in Java könnte wie folgt aussehen:
+
+	\begin{lstlisting}[language=Java]
+	public class Beispiel {
+		DatabaseConnector connector;
+
+		public Beispiel() {
+			this.connector = DatabaseConnector(
+				pIp="localhost",
+				pPort="5432",
+				pDatabase="kundendb",
+				pUsername="admin",
+				pPassword="admin"
+			);
+		}
+
+		public void neuerKunde(String pVorname, String pNachname, int pPlz) {
+			if (!checkPlzExists(pPlz)) {
+				throw new SQLException("PLZ existiert nicht; bitte hinzufuegen");
+			}
+
+			this.connector.executeStatement(
+				"INSERT INTO kunden (vorname, nachname, bestellungen, plz) \
+				VALUES ('"+ pVorname +"', '"+ pNachname +"', 0, "+ pPlz +");"
+			);
+		}
+
+		public String[] holAlleKunden() {
+			this.connector.executeStatement("SELECT * FROM kunden;");
+		
+			// Prueft auf Fehler
+			String error = this.connector.getErrorMessage();
+			if (error != null) {
+				throw new SQLException("Irgendwas ging schief: " + error);
+			}
+
+			QueryResult result = this.connector.getCurrentQueryResult();
+			String[][] data = result.getData();
+			String[] out = new String[data.length];
+		
+			for (int i = 0; i< data.length; i++) {
+				out[i] = data[i][0];
+			}
+			return out;
+		}
+
+		public void fuegeOrtHinzu(int pPlz, String pName) {
+			if (checkPlzExists(pPlz)) {
+				throw new SQLException("PLZ existiert bereits");
+			}
+			this.connector.executeStatement(
+				"INSERT INTO orte (plz, name) \
+				VALUES "+ pPlz +"'"+ pName +"');"
+			);
+		}
+
+		public boolean checkPlzExists(int plz) {
+			this.connector.executeStatement("SELECT plz FROM orte WHERE plz = " + String.valueOf(plz) + ";");
+
+			if (this.connector.getErrorMessage() != null) {
+				throw new SQLException("Irgendwas ging schief");
+			}
+			return this.connector.getCurrentQueryResult() != null; // Wenn ein Eintrag gefunden wurde, return wir true
+		}
+	}
+	\end{lstlisting}
+
 
 	\section{Nicht-Lineare Datenstrukturen}
 
