@@ -421,18 +421,30 @@
 	Nun könnten wir die PLZs aus den Tabellen "Kunden" und "Zulieferer" zusammenführen:
 
 	\begin{lstlisting}[language=SQL, caption=Wir sammeln sämtliche momentan benutzten PLZs in unserer Datenbank ein]
-		SELECT plz FROM kunden
-		UNION
-		SELECT plz FROM zulieferer;
+	SELECT plz FROM kunden
+	UNION
+	SELECT plz FROM zulieferer;
 	\end{lstlisting}
 
 	Dies unterscheidet sich von einer einfachen SELECT-Abfrage sämtlicher Postleitzahlen in "Orte" insofern, dass "Orte" auch Postleitzahlen enthalten kann, deren zugehörige Kunden und Zuliefrer schon gelöscht wurden. Dadurch erhalten wir nur die PLZs, die momentan wirklich verwendet werden.
 
+	\subsubsection{INSERT INTO}
+	Mit dem INSERT INTO-Statement können wir neue Einträge zu unserer Datenbank hinzufügen:
 
+	\begin{lstlisting}[language=SQL, caption=Wir fügen neue Einträge zu der Kunden-Tabelle hinzu]
+	INSERT INTO kunden (vorname, name, bestellungen, plz) VALUES ('Juergen', 'Mustermann', 0, 52341);
+	\end{lstlisting}
 
+	Innerhalb der ersten Klammern geben wir die Spalten ein, die wir befüllen möchten. Die zweite Klammer enthält die tatsächlichen Werte, die wir einfügen möchten. Eine Kundennummer fügen wir nicht hinzu, da wir davon ausgehen, dass unsere Tabelle so konfiguriert ist, dass sie automatisch neue Primärschlüssel hinzufügt. Wichtig ist, dass wir sicherstellen, dass es für unsere PLZ bereits einen Eintrag in der "Orte"-Tabelle gibt.
 
+	\subsection{DELETE FROM}
+	Mit dem DELETE FROm-Statement können wir Einträge aus unserer Tabelle entfernen:
 
+	\begin{lstlisting}[language=SQL, caption=Wir entfernen alle Jürgens aus unserer Kundentabelle]
+	DELETE FROM kunden WHERE vorname = 'Juergen';
+	\end{lstlisting}
 
+	Für DELETE FROM können die gleichen WHERE-Klauseln verwendet werden, die wir schon für SELECT erläutert haben.
 
 
 	\section{Nicht-Lineare Datenstrukturen}
