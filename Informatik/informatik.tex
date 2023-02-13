@@ -5,6 +5,7 @@
 \usepackage{svg}
 \usepackage{float}
 \usepackage{listings}
+\usepackage{hyperref}
 \usepackage[inner=3cm, outer=3cm, top=2cm, bottom=2.5cm]{geometry}
 
 \usepackage{xcolor}
@@ -47,6 +48,8 @@
 	\pagenumbering{arabic}
 
 	\section{Allgemeines}
+	\subsection{Dokumentationen}
+	Eine vollständige Dokumentation sämtlicher Abiturrelevanter Klassen kann \href{https://www.schulentwicklung.nrw.de/lehrplaene/upload/klp\_SII/if/Dokumentation\_ZA-IF\_GK-LK\_ab\_2018\_2021\_12\_22.pdf}{\underline{hier gefunden werden}}.
 
 	\section{OOP mit Java}
 
@@ -432,7 +435,8 @@
 	Mit dem INSERT INTO-Statement können wir neue Einträge zu unserer Datenbank hinzufügen:
 
 	\begin{lstlisting}[language=SQL, caption=Wir fügen neue Einträge zu der Kunden-Tabelle hinzu]
-	INSERT INTO kunden (vorname, name, bestellungen, plz) VALUES ('Juergen', 'Mustermann', 0, 52341);
+	INSERT INTO kunden (vorname, name, bestellungen, plz) 
+	VALUES ('Juergen', 'Mustermann', 0, 52341);
 	\end{lstlisting}
 
 	Innerhalb der ersten Klammern geben wir die Spalten ein, die wir befüllen möchten. Die zweite Klammer enthält die tatsächlichen Werte, die wir einfügen möchten. Eine Kundennummer fügen wir nicht hinzu, da wir davon ausgehen, dass unsere Tabelle so konfiguriert ist, dass sie automatisch neue Primärschlüssel hinzufügt. Wichtig ist, dass wir sicherstellen, dass es für unsere PLZ bereits einen Eintrag in der "Orte"-Tabelle gibt.
