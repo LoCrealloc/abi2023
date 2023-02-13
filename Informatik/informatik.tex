@@ -38,7 +38,7 @@
 
 \title{Informatik}
 \date{Q2 2022/2023}
-\author{Paul SK}
+\author{Paul SK \& Sophie}
 
 \begin{document}
 	\pagenumbering{gobble}
@@ -525,6 +525,200 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 	\section{Nicht-Lineare Datenstrukturen}
 
 	\section{Formale Sprachen, Grammatiken und Automaten}
+	
+	\subsection{Formale Sprachen}
+	
+	\subsubsection{Definition}
+	
+	\begin{itemize}
+		\item Menge von Symbolanordnungen
+		\item vorgegebene Regeln
+		\item Syntax: erlaubte Ausdrücke
+		\item Semantik: Bedeutung von Ausdrücken (in formalen Sprachen nicht definiert)
+	\end{itemize}
+	
+	\subsubsection{Alphabet}
+	
+	\begin{itemize}
+		\item Menge zulässiger Zeichen für eine Sprache
+		\item Bezeichnung: $\Sigma$
+	\end{itemize}
+	
+	\subsubsection{Wort}
+	
+	\begin{itemize}
+		\item beliebige endliche Aneinanderreihung von Zeichen des Alphabets
+		\item leeres Wort ($\epsilon$): Wort ohne Buchstaben
+		\item Menge aller Worte aus dem Alphabet $\Sigma$ inklusive $\epsilon$: $\Sigma$*
+		\item $\Sigma$* kann Worte mit unendlicher Länge enthalten und enthält daher unendlich viele Worte
+	\end{itemize}
+	
+	\subsubsection{Syntaxdiagramme}
+	
+	\begin{itemize}
+		\item mehrere Symbole hintereinander
+		\begin{figure}[H]
+			\centering
+			\includesvg[width=9.0cm]{Syntaxdiagramm_Sequence}
+			\caption{In den Rechtecken stehen Zeichen des Alphabets. Diese werden nacheinander angefügt, um ein Wort zu bilden. Diese Kette kann beliebig lang sein.}
+		\end{figure}	
+		\item Iteration (0 - $\infty$)
+		\begin{figure}[H]
+			\centering
+			\includesvg[width=9.0cm]{Syntaxdiagramm_Iteration_0-n}
+			\caption{In dem Rechteck steht ein Zeichen des Alphabets. Dieses kann beliebig oft aneinandergereiht werden, muss aber nicht verwendet werden.}
+		\end{figure}	
+		\item Iteration (1 - $\infty$)
+		\begin{figure}[H]
+			\centering
+			\includesvg[width=9.0cm]{Syntaxdiagramm_Iteration_1-n}
+			\caption{In dem Rechteck steht ein Zeichen des Alphabets. Dieses muss mindestens einmal, kann aber auch beliebig oft verwendet werden.}
+		\end{figure}	
+		\item Auswahl
+		\begin{figure}[H]
+			\centering
+			\includesvg[width=9.0cm]{Syntaxdiagramm_Selection}
+			\caption{In den Rechtecken stehen Zeichen des Alphabets. Von diesen muss genau eines an das entstehende Wort angehängt werden.}
+		\end{figure}	
+		\item Option
+		\begin{figure}[H]
+			\centering
+			\includesvg[width=9.0cm]{Syntaxdiagramm_Option}
+			\caption{In dem Rechteck steht ein Zeichen des Alphabets. Dieses kann genau einmal oder gar nicht an das entstehende Wort angehängt werden.}
+		\end{figure}	
+		\item Bezug auf andere Syntaxdiagramme
+		\begin{figure}[H]
+			\centering
+			\includesvg[width=15.0cm]{Syntaxdiagramm_in_Syntaxdiagramm_1}
+			\caption{Dies ist ein Beispiel für ein Syntaxdiagramm. Mit dem von links kommenden "Anfangspfeil" kann ein Syntaxdiagramm benannt werden.}
+		\end{figure}	
+		\begin{figure}[H]
+			\centering
+			\includesvg[width=15.0cm]{Syntaxdiagramm_in_Syntaxdiagramm_2}
+			\caption{In den Rechtecken können neben Zeichen des Alphabets auch Namen anderer Syntaxdiagramme stehen. Dann wird statt ein Zeichen an das entstehende Wort anzuhängen dieses Syntaxdiagramm ausgeführt.}
+		\end{figure}	
+	\end{itemize}
+	
+	\subsection{Grammatiken}
+	
+	\begin{itemize}
+		\item eine Grammatik erzeugt (genau) eine Sprache
+		\item mehrere Grammatiken können die selbe Sprache erzeugen
+		\item Grammatik $G = (N, \Sigma, S, P)$
+		\item $N$: Menge der Nichtterminalsymbole ("Variablen")
+		\item $\Sigma$: Menge der Terminalsymbole / Alphabet
+		\item $S$: Startsymbol mit $S \in N$
+		\item $P$: Menge der Produktionsregeln \\
+		Beispiele:
+		\begin{itemize}
+			\item A $\rightarrow$ B
+			\item A $\rightarrow$ B, B $\rightarrow$ A
+			\item A $\rightarrow$ 0 $\mid$ 1
+			\item A $\rightarrow$ 0B $\mid$ 100B $\mid$ $\epsilon$
+		\end{itemize}
+		\item $N \cap \Sigma = \varnothing$ (nichts ist gleichzeitig Terminal- und Nichtterminalsymbol)
+	\end{itemize}
+	
+	\subsubsection{Reguläre Grammatiken}
+	
+	Man unterscheidet zwischen rechts- und linksregulären Grammatiken. Ist dies nicht genauer spezifiziert, sind meist rechtsreguläre Grammatiken gemeint. Eine (rechts-) reguläre Grammatik $G = (N, \Sigma, S, P)$ hat in der Menge der Produktionsregeln $P$ nur Produktionsregeln der Form:
+	\begin{itemize}
+		\item $A = \sigma B$
+		\item $A = \sigma$
+	\end{itemize}
+	Dabei gilt: 
+	\begin{itemize}
+		\item $A, B \in N$
+		\item $\sigma \in \Sigma$
+		\item $A = B$ ist erlaubt
+	\end{itemize}
+	Bei rechtsregulären Grammatiken werden also Worte nur nach rechts erweitert. Entsprechend werden bei linksregulären Grammatiken Worte nur nach links erweitert ($B \sigma$ statt $\sigma B$). Eine Sprache, die durch mindestens eine reguläre Grammatik erzeugt werden kann, nennt man reguläre Sprache.
+	
+	\subsection{Automaten}
+	
+	\subsubsection{Deterministische endliche Automaten (DEA)}
+	
+	$A = (Q, q_0, \Sigma, F, \delta)$
+	\begin{itemize}
+		\item $Q$: endliche Menge von Zuständen
+		\item $q_0$: Startzustand mit $q_0 \in Q$
+		\item $\Sigma$: endliches Eingabealphabet
+		\item $F$: Menge der Endzustände mit $F \subseteq Q$
+		\item $\delta$: Übergangsfunktion mit $\delta: Q \times \Sigma \rightarrow Q$ \\
+		$\implies$ ordnet jedem Paar $q \in Q$, $\sigma \in \Sigma$ einen eindeutigen Folgezustand $\delta(q,\sigma) = q'$ zu
+	\end{itemize}
+	
+	\subsubsection{Nichtdeterministische endliche Automaten (NEA)}
+	
+	$A = (Q, q_0, \Sigma, F, \delta)$
+	\begin{itemize}
+		\item $Q$: endliche Menge von Zuständen
+		\item $q_0$: Startzustand mit $q_0 \in Q$
+		\item $\Sigma$: endliches Eingabealphabet
+		\item $F$: Menge der Endzustände mit $F \subseteq Q$
+		\item $\delta$: Übergangsrelation mit $\delta: Q \times \Sigma \rightarrow Q^n$ \\
+		$\implies$ ordnet jedem Paar $q \in Q$, $\sigma \in \Sigma$ einen eindeutigen Folgezustand $\delta(q,\sigma) \subseteq Q$ zu
+	\end{itemize}
+	
+	\subsubsection{Visualisierung}
+	
+	\begin{figure}[H]
+		\centering
+		\includesvg[width=15.0cm]{Automats_Visualisation_Example}
+		\caption{Die Kreise symbolisieren Zustände. In ihnen stehen Bezeichnungen. Der Startzustand wird durch ein Dreieck gekennzeichnet. Der  Endzustand / die Endzustände werden durch einen doppelten Kreis gekennzeichnet. Start- und Endzustand können, müssen aber nicht identisch sein. Die Pfeile symbolisieren Übergänge. An ihnen stehen Zeichen des Eingabealphabets. Sie können von einem Zustand auf einen anderen oder den diesen selbst zeigen. Gehen mehrere Pfeile mit dem selben Zeichen des Alphabets von einem Zustand ab, handelt es sich um einen NDE, ansonsten um einen DEA.}
+	\end{figure}	
+		
+	\subsubsection{Zustandstabelle}
+		
+	Automaten lassen sich auch in Form einer Zustandstabelle darstellen. In diesen stehen de Zeilen für die einzelnen Zustände und die Spalten für die Zeichen des Eingabealphabets. In den Zellen steht der damit jeweils erreichte Folgezustand bzw. die Menge der hiermit zu erreichenden Folgezustände. Auch der Fehlerzustand kann hier aufgeführt werden.\\
+	Beispiel:
+		
+	\begin{center}
+		\begin{tabular}{ |c|c|c|c| } 
+ 			\hline
+  			& Zustand1 & Zustand2 & $\ldots$ \\ 
+  			\hline
+ 			Zeichen1 & Zustand2 & \{Zustand1, Zustand2\} & $\ldots$ \\ 
+			\hline
+ 			Zeichen2 & F & Zustand2 & $\ldots$ \\ 
+ 			\hline
+ 			F & F & F & $\ldots$ \\
+ 			\hline
+ 			$\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ \\
+ 			\hline
+		\end{tabular}
+	\end{center}
+		
+	\subsubsection{Automaten und reguläre Grammatiken}
+		
+	\paragraph{Zentrale Erkenntnisse}
+	\begin{itemize}
+		\item zu jedem endlichen Automaten gibt es eine reguläre Grammatik, die exakt die von dem Automaten erkannte Sprache erzeugt
+		\item daher ist jede formale Sprache, die von einem endlichen Automaten erkannt wird, eine reguläre Sprache
+		\item reguläre Grammatiken und endliche Automaten lassen sich in einander umwandeln
+	\end{itemize}
+		
+	\paragraph{Automat $\rightarrow$ reguläre Grammatik}
+	\begin{itemize}
+		\item die Zustände des Automaten werden zu Nichtterminalsymbolen der Grammatik
+		\item die Zeichen des Eingabealphabets des Automaten werden zu Zeichen des Alphabets bzw. Terminalsymbole der Grammatik
+		\item der Startzustand des Automaten wird zum Startsymbol der Grammatik
+		\item die Produktionsregeln der Grammatik können aus dem visualisierten Automaten wiefolgt abgeleitet werden: 
+		\begin{figure}[H]
+			\centering
+			\includesvg[width=15.0cm]{Automats_Example}
+			\caption{Dies ist ein Beispiel für einen Automaten, das im Folgenden die Erklärung verdeutlichen soll.}
+		\end{figure}	
+		\begin{itemize}
+			\item kann von einem Zustand aus in den Endzustand übergegangen werden, wird der Produktionsregel für das entsprechende Nichtterminalsymbol die Umwandlung in das Terminalsymbol hinzugefügt, das dem Zeichen des Eingabealphabets entspricht, welches verwendet wird, um den Endzustand zu erreichen \\
+			Beispiel: $A \rightarrow 1$, da von A in den Endzustand B übergegangen werden kann, wenn die 1 gewählt wird.
+			\item für jeden Übergang des Automaten wird der Grammatik eine Produktionsregel hinzugefügt, bei der auf der linken Seite das Nichtterminalsymbol steht, das dem Zustand am stumpfen Ende des Pfeils entspricht und auf der rechten Seite zuerst das Terminalsymbol / Symbol des Eingabealphabets, das am Pfeil steht und danach das Nichtterminalsymbol, das dem Zustand entspricht, der an der Spitze des Pfeils steht \\
+			Beispiel: $A \rightarrow 0A$ und $A \rightarrow 1B$
+		\end{itemize}
+		Insgesamt ergibt sich für dieses Beispiel: \\
+		$A \rightarrow 0A \mid 1B \mid 1$ \\
+		$B \rightarrow 0A \mid 1B \mid 1$
+	\end{itemize}
 
 	\section{Datenschutz}
 
