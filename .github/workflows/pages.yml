@@ -20,6 +20,8 @@ jobs:
             Englisch/englisch.tex
             Mathematik/mathematik.tex
           work_in_root_file_dir: true
+          extra_system_packages: "inkscape"
+          latexmk_shell_escape: true
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v1.0.7
