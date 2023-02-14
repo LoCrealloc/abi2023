@@ -516,13 +516,43 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 			if (this.connector.getErrorMessage() != null) {
 				throw new SQLException("Irgendwas ging schief");
 			}
-			return this.connector.getCurrentQueryResult() != null; // Wenn ein Eintrag gefunden wurde, return wir true
+			return this.connector.getCurrentQueryResult() != null;
 		}
 	}
 	\end{lstlisting}
 
 
 	\section{Nicht-Lineare Datenstrukturen}
+	
+	Unterschied zu linearen Datenstrukturen: Ein Objekt kann mehr als einen Nachfolger haben.
+	
+	\subsection{Bäume}
+	
+	\subsubsection{Komponenten}
+	
+	\begin{itemize}
+		\item Knoten (Vertex): speichert Daten
+		\item Kante (Edge): verbindet Knoten
+		\item Wurzel (Root): Knoten, der keinen Vorgänger hat
+		\item Blatt (Leaf): Knoten, der keinen Nachfolger hat
+		\item Vaterknoten (Parent): Knoten, der einen Nachfolger hat
+		\item Kindknoten (Child): Knoten, der einen Vorgänger hat
+	\end{itemize}
+	
+	\subsubsection{Maße}
+	
+	\begin{itemize}
+		\item Ordnung (Order) eines Baums: Anzahl der Kinder, die ein Knoten höchstens haben darf
+		\item Grad (Degree) eines Knotens: Anzahl der Kinder, die ein Knoten hat
+	\end{itemize}
+	
+	\subsubsection{Binärbäume}
+	
+	\begin{itemize}
+		\item Baum zweiter Ordnung
+		\item effiziente Suche und Sortierung möglich
+		\item da höchstens zwei Kinderknoten vorhanden sind, werden diese als linkes (left) und rechtes (right) Kind bezeichnet
+	\end{itemize}
 
 	\section{Formale Sprachen, Grammatiken und Automaten}
 	
@@ -664,7 +694,7 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 	
 	\begin{figure}[H]
 		\centering
-		\includesvg[width=15.0cm]{Automats_Visualisation_Example}
+		\includesvg[width=6.0cm]{Automats_Visualisation_Example}
 		\caption{Die Kreise symbolisieren Zustände. In ihnen stehen Bezeichnungen. Der Startzustand wird durch ein Dreieck gekennzeichnet. Der  Endzustand / die Endzustände werden durch einen doppelten Kreis gekennzeichnet. Start- und Endzustand können, müssen aber nicht identisch sein. Die Pfeile symbolisieren Übergänge. An ihnen stehen Zeichen des Eingabealphabets. Sie können von einem Zustand auf einen anderen oder den diesen selbst zeigen. Gehen mehrere Pfeile mit dem selben Zeichen des Alphabets von einem Zustand ab, handelt es sich um einen NDE, ansonsten um einen DEA.}
 	\end{figure}	
 		
@@ -694,9 +724,24 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 	\paragraph{Zentrale Erkenntnisse}
 	\begin{itemize}
 		\item zu jedem endlichen Automaten gibt es eine reguläre Grammatik, die exakt die von dem Automaten erkannte Sprache erzeugt
+		\item zu jeder regulären Grammatik gibt es einen endlichen Automaten, der exakt die von der Grammatik erzeugte Sprache erkennt
 		\item daher ist jede formale Sprache, die von einem endlichen Automaten erkannt wird, eine reguläre Sprache
 		\item reguläre Grammatiken und endliche Automaten lassen sich in einander umwandeln
+		\item daher gibt es zu jeder regulären Grammatik ein Verfahren, mit dem festgestellt werden kann, ob ein beliebiges gegebenes Wort zu dieser Grammatik gehört
 	\end{itemize}
+	
+	\paragraph{Grenzen endlicher Automaten}
+	Endliche Automaten können nur mit regulären Sprachen arbeiten. Sie können beispielsweise keine Palindrome oder korrekte Klammerung erzeugen, denn hierbei hängt das Ende vom Anfang ab und es gilt:
+	\begin{itemize}
+		\item Ist eine Sprache regulär, muss sie nicht mitzählen können.
+		\item Automaten haben kein unbeschränktes Gedächtnis.
+	\end{itemize}
+	
+	\begin{figure}[H]
+			\centering
+			\includesvg[width=6.0cm]{Automats_Example}
+			\caption{Dies ist ein Beispiel für einen Automaten, das im Folgenden die Erklärung verdeutlichen soll.}
+		\end{figure}	
 		
 	\paragraph{Automat $\rightarrow$ reguläre Grammatik}
 	\begin{itemize}
@@ -704,11 +749,6 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 		\item die Zeichen des Eingabealphabets des Automaten werden zu Zeichen des Alphabets bzw. Terminalsymbole der Grammatik
 		\item der Startzustand des Automaten wird zum Startsymbol der Grammatik
 		\item die Produktionsregeln der Grammatik können aus dem visualisierten Automaten wiefolgt abgeleitet werden: 
-		\begin{figure}[H]
-			\centering
-			\includesvg[width=15.0cm]{Automats_Example}
-			\caption{Dies ist ein Beispiel für einen Automaten, das im Folgenden die Erklärung verdeutlichen soll.}
-		\end{figure}	
 		\begin{itemize}
 			\item kann von einem Zustand aus in den Endzustand übergegangen werden, wird der Produktionsregel für das entsprechende Nichtterminalsymbol die Umwandlung in das Terminalsymbol hinzugefügt, das dem Zeichen des Eingabealphabets entspricht, welches verwendet wird, um den Endzustand zu erreichen \\
 			Beispiel: $A \rightarrow 1$, da von A in den Endzustand B übergegangen werden kann, wenn die 1 gewählt wird.
@@ -718,6 +758,43 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 		Insgesamt ergibt sich für dieses Beispiel: \\
 		$A \rightarrow 0A \mid 1B \mid 1$ \\
 		$B \rightarrow 0A \mid 1B \mid 1$
+	\end{itemize}
+	
+	\paragraph{reguläre Grammatik $\rightarrow$ NEA}
+	\begin{itemize}
+		\item die Nichtterminalsymbole der Grammatik werden zu Zuständen des Automaten
+		\item die Terminalsymbole der Grammatik werden zu Buchstaben des Eingabealphabets des Automaten
+		\item das Startsymbol der Grammatik wird zum Startzustand des Automaten
+		\item die Produktionsregeln der Grammatik werden als Pfeile des Automaten dargestellt. Außerdem werden aus ihnen die Endzustände abgeleitet. Dabei gilt:
+		\begin{itemize}
+			\item ein Pfeil zeigt von dem Zustand, der dem Nichtterminalsymbol auf der linken Seite der Produktionsregel entspricht, zu dem Zustand, der auf der rechten Seite der Produktionsregel steht. An dem Pfeil steht das Zeichen des Eingabealphabets, das dem Terminalsymbol auf der rechten Seite der Produktionsregel entspricht
+			\item steht auf der rechten Seite der Produktionsregel kein Nichtterminalsymbol, zeigt ein Pfeil von dem Zustand, der dem Nichtterminalsymbol auf der linken Seite der Grammatik entspricht, in einen Endzustand
+			\item es bietet sich an, falls es zwei Produktionsregeln gibt, die auf der linken Seite das selbe Nichtterminalsymbol und auf der rechten Seite das selbe Terminalsymbol haben, von denen aber eine auf der rechten Seite außerdem ein Nichtterminalsymbol hat, den Zustand, der diesem Nichtterminalsymbol entspricht, zum Endzustand zu machen
+		\end{itemize}
+	\end{itemize}
+	
+	\paragraph{NEA $\rightarrow$ DEA}
+	\begin{itemize}
+		\item bilden der Potenzmenge von $N$: es werden alle möglichen Kombinationen von Zuständen ermittelt, die in dem NEA vorkommen. Die leere Menge gehört hier theoretisch zu, hat aber keinen Nutzen
+		\item diese werden in die linke Spalte einer Tabelle geschrieben, sodass jede Zeile der Tabelle für eine Kombination von Zuständen steht
+		\item der Startzustand wird mit einem $>$ und die Mengen, in denen Endzustände vorkommen mit * markiert
+		\item in die erste Zeile werden alle Buchstaben des Eingabealphabets geschrieben, sodass jede Spalte für eines dabon steht
+		\item in die restlichen Zellen der Tabelle werden Mengen von Zuständen eingetragen, die erreicht werden können, wenn von den Zuständen in der linken Spalte ausgegangen wird und dem Pfeil mit dem Zeichen aus der ersten Zeile gefolgt wird
+		\item nun kann diese Tabelle als Zustandstabelle für den DEA, der erzeugt werden soll, betrachtet werden. Es werden also alle in der linken Spalte stehenden Kombinationen aus Zuständen als einzelne Zustände aufgefasst und eingezeichnet. Aus der Tabelle kann nun abgelesen werden, welche Verbindungen mit welchen Zeichen des Alphabets (oberste Zeile) auf welche anderen Zustände (mittlere Zellen der Tabelle) eingezeichnet werden müssen
+		\item der entstandene Automat kann optimiert werden, indem Zustände, die nicht erreicht werden können (nicht Startzustand und kein Pfeil zeigt auf sie) entfernt werden
+	\end{itemize}
+	
+	\subsection{Mengenlehre}
+	
+	\subsubsection{Zeichen und ihre Bedeutung}
+	
+	\begin{itemize}
+		\item $\{a, b, c\}$: Beispiel für den Grundaufbau einer Menge: umschlossen von geschweiften Klammern und Elemente abgetrennt mit Komma (in der Mathematik häufig Semikolon)
+		\item $A \backslash B$: $A$ und $B$ sind Mengen. $A \backslash B$ enthält alle Elemente, die $A$ enthält, $B$ aber nicht ("$A$ ohne $B$")
+		\item $A \cup B$: Vereinigung ("$A$ vereinigt $B$"): $A \cup B$ enthält alle Elemente, die in $A$ enthält und zusätzlich alle, die $B$ enthält
+		\item $A \cap B$: Schnittmenge ("$A$ schneidet $B$"): $a \cap B$ enthält alle Elemente, die sowohl in $A$ als auch in $B$ enthalten sind
+		\item $A \subseteq B$: Teilmenge: alle Elemente, die in $A$ enthalten sind, sind auch in $B$ enthalten. Die Mengen dürfen auch gleich sein (ansonsten wird $\subset$ genutzt)
+		\item Potenzmenge $Pot(A)$: Menge aller Teilmengen von $A$. Dies sind $2^Q$ wenn $Q$ die Anzahl der Elemente in $A$ ist
 	\end{itemize}
 
 	\section{Datenschutz}
