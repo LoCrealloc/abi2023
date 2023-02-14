@@ -101,7 +101,7 @@
 
 	\subsubsection{Transformation}
 	Bei der Transformation überführen wir ein ER-Diagramm in eine Tabellenform, die wir für eine relationale Datenbank verwenden können.
-	Eine Tabelle wird wie folgt dargstellt:
+	Eine Tabelle wird wie folgt dargestellt:
 	\begin{center}
 		Mensch(\underline{MenschId}, Name, Geschlecht) \\
 		Auto(\underline{AutoId}, Modell, Kennzeichen, $\uparrow$ MenschId)
@@ -121,10 +121,10 @@
 	Jede 1:n- und 1:1-Beziehung mit eigenen Attributen wird wie bei Regel 2 durch eine eigene Tabelle repräsentiert.
 
 	\subparagraph{Regel 4a}
-	Jede 1:n-Beziehung ohne eigene Attribute wird so dargstellt, dass der Primärschlüssel der 1-Entität Fremdschlüssel der n-Entität wird.
+	Jede 1:n-Beziehung ohne eigene Attribute wird so dargestellt, dass der Primärschlüssel der 1-Entität Fremdschlüssel der n-Entität wird.
 
 	\subparagraph{Regel 4b}
-	Jede 1:1-Beziehung ohne eigene Attribute wird so dargstellt, dass der Primärschlüssel der ersten Entität bei der zweiten Entität Primär- und Fremdschlüssel zugleich wird.
+	Jede 1:1-Beziehung ohne eigene Attribute wird so dargestellt, dass der Primärschlüssel der ersten Entität bei der zweiten Entität Primär- und Fremdschlüssel zugleich wird.
 
 	\subparagraph{Regel 4c}
 	Sind Regel 4a und 4b nicht anwendbar, dann wird für die Beziehung eine gesonderte Tabelle angelegt. Diese Fälle müssen aus dem Kontext abgeleitet werden.
@@ -523,6 +523,16 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 
 
 	\section{Nicht-Lineare Datenstrukturen}
+
+	\subsection{Graphen}
+	Ein Graph ist eine nicht-lineare Datenstruktur, die genutzt werden kann, um Netzwerke darzustellen. Beispielsweise kann man Graphen nutzen, um Freundesgruppen, internationale Beziehungen oder Verkehrsinfrastruktur zu modellieren. Mit Graphen lassen sich eine Vielzahl von Sachzusammenhängen abstrahieren.
+	Ein Graph besteht dabei aus zwei wesentlichen Komponenten:
+
+	\paragraph{Knoten}
+	Die Knoten (engl. Vertex, pl. Vertices) beschreiben die konkreten Entitäten, die wir in unserem Graphen abbilden wollen. In einer Freundesgruppe könnten dies zum Beispiel "Menschen" sein.In Java benutzen wir die Klasse "Vertex", um Knoten zu implementieren. Die Dokumentation \href{https://www.schulentwicklung.nrw.de/lehrplaene/upload/klp_SII/if/Dokumentation_ZA-IF_GK-LK_ab_2018_2021_12_22.pdf#page=29}{findet ihr hier}.
+
+	\paragraph{Kanten}
+	Mit Kanten (engl. Edge) werden die Verbindungen zwischen den einzelnen Knoten dargestellt. Eine Kante verbindet immer genau zwei Knoten miteinander. In Java ist die Klasse "Edge" vorgeschrieben, mit der wir eine Kante implementieren. Die Dokumentation \href{https://www.schulentwicklung.nrw.de/lehrplaene/upload/klp_SII/if/Dokumentation_ZA-IF_GK-LK_ab_2018_2021_12_22.pdf#page=30}{ist hier zu finde}.
 
 	\section{Formale Sprachen, Grammatiken und Automaten}
 	
