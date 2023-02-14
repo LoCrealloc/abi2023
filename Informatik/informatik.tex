@@ -101,7 +101,7 @@
 
 	\subsubsection{Transformation}
 	Bei der Transformation überführen wir ein ER-Diagramm in eine Tabellenform, die wir für eine relationale Datenbank verwenden können.
-	Eine Tabelle wird wie folgt dargstellt:
+	Eine Tabelle wird wie folgt dargestellt:
 	\begin{center}
 		Mensch(\underline{MenschId}, Name, Geschlecht) \\
 		Auto(\underline{AutoId}, Modell, Kennzeichen, $\uparrow$ MenschId)
@@ -121,10 +121,10 @@
 	Jede 1:n- und 1:1-Beziehung mit eigenen Attributen wird wie bei Regel 2 durch eine eigene Tabelle repräsentiert.
 
 	\subparagraph{Regel 4a}
-	Jede 1:n-Beziehung ohne eigene Attribute wird so dargstellt, dass der Primärschlüssel der 1-Entität Fremdschlüssel der n-Entität wird.
+	Jede 1:n-Beziehung ohne eigene Attribute wird so dargestellt, dass der Primärschlüssel der 1-Entität Fremdschlüssel der n-Entität wird.
 
 	\subparagraph{Regel 4b}
-	Jede 1:1-Beziehung ohne eigene Attribute wird so dargstellt, dass der Primärschlüssel der ersten Entität bei der zweiten Entität Primär- und Fremdschlüssel zugleich wird.
+	Jede 1:1-Beziehung ohne eigene Attribute wird so dargestellt, dass der Primärschlüssel der ersten Entität bei der zweiten Entität Primär- und Fremdschlüssel zugleich wird.
 
 	\subparagraph{Regel 4c}
 	Sind Regel 4a und 4b nicht anwendbar, dann wird für die Beziehung eine gesonderte Tabelle angelegt. Diese Fälle müssen aus dem Kontext abgeleitet werden.
@@ -202,15 +202,15 @@
 		\def\arraystretch{1.1}
 		\begin{tabular}{ | c | c |}
 			\hline 
-			\textbf{Operator} & \textbf{Beschreibung} \\
+			\textbf{Operator} 	& \textbf{Beschreibung} \\
 			\hline
 			\hline
-			\textbf{$=$} & Ist gleich \\
-			\textbf{$>$} & Größer als \\
-			\textbf{$<$} & Kleiner als \\
-			\textbf{$>=$} & Größer oder gleich \\
-			\textbf{$<=$} & Kleiner oder gleich \\
-			\textbf{$<>$} & Nicht gleich \\
+			\textbf{$=$} 		& Ist gleich \\
+			\textbf{$>$} 		& Größer als \\
+			\textbf{$<$} 		& Kleiner als \\
+			\textbf{$>=$} 		& Größer oder gleich \\
+			\textbf{$<=$} 		& Kleiner oder gleich \\
+			\textbf{$<>$} 		& Nicht gleich \\
 			\hline
 		\end{tabular}
 	\end{center}
@@ -225,14 +225,14 @@
 		\def\arraystretch{1.1}
 		\begin{tabular}{ | c | c |}
 			\hline
-			\textbf{Symbol} & \textbf{Beschreibung} \\
+			\textbf{Symbol} 	& \textbf{Beschreibung} \\
 			\hline
 			\hline
-			\textbf{\%} & Eines oder mehrere zeichen \\
-			\textbf{\_} & Ein einzelnes Zeichen \\
-			\textbf{[ ]} & Irgendeines der Zeichen in den Klammern \\
-			\textbf{\^ [  ]} & Ein Zeichen, das nicht in den Klammern steht \\
-			\textbf{[x-y]} & Ein Zeichen in dem angegebenen Bereich \\
+			\textbf{\%} 		& Eines oder mehrere zeichen \\
+			\textbf{\_} 		& Ein einzelnes Zeichen \\
+			\textbf{[ ]} 		& Irgendeines der Zeichen in den Klammern \\
+			\textbf{\^ [  ]} 	& Ein Zeichen, das nicht in den Klammern steht \\
+			\textbf{[x-y]} 		& Ein Zeichen in dem angegebenen Bereich \\
 			\hline
 		\end{tabular}
 	\end{center}
@@ -373,7 +373,7 @@
 	PLZ ist also für "Kunden" ein Fremdschlüssel, der auf die Tabelle "Orte" verweist. Darüber können wir die beiden Tabellen verknüpfen:
 
 	\begin{lstlisting}[language=SQL, caption=Wir erhalten Vornamen sowie Kundennummern und dazugehörige Ortsnamen]
-	SELECT kunden.vorname, kunden.kundennummer 
+	SELECT kunden.vorname, kunden.kundennummer, orte.name
 	FROM kunden
 	INNER JOIN orte ON kunden.plz = orte.plz;
 	\end{lstlisting}
@@ -383,25 +383,25 @@
 	\begin{figure}[h!]
 		\centering
 		\includesvg[width=5.5cm]{inner_join}
-		\caption{INNER JOIN gibt Einträge mit zutreffenden Werten in beiden Tabellen zurück}
+		\caption{\textbf{INNER JOIN} gibt Einträge mit zutreffenden Werten in beiden Tabellen zurück}
 	\end{figure}
 
 	\begin{figure}[h!]
 		\centering
 		\includesvg[width=5.5cm]{left_join}
-		\caption{LEFT JOIN gibt alle Einträge aus der linken Tabelle und Einträge mit zutreffenden Werten aus der rechten Tabelle zurück}
+		\caption{\textbf{LEFT JOIN} gibt alle Einträge aus der linken Tabelle und Einträge mit zutreffenden Werten aus der rechten Tabelle zurück}
 	\end{figure}
 
 	\begin{figure}[h!]
 		\centering
 		\includesvg[width=5.5cm]{right_join}
-		\caption{RIGHT JOIN funktioniert wie LEFT JOIN, nur umgekehrt}
+		\caption{\textbf{RIGHT JOIN} funktioniert wie LEFT JOIN, nur umgekehrt}
 	\end{figure}
 
 	\begin{figure}[h!]
 		\centering
 		\includesvg[width=5.5cm]{full_join}
-		\caption{FULL JOIN gibt alle Einträge aus der linken und rechten Tabelle zurück, wenn es in einer der Tabellen einen zutreffenden Wert gibt}
+		\caption{\textbf{FULL JOIN} gibt alle Einträge aus der linken und rechten Tabelle zurück, wenn es in einer der Tabellen einen zutreffenden Wert gibt}
 	\end{figure}
 
 	\paragraph{SELECT IN SELECT}
@@ -554,6 +554,194 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 		\item da höchstens zwei Kinderknoten vorhanden sind, werden diese als linkes (left) und rechtes (right) Kind bezeichnet
 	\end{itemize}
 
+	\subsection{Graphen}
+	Ein Graph ist eine nicht-lineare Datenstruktur, die genutzt werden kann, um Netzwerke darzustellen. Beispielsweise kann man Graphen nutzen, um Freundesgruppen, internationale Beziehungen oder Verkehrsinfrastruktur zu modellieren. Mit Graphen lassen sich eine Vielzahl von Sachzusammenhängen abstrahieren.
+	Ein Graph besteht dabei aus zwei wesentlichen Komponenten:
+
+	\paragraph{Knoten}
+	Die Knoten (engl. Vertex, pl. Vertices) beschreiben die konkreten Entitäten, die wir in unserem Graphen abbilden wollen. In einer Freundesgruppe könnten dies zum Beispiel "Menschen" sein.In Java benutzen wir die Klasse "Vertex", um Knoten zu implementieren. Die Dokumentation \href{https://www.schulentwicklung.nrw.de/lehrplaene/upload/klp_SII/if/Dokumentation_ZA-IF_GK-LK_ab_2018_2021_12_22.pdf#page=29}{\underline{findet ihr hier}}.
+
+	\paragraph{Kanten}
+	Mit Kanten (engl. Edge) werden die Beziehungen zwischen den einzelnen Knoten dargestellt, wobei eine Kante immer genau zwei Knoten verbindet. In Java kann man für die Klasse "Edge" nutzen, deren Dokumentation \href{https://www.schulentwicklung.nrw.de/lehrplaene/upload/klp_SII/if/Dokumentation_ZA-IF_GK-LK_ab_2018_2021_12_22.pdf#page=30}{\underline{ist hier zu finden}}.
+
+	\subsubsection{Gerichtete Graphen}
+	Ein Graphen kann so verwendet werden, dass eine Kante explizit vom einen Knoten zum anderen zeigt, aber nicht umgekehrt. In diesem Fall gibt die Kante eine Richtung vor - der Graph ist also ein gerichteter Graph
+
+	\subsubsection{Gewichtete Graphen}
+	Neben einer Richtung können wir Kanten auch ein Gewicht geben. Dieses kann je nach Zusammenhang verschiedene Funktionen erfüllen. In einem Verkehrsnetz könnte ein Gewicht eventuell die Zeit beschreiben, die man benötigt, um von einem Knoten zu einem anderen zu kommen.
+
+	\subsubsection{Schreibweise}
+	Graphen können auf mehrere Arten aufgeschrieben werden:
+	
+	\paragraph{Graphenschreibweise}
+	Ganz klassich kann ein Graph visualisiert mit Kanten und Knoten gezeichnet werden:
+
+	\begin{figure}[h!]
+		\centering
+		\includesvg[width=5.5cm]{example_graph}
+		\caption{Ein Beispiel für einen gerichteten und gewichteten Graphen}
+	\end{figure}
+
+	\paragraph{Adjazenzmatrix}
+	Ein Graph kann auch in einer Matrix dargestellt werden. Eine Matrix für den gerade gezeichneten Graphen sieht so aus:
+
+	
+	\begin{center}
+		\def\arraystretch{1.1}
+		\begin{tabular}{ | c | c | c | c | }
+			\hline 
+						& \textbf{A} 	& \textbf{B} 	& \textbf{C} 	\\
+			\textbf{A} 	& 0 			& 1 			& 3 			\\
+			\textbf{B} 	& 				& 0 			& 				\\
+			\textbf{C} 	& 3 			& 12 			& 0 			\\ 
+			\hline
+		\end{tabular}
+	\end{center}
+
+	\subsubsection{Algorithmen}
+	Es gibt eine Vilzahl von Algorithmen, um Graphen-bezogene Probleme zu lösen.
+
+	\paragraph{Einen Knoten finden}
+	Um sämtliche Knoten abzufragen, mit denen ein Ursprungsknoten $v$ verbunden ist, gibt es zwei sehr ähnliche Algorithmen, die beinahe identisch arbeiten:
+
+	\subparagraph{Breitensuche (BFS)}
+	Die Breitensuche beginnt bei einem Knoten und fügt alle verbunden Knoten in eine Queue ein. Danach arbeitet sie diese Queue ab und wiederholt das Anfügen, bis alle Knoten besucht wurden. 
+
+	\begin{lstlisting}[caption=Ein Beispiel für BFS in Pseudocode]
+	method BFS(G, v) {
+		Initialisiere Queue Q
+		Q.enqueue(v)
+		while Q nicht leer {
+			v = Q.dequeue()
+
+			for Nachbarn w von v {
+				markiere w als besucht
+				Q.enqueue(w) // um spaeter die Nachbarn von w zu besuchen
+			}
+		}
+	}
+	\end{lstlisting}
+
+	\begin{lstlisting}[language=Java, caption=Ein Beispiel für BFS in Java]
+	public static void bfs(Graph g, Vertex v) {
+		g.setAllVertexMarks(false);
+
+		Queue<Vertex> q = new Queue<Vertex>();
+
+		q.enqueue(v);
+
+		while (!queue.isEmpty()) {
+			v = q.front();
+			q.dequeue();
+
+			for (Vertex w : g.getNeighbours(v)) {
+				if (!w.isMarked()) {
+					w.setMark(true);
+					q.enqueue(w);
+				}
+			}
+		}
+	}
+	\end{lstlisting}
+
+	\newpage
+
+	\subparagraph{Tiefensuche (DFS)}
+	DFS funktioniert genau wie die BFS, allerdings wird statt einer Queue ein Stack verwendet:
+
+	
+	\begin{lstlisting}[caption=Ein Beispiel für DFS in Pseudocode]
+	method DFS(G, v) {
+		Initialisiere Stack s
+		s.push(v)
+		while s nicht leer {
+			v = s.pop()
+
+			for Nachbarn w von v {
+				markiere w als besucht
+				s.push(w) // um spaeter die Nachbarn von w zu besuchen
+			}
+		}
+	}
+	\end{lstlisting}
+
+	\paragraph{Kürzester Weg}
+	Ein häufiges Graphenproblem ist es auch, den kürzesten bzw. "günstigsten" Weg von einem Knoten zu einem anderen in einem gewichteten Graphen zu finden. Auch dafür gibt es mehrere Algorithmen:
+
+	\subparagraph{Dijkstra}
+	Der Dijkstra-Algorithmus ist ein sogenannter "Greedy"-Algorithmus, der Knoten für Knoten die Entfernungen berechnet. Dabei geht er folgendermaßen vor:
+
+	\begin{enumerate}
+		\item Weise jedem Knoten die Eigenschaft "Distanz" und "Vorgänger" zu
+		\item Setze die Distanz des Startknotens auf "0"
+		\item Setze die Distanz aller anderen Knoten auf $\infty$
+		\item Wähle unter den nicht besuchten Knoten den mit der niedrigsten Distanz aus
+			\begin{enumerate}
+				\item Speichere, dass dieser Knoten besucht wurde
+				\item Berechne die Gesamtdistanz aller Nachbarknoten über das Gewicht der Kante zu dem Knoten und der Gesamtdistanz des aktuellen Knotens
+				\item Wenn dieser Wert kleiner ist als der Wert, der dort bereits gespeichert ist, aktualisiere die Distanz und setze den aktuellen Knoten als neuen Vorgänger
+			\end{enumerate}
+	\end{enumerate}
+
+	Allerdings findet Dijkstra bei Graphen mit negativen Kanten nicht immer ein optimales Ergebnis. Daher muss man für solche Graphen andere Algorithmen wie Bellman Ford verwenden. Mit gerichteten Graphen wiederum hat Dijkstra kein Problem.
+
+	\newpage
+
+	Ein Pseudocode des Dijkstra-Algirithmus könnte wie folgt aussehen:
+
+	\begin{lstlisting}[caption=Dijkstra in Pseudocode]
+	method Dijkstra(G, v) {
+		Initialisiere Liste L
+
+		For knoten w in G {
+			Setze Distanz von w auf unendlich
+			Setze Vorgaenger von w auf null
+			Fuege w in L ein
+		}
+
+		Setze Distanz zu v auf 0
+
+		While L ist nicht leer {
+			v = Knoten mit geringster Distanz in L
+			Entferne v aus L
+
+			For Nachbar w von v, der noch in L ist {
+				c = Distanz von v + Gewicht v-w
+
+				Wenn c < Distanz von w {
+					Setze Distanz von w auf c
+					Setze Vorgaenger von w auf v
+				}
+			}
+		}
+	}
+	\end{lstlisting}
+
+	\paragraph{Minimale Spannbäume (MST)}
+	Ein Teilhraph $H$ eines ungerichteten Graphen $G$ heißt Spannbaum, wenn H ein Baum aus den Knote von G ist. Ein Spannbaum S eines gewichteten, ungerichteten Graphen G heißt minimaler Spannbaum von G, wenn S unter allen Spannbäumen von G ein minimales Gewicht besitzt. Das Ziel eines minimalen Spannbaums ist es, alle Knoten eines Graphen möglichst kostengünstig miteinander zu verbinden. Um diesen Baum zu generieren, können wir den Kruskal- oder den Prim-Algorithmus verwenden:
+
+	\subparagraph{Kruskal}
+	Der Kruskal-Algorithmus arbeitet mit den Kanten des Graphen: er sortiert die Kanten nach Gewicht in aufsteigender Reihenfolge und fügt anschließend immer die Kante mit dem kleinsten Gewicht zum Graphen hinzu, falls beim hinzufügen der Kante keine Kreise im Graphen entstehen. Diesen Vorgang wiederholt der Algorithmus so lange, bis alle Knoten im minimalen Spannbaum verbunden sind.
+
+	\begin{lstlisting}[caption=Der Kruskal-Algorithmus in Pseudocode]
+	method kruskal(G) {
+		V = Liste mit Knoten von G
+		E = Liste mit Kanten von G
+
+		MST = neuer Graph mit Knoten V
+
+		sortiere E aufsteigend
+
+		For Kante e aus E {
+			Entferne e aus E
+			Wenn MST mit hinzugefuegter Kante e keine Kreise enthaelt {
+				fuege e zu MST hinzu
+			}
+		}
+	}
+	\end{lstlisting}
+
+
 	\section{Formale Sprachen, Grammatiken und Automaten}
 	
 	\subsection{Formale Sprachen}
@@ -687,7 +875,7 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 		\item $\Sigma$: endliches Eingabealphabet
 		\item $F$: Menge der Endzustände mit $F \subseteq Q$
 		\item $\delta$: Übergangsrelation mit $\delta: Q \times \Sigma \rightarrow Q^n$ \\
-		$\implies$ ordnet jedem Paar $q \in Q$, $\sigma \in \Sigma$ einen eindeutigen Folgezustand $\delta(q,\sigma) \subseteq Q$ zu
+		$\implies$ ordnet jedem Paar $q \in Q$, $\sigma \in \Sigma$ eine Menge von Folgezuständen $\delta(q,\sigma) \subseteq Q$ zu
 	\end{itemize}
 	
 	\subsubsection{Visualisierung}
@@ -748,7 +936,13 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 		\item die Zustände des Automaten werden zu Nichtterminalsymbolen der Grammatik
 		\item die Zeichen des Eingabealphabets des Automaten werden zu Zeichen des Alphabets bzw. Terminalsymbole der Grammatik
 		\item der Startzustand des Automaten wird zum Startsymbol der Grammatik
-		\item die Produktionsregeln der Grammatik können aus dem visualisierten Automaten wiefolgt abgeleitet werden: 
+		\item die Produktionsregeln der Grammatik können aus dem visualisierten Automaten abgeleitet werden: 
+		\begin{figure}[H]
+			\centering
+			\includesvg[width=15.0cm]{Automats_Example}
+			\caption{Dies ist ein Beispiel für einen Automaten, das im Folgenden die Erklärung verdeutlichen soll.}
+		\end{figure}	
+>>>>>>> master
 		\begin{itemize}
 			\item kann von einem Zustand aus in den Endzustand übergegangen werden, wird der Produktionsregel für das entsprechende Nichtterminalsymbol die Umwandlung in das Terminalsymbol hinzugefügt, das dem Zeichen des Eingabealphabets entspricht, welches verwendet wird, um den Endzustand zu erreichen \\
 			Beispiel: $A \rightarrow 1$, da von A in den Endzustand B übergegangen werden kann, wenn die 1 gewählt wird.
