@@ -145,7 +145,7 @@
 	Aus diesem Grund führen wir sogenannte Normalisierungen durch, durch die solche Anomalien verhindert werden.
 
 	\subsubsection{Erste Normalform}
-	Um die erste Normalform zu erreichen, müssen alle Attribute atomisiert werden. Das bedeutet, dass alle Attribute so weit wie möglich zerlegt werden.
+	Um die erste Normalform zu erreichen, müssen alle Attribute normalisiert werden. Das bedeutet, dass alle Attribute so weit wie möglich zerlegt werden.
 	Beispielsweise könnte das Attribut "Name" in "Vorname" und "Nachname" zerlegt werden.
 
 	\subsubsection{Zweite Normalform}
@@ -926,22 +926,26 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 	\end{itemize}
 	
 	\begin{figure}[H]
-		\centering
-		\includesvg[width=6.0cm]{Automats_Example}
-		\caption{Dies ist ein Beispiel für einen Automaten, das im Folgenden die Erklärung verdeutlichen soll.}
-	\end{figure}	
+			\centering
+			\includesvg[width=6.0cm]{Automats_Example}
+			\caption{Dies ist ein Beispiel für einen Automaten, das im Folgenden die Erklärung verdeutlichen soll.}
+		\end{figure}	
 		
 	\paragraph{Automat $\rightarrow$ reguläre Grammatik}
 	\begin{itemize}
 		\item die Zustände des Automaten werden zu Nichtterminalsymbolen der Grammatik
 		\item die Zeichen des Eingabealphabets des Automaten werden zu Zeichen des Alphabets bzw. Terminalsymbole der Grammatik
 		\item der Startzustand des Automaten wird zum Startsymbol der Grammatik
+<<<<<<< HEAD
+		\item die Produktionsregeln der Grammatik können aus dem visualisierten Automaten wiefolgt abgeleitet werden: 
+=======
 		\item die Produktionsregeln der Grammatik können aus dem visualisierten Automaten abgeleitet werden: 
 		\begin{figure}[H]
 			\centering
 			\includesvg[width=15.0cm]{Automats_Example}
 			\caption{Dies ist ein Beispiel für einen Automaten, das im Folgenden die Erklärung verdeutlichen soll.}
 		\end{figure}	
+>>>>>>> master
 		\begin{itemize}
 			\item kann von einem Zustand aus in den Endzustand übergegangen werden, wird der Produktionsregel für das entsprechende Nichtterminalsymbol die Umwandlung in das Terminalsymbol hinzugefügt, das dem Zeichen des Eingabealphabets entspricht, welches verwendet wird, um den Endzustand zu erreichen \\
 			Beispiel: $A \rightarrow 1$, da von A in den Endzustand B übergegangen werden kann, wenn die 1 gewählt wird.
