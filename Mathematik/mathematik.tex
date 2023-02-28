@@ -171,7 +171,7 @@
   		$\implies$ Punkt am Schnittpunkt von Funktion und Tangente \\
   		$\implies$ Steigung am Schnittpunkt, also wert der Ableitung an diesem 
   		\item Punktsymmetrie (zum Ursprung) \\
-  		$\implies f(x) = -f(-x) \implies$ nur ungerade Exponenten von $x$ (inklusive $1$)
+  		$\implies f(-x) = -f(x) \implies$ nur ungerade Exponenten von $x$ (inklusive $1$)
   		\item Achsensymmetrie (zur $x$-Achse) \\
   		$\implies f(x) = f(-x) \implies$ nur gerade Exponenten von $x$ (inklusive $0$)
   	\end{enumerate}
@@ -377,6 +377,475 @@
   \end{equation*}
   
   \section{Analytische Geometrie}
+  
+  \subsection{Einführung}
+  
+  \subsubsection{Definition: Vektor}
+  Ein Vektor ist die Klasse aller Pfeile, die in Richtung, Orientierung und Länge übereinstimmen. \\
+  \\
+  Jeder Pfeil des Vektors wird auch Repräsentant des Vektors genannt.
+  
+  \subsubsection{Definition: Ortsvektor}
+  Ist $P \in \mathbb{R}^n$, das heißt $P(x_1 | x_2 | \ldots | x_n$, so heißt der Vektor $\vec{p}$, der den Repräsentanten $\vec{0p}$ hat, Ortsvektor von $P$. 
+  
+  \subsubsection{Schreibweise}
+  \begin{itemize}
+  	\item $\vec{v} \in \mathbb{R}^n$ ($n$-dimensionaler Vektor) \\
+  	\item $\vec{v} = 
+  	\begin{pmatrix}
+  		x_1 \\
+  		x_2 \\
+  		\vdots \\
+  		x_n
+  	\end{pmatrix}$ \\
+  	(Schreibweise eines Ortsvektors; $x_1$ bis $x_n$ sind Koordinaten des Punktes, auf den dieser zeigt)
+  \end{itemize}
+  
+  \subsubsection{Definition: Betrag eines Vektors}
+  Der Betrag eines Vektors $\vec{v}$, also $|\vec{v}|$, gibt die Länge von $\vec{v}$ an. Es gilt für $\vec{v} = 
+  \begin{pmatrix}
+  	v_1 \\
+  	v_2 \\
+  	\vdots \\
+  	v_n
+  \end{pmatrix}$
+  \begin{equation*}
+  	| \vec{v} | = \sqrt{v_1^2 + v_2^2 + \ldots + v_n^2}
+  \end{equation*}
+  
+  \subsubsection{Satz: Vektor zwischen zwei Punkten}
+  Der Vektor $\vec{v} = \vec{PQ}$ zwischen den Punkten $P$ und $Q$ ergibt sich durch 
+  \begin{equation*}
+  	\vec{v} = 
+  	\begin{pmatrix}
+  		x_Q - x_P \\
+  		y_Q - y_P
+  	\end{pmatrix}
+  \end{equation*}
+  
+  \subsubsection{Definition: Gegenvektor}
+  Der Vektor $\vec{v} \in \mathbb{R}^n$ sei gegeben. Der Vektor $\vec{w} = -\vec{v}$ heißt Gegenvektor von $\vec{v}$. $\vec{v}$ und $\vec{w}$ sind folglich in Länge und Richtung gleich, nur die Orientierung ist umgekehrt. \\
+  Für $\vec{v} = 
+  \begin{pmatrix}
+  	v_1 \\
+  	v_2 \\
+  	\vdots \\
+  	v_n
+  \end{pmatrix}$
+  bedeutet das $\vec{w} =
+  \begin{pmatrix}
+  	-v_1 \\
+  	-v_2 \\
+  	\vdots \\
+  	-v_n
+  \end{pmatrix}$
+  
+  \subsection{Rechnen mit Vektoren}
+  
+  \subsubsection{Addition}
+  $\vec{v}, \vec{w} \in \mathbb{R}^n$
+  \begin{equation*}
+  	\vec{v} + \vec{w} = 
+  	\begin{pmatrix}
+  		v_1 \\
+  		v_2 \\
+  		\vdots \\
+  		v_n
+  	\end{pmatrix}
+  	+
+  	\begin{pmatrix}
+  		w_1 \\
+  		w_2 \\
+  		\vdots \\
+  		w_n
+  	\end{pmatrix}
+  	\coloneqq 
+  	\begin{pmatrix}
+  		v_1 + w_1 \\
+  		v_2 + w_2 \\
+  		\vdots \\
+  		v_n + w_n
+  	\end{pmatrix}
+  \end{equation*}
+  
+  \subsubsection{Multiplikation Zahl - Vektor}
+  $k \in \mathbb{R}, \vec{v} \in \mathbb{R}^n$
+  \begin{equation*}
+  	k \cdot \vec{v} = k \cdot 
+  	\begin{pmatrix}
+  		v_1 \\
+  		v_2 \\
+  		\vdots \\
+  		v_n
+  	\end{pmatrix}
+  	\coloneqq 
+  	\begin{pmatrix}
+  		k \cdot v_1 \\
+  		k \cdot v_2 \\
+  		\vdots \\
+  		k \cdot v_n
+  	\end{pmatrix}
+  \end{equation*}
+  
+  \subsubsection{Multiplikation Vektor - Vektor (Definition: Skalarprodukt)}
+  Es seien $\vec{u}, \vec{v} \in \mathbb{R}^n$. Man definiert: 
+  \begin{equation*}
+  	\vec{u} \cdot \vec{v} = 
+  	\begin{pmatrix}
+  		u_1 \\
+  		u_2 \\
+  		\vdots \\
+  		u_n
+  	\end{pmatrix}
+  	\cdot 
+  	\begin{pmatrix}
+  		v_1 \\
+  		v_2 \\
+  		\vdots \\
+  		v_n
+  	\end{pmatrix}
+  	\coloneqq u_1 v_1 + u_2 v_2 + \ldots + u_n v_n
+  \end{equation*}
+  
+  \subsection{}
+  
+  \subsubsection{Definition: Linearkombination}
+  Für $\vec{v_1}, \vec{v_2}, \ldots, \vec{v_n} \in \mathbb{R}^k$ und $r_1, r_2, \ldots, r_n \in \mathbb{R}$ heißt $r_1 \vec{v_1} + r_2 \vec{v_2} + \ldots + r_n \vec{v_n}$ Linearkombination der Vektoren $\vec{v_1}, \vec{v_2}, \ldots, \vec{v_n}$.
+  
+  \subsubsection{Definition: Lineare Unabhängigkeit}
+  Es seien $\vec{v_1}, \vec{v_2}, \ldots, \vec{v_n} \in \mathbb{R}^k$ und $r_1, r_2, \ldots, r_n \in \mathbb{R}$. Folgt aus 
+  \begin{equation*}
+  	r_1 \vec{v_1} + r_2 \vec{v_2} + \ldots + r_n \vec{v_n} = \vec{0}
+  \end{equation*}
+  dass gilt
+  \begin{equation*}
+  	r_1 = r_2 = \ldots = r_n = 0
+  \end{equation*}
+  so heißen $\vec{v_1}, \vec{v_2}, \ldots, \vec{v_n}$ linear unabhängig.
+  
+  \subsubsection{Definition: Basis}
+  Sind die Vektoren $\vec{v_1}, \vec{v_2}, \ldots, \vec{v_n} \in \mathbb{R}^n$ linear unabhängig, so werden sie Basis des $\mathbb{R}^n$ genannt, das heißt, dass sich jeder Vektor des $\mathbb{R}^n$ als Linearkombination der $\vec{v_1}, \vec{v_2}, \ldots, \vec{v_n}$ darstellen lässt.
+  
+  \subsubsection{Satz: Orthogonalität von Vektoren}
+  Es seien $\vec{u}, \vec{v} \in \mathbb{R}^n$. Es gilt dann: 
+  \begin{equation*}
+  	\vec{u} \perp \vec{v} \Leftrightarrow \vec{u} \cdot \vec{v} = 0
+  \end{equation*}
+  
+  \subsubsection{Satz: Winkel zwischen Vektoren}
+  Für den Winkel $\alpha$, der von zwei Vektoren $\vec{a}, \vec{b} \in \mathbb{R}^n$ eingeschlossen wird, gilt: 
+  \begin{equation*}
+  	\cos(\alpha) = \frac{\vec{a} \cdot \vec{b}}{|\vec{a}| \cdot |\vec{b}|}
+  \end{equation*}
+  ($0^{\circ} \leqslant \alpha \leqslant 180^{\circ}$)
+  
+  \subsection{Geraden und Ebenen}
+  
+  \subsubsection{Definition: Geradengleichung}
+  Es seien $\vec{u}, \vec{v} \in \mathbb{R}^n$ und $r \in \mathbb{R}$. Eine Gerade im $\mathbb{R}^n$ lässt sich beschreiben durch 
+  \begin{equation*}
+  	g : \vec{x} = \vec{u} + r \cdot \vec{v}
+  \end{equation*}
+  Dabei stehen die Vektoren für: 
+  \begin{itemize}
+  	\item $\vec{x}$: Jeder Punkt der Geraden
+  	\item $\vec{u}$: Stützvektor (beliebiger Punkt der Geraden)
+  	\item $\vec{v}$: Richtungsvektor (Differenz zwischen zwei beliebigen Punkten der Geraden)
+  \end{itemize}
+  
+  \subsubsection{Definition: Kollinearität}
+  Zwei Vektoren $\vec{a}, \vec{b} \in \mathbb{R}^n$ heißen kollinear, wenn es ein $k \in \mathbb{R}$ gibt mit 
+  \begin{equation*}
+  	\vec{a} = k \cdot \vec{b}
+  \end{equation*}
+  
+  \subsubsection{Lagebeziehungen von Geraden}
+  Richtungsvektor kollinear? 
+  \begin{itemize}
+  	\item ja $\implies$ Stützvektor einer Geraden auf der anderen? \\
+  	\begin{itemize}
+  		\item ja $\implies$ Identität ($g = h$)
+  		\item nein $\implies$ Parallelität ($g \parallel h$)
+  	\end{itemize}
+  	\item nein $\implies$ gleichsetzen
+  	\begin{itemize}
+  		\item $\mathbb{L} = \varnothing \implies$ Windschiefheit (kein Symbol)
+  		\item $\mathbb{L} \neq \varnothing \implies$ Schnitt ($g \nmid h$)
+  	\end{itemize}
+  \end{itemize}
+  
+  \subsubsection{Definition: Ebenengleichung in Parameterform}
+  Es seien $\vec{u}, \vec{v}, \vec{w} \in \mathbb{R}^n$ und $r, t \in \mathbb{R}$. Eine Ebene im $\mathbb{R}^n$ lässt sich beschreiben durch 
+  \begin{equation*}
+  	E : \vec{x} = \vec{u} + r \cdot \vec{v} + t \cdot \vec{w}
+  \end{equation*}
+  Dabei stehen die Vektoren für: 
+  \begin{itemize}
+  	\item $\vec{x}$: Jeder Punkt der Ebene
+  	\item $\vec{u}$: Stützvektor (beliebiger Punkt der Ebene)
+  	\item $\vec{v}, \vec{w}$: Spannvektor (Differenz zwischen zwei beliebigen Punkten der Geraden; nicht kollinear)
+  \end{itemize}
+  
+  \subsubsection{Definition: Normalenvektor}
+  Ein Vektor $\vec{n}$ heißt Normalenvektor bezüglich einer Ebene $E$, wenn gilt: 
+  \begin{equation*}
+  	\vec{n} \perp E
+  \end{equation*}
+  
+  \subsubsection{Bestimmung von Normalenvektoren}
+  $\vec{n}$ mit $\vec{n} \perp E : \vec{x} = \vec{u} + r \cdot \vec{v} + t \cdot \vec{w}$ ist gesucht, das heißt $\vec{n} \perp \vec{v} \land \vec{n} \perp \vec{w} \Leftrightarrow \vec{n} \cdot \vec{v} = 0 \land \vec{n} \cdot \vec{w} = 0$
+  
+  \subsubsection{Definition: Normalenform einer Ebenengleichung}
+  Es sei $\vec{x_0}$ der Ortsvektor eines Ponktes der Ebene $E$, $\vec{n}$ sei ein Normalenvektor von $E$. Dann ist $E$ eindeutig festgelegtdurch die Normalenform
+  \begin{equation*}
+  	(\vec{x} - \vec{x_0}) \cdot \vec{n} = 0
+  \end{equation*}
+  
+  \subsubsection{Definition: Koordinatenform einer Ebenenngleichung}
+  Es seien $a, b, c, d, \in \mathbb{R}$. Die Gleichung 
+  \begin{equation*}
+  	ax + by + cz = d
+  \end{equation*}
+  legt ebenfalls eine Ebene eindeutig fest.
+  
+  \subsubsection{Umwandlungen zwischen Formen von Ebenengleichungen}
+  
+  \paragraph{Parameterform $\rightarrow$ Normalenform} 
+  \subparagraph{gesucht:}
+  \begin{itemize}
+  	\item $\vec{x_0}$
+  	\item $\vec{n}$
+  \end{itemize}
+  \subparagraph{$\vec{x_0}$:}
+  Stützvektor - beliebiger Punkt der Ebene (beispielsweise Stützvektor der Parameterform)
+  
+  \subparagraph{$\vec{n}$:}
+  Normalenvektor - Vektor, der zu beiden Spannvektoren orthogonal ist (Produkt aus Normalenvektor und Spannvektor ist null für beide Spannvektoren der Ebene)
+  
+  \paragraph{Normalenform $\rightarrow$ Koordinatenform}
+  \subparagraph{Vorgehen:}
+  Der Vektor $\vec{x}$ wird hier dargestellt durch
+  $\begin{pmatrix}
+  	x_1 \\
+  	x_2 \\
+  	x_3
+  \end{pmatrix}$.
+  Auf diese Weise kann mit ihm gerechnet werden. Er wird mit $\vec{x_0}$ zusammengefasst, sodass sich
+  $\begin{pmatrix}
+  	x_1 + x_{01} \\
+  	x_2 + x_{02} \\
+  	x_3 + x_{03}
+  \end{pmatrix}$
+  ergibt. Mit diesem Vektor wird nun die Multiplikation mit $\vec{n}$ durchgeführt. Die resultierende Gleichung kann zusammengefasst werden und der Wert, der nicht mit einer Unbekannten multipliziert wird, wird auf die rechte Seite des Gleichheitszeichens gebracht. 
+  
+  \paragraph{Koordinatenform $\rightarrow$ Parameterform} 
+  \subparagraph{Vorgehen:}
+  Die Gleichung wird so umgestellt, dass eine der Unbekannten alleine auf einer Seite des Gleichheitszeichens steht. Die anderen beiden Unbekannten werden zu den Vorfaktoren der Spannbektoren der Parameterform (umbenannt). Der Stützvektor der Parameterform ergibt sich aus der Zahl ohne Unbekannte ($z$) als 
+  $\begin{pmatrix}
+  	z \\
+  	0 \\
+  	0
+  \end{pmatrix}$. 
+  Die Spannvektoren ergeben sich jeweils durch den Wert vor einer der Variablen (die in den Vorfaktor des entsprechenden Stützvektors umbenannt wurde) an erster Stelle und an der Stelle, zu der diese Variable gehört (z. B. an zweiter Stelle für $x_2$), eine 1.
+  
+  \paragraph{Koordinatenform $\rightarrow$ Normalenform}
+  \subparagraph{gesucht:} 
+  \begin{itemize}
+  	\item $\vec{n}$
+  	\item $\vec{x_0}$
+  \end{itemize}
+  
+  \subparagraph{$\vec{n}$:}
+  Der Normalenvektor ergibt sich aus den Vorfaktoren der Unbekannten der Koordinatenform, also 
+  $\begin{pmatrix}
+  	a \\
+  	b \\
+  	c
+  \end{pmatrix}$. 
+  
+  \subparagraph{$\vec{x_0}$:}
+  Der Stützvektor kann ermittelt werden, indem in der Gleichung der Koordinatenform zwei Unbekannte auf beliebige Werte gesetzt und der Wert der dritten Unbekannten ermittelt wird. diese ergeben dann den Stützvektor 
+  $\begin{pmatrix}
+  	x_1 \\
+  	x_2 \\
+  	x_3
+  \end{pmatrix}$
+  
+  \subsubsection{Definition: Spurpunkte}
+  Die Schnittpunkte einer Ebene mit den Koordinatenachsen heißen Spurpunkte der Ebene. Analog sind die Spurpunte einer Geraden der Durchstoßpunkte der Geraden mit den Koordinatenebenen.
+  
+  \subsubsection{Lagebeziehungen von Gerade - Ebene}
+  Gerade in Ebene einsetzen $\rightarrow$ Lösung?
+  \begin{itemize}
+  	\item ja, eine $\implies$ Schnittbeziehung
+  	\item ja, unendlich viele $\implies$ Gerade in Ebene
+  	\item nein $\implies$ Parallelität
+  \end{itemize}
+  
+  \subsubsection{Lagebeziehungen zweier Ebenen}
+  Normalenvektoren kollinear?
+  \begin{itemize}
+  	\item ja $\implies$ gemeinsamer Punkt? \\
+  	\begin{itemize}
+  		\item ja $\implies$ Identität 
+  		\item nein $\implies$ Parallelität
+  	\end{itemize}
+  	\item nein $\implies$ es existiert eine Schnittgerade
+  \end{itemize}
+  
+  \subsubsection{Bestimmung der Schnittgeraden zweier Ebenen}
+  Das Ziel ist es, zwei Punkte zu finden, die auf beiden Ebenen liegen. Sind diese gefunden, kann der Ortsvektor des einen als Stützvektor für die Geradengleichung verwendet werden und der Spannvektor entsteht durch die Differenz der Ortsvektoren beider Punkte. Diese Punkte können durch Gleichsetzen der Ebenengleichungen ermittelt werden, sofern diese sich in geeigneten Formen befinden. Andernfalls müssen sie erst in diese umgewandelt werden. 
+  
+  \subsubsection{Abstände berechnen}
+  
+  \paragraph{Punkt - Punkt}
+  \begin{enumerate}
+  	\item Betrag der Differenz der Ortsvektoren beider Punkte
+  \end{enumerate}
+  
+  \paragraph{Punkt - Gerade}
+  \begin{enumerate}
+ 	\item Hilfsebene 
+ 	\begin{itemize}
+ 		\item Punkt als Stützvektor
+ 		\item Richtungsvektor der Geraden als Normalenvektor
+ 	\end{itemize}
+ 	\item Der Lotfußpunkt ergibt sich aus dem Schnittpunkt der Geraden mit der Hilfsebene
+ 	\begin{itemize}
+ 		\item Hilfsebene in Koordinatenform
+ 		\item Gerade einsetzen
+ 	\end{itemize}
+ 	\item Skalar in Gerade einsetzen und Lotfußpunkt ausrechnen
+ 	\item Bestimmung des Abstandes des Lotfußpunktes vom Ausgangspunkt
+ 	\begin{itemize}
+ 		\item Betrag der Differenz der Ortsvektoren der beiden Punkte
+ 	\end{itemize}
+  \end{enumerate}
+  
+  \paragraph{Punkt - Ebene}
+  \begin{enumerate}
+  	\item Hilfsgerade
+  	\begin{itemize}
+  		\item Punkt als Stützvektor
+  		\item Normalenvektor der Ebene ist Richtungsvektor
+  	\end{itemize}
+  	\item Der Lotfußpunkt ergibt sich aus dem Schnittpunkt der Ebene mit der Hilfsgeraden
+  	\begin{itemize}
+  		\item Ebene in Koordinatenform
+  		\item Hilfsgerade einsetzen
+  	\end{itemize}
+  	\item Skalar in Hilfsgerade einsetzen und Lotfußpunkt ausrechnen
+  	\item Bestimmung des Abstands des Lotfußpunktes vom Ausgangspunkt
+  	\begin{itemize}
+  		\item Betrag der Differenz der Ortsvektoren der beiden Punkte
+  	\end{itemize}
+  \end{enumerate}
+  
+  \paragraph{Gerade - Gerade}
+  \begin{enumerate}
+  	\item Prüfung auf Parallelität oder Windschiefheit
+  	\begin{itemize}
+  		\item Richtungsvektoren kollinear? 
+  		\begin{itemize}
+  			\item ja $\implies$ parallel
+  			\item nein $\implies$ windschief
+  		\end{itemize}
+  	\end{itemize}
+  \end{enumerate}
+  
+  \subparagraph{Parallele Geraden}
+  \begin{enumerate}
+  	\item Hilfsebene
+  	\begin{itemize}
+  		\item Stützvektor von Gerade 1 als Stützvektor
+  		\item Richtungsvektor von Gerade 2 als Normalenvektor
+  	\end{itemize}
+  	\item Der Lotfußpunkt ergibt sich aus dem Schnittpunkt der Hilfsgerade mit Gerade 2
+  	\begin{itemize}
+  		\item Hilfsebene in Koordinatenform
+  		\item Gerade 2 einsetzen
+  	\end{itemize}
+  	\item Skalar in Gerade 2 einsetzen und Lotfußpunkt ausrechnen
+  	\item Bestimmung des Abstands vom Stützvektor der Geraden 1 und dem Lotfußpunkt
+  	\begin{itemize}
+  		\item Betrag der Differenz des Stützvektors der Geraden 1 und des Ortsvektors des Lotfußpunktes
+  	\end{itemize}
+  \end{enumerate}
+  
+  \subparagraph{Windschiefe Geraden}
+  \begin{enumerate}
+  	\item Hilfsebene
+  	\begin{itemize}
+  		\item Stützvektor der Geraden 1 als Stützvektor
+  		\item beide Richtungsvektoren als Spannvektoren
+  	\end{itemize}
+  	\item Hilfsgerade
+  	\begin{itemize}
+  		\item Stützvektor der Geraden 2 als Stützvektor
+  		\item Normalenvektor der Hilfsebene als Richtungsvektor
+  	\end{itemize}
+  	\item Der Lotfußpunkt ergibt sich aus dem Schnittpunkt der Hilfsebene mit der Hilfsgeraden
+  	\begin{itemize}
+  		\item Hilfsebene in Koordinatenform
+  		\item Hilfsgerade einsetzen
+  	\end{itemize}
+  	\item Skalar in Hilfsgerade einsetzen und Lotfußpunkt ausrechnen
+  	\item Bestimmung des Abstandes vom Stützvektor der Hilfsgeraden bzw. Geraden 2 und dem Lotfußpunkt
+  	\begin{itemize}
+  		\item Betrag der Differenz des Stützvektors der Hilfsgeraden bzw. Geraden 2 und des Ortsvektors des Lotfußpunktes 
+  	\end{itemize}
+  \end{enumerate}
+  
+  \paragraph{Gerade - Ebene}
+  \begin{enumerate}
+  	\item Hilfsgerade
+  	\begin{itemize}
+  		\item Stützvektor der Geraden als Stützvektor
+  		\item Normalenvektor der Ebene als Richtungsvektor
+  	\end{itemize}
+  	\item Der Lotfußpunkt ergibt sich aus dem Schnittpunkt der Ebene und der Hilfsgeraden
+  	\begin{itemize}
+  		\item Ebene in Koordinatenform
+  		\item Hilfsgerade einsetzen
+  	\end{itemize}
+  	\item Skalar in Hilfsgerade einsetzen und Lotfußpunkt ausrechnen
+  	\item Bestimmung des Abstands des Stützvektors der Hilfsgeraden bzw. Ausgangsgeraden und des Lotfußpunktes
+  	\begin{itemize}
+  		\item Betrag der Differenz des Stützvektors der Hilfsgeraden bzw. Ausgangsgeraden und des Ortsvektors des Lotfußpunktes
+	\end{itemize}  	 
+  \end{enumerate}
+  
+  \paragraph{Ebene - Ebene}
+  \begin{enumerate}
+  	\item Hilfspunkt
+  	\begin{itemize}
+  		\item Stützvektor der Ebene 1
+  	\end{itemize}
+  	\item Hilfsgerade
+  	\begin{itemize}
+  		\item Punkt als Stützvektor
+  		\item Normalenvektor der Ebene 2 als Richtungsvektor
+  	\end{itemize}
+  	\item Der Lotfußpunkt ergibt sich aus dem Schnittpunkt der Ebenen 2 und der Hilfsgeraden
+  	\begin{itemize}
+  		\item Ebene 2 in Koordinatenform
+  		\item Hilfsgerade einsetzen
+  	\end{itemize}
+  	\item Skalar in Hilfsgerade einsetzen und Lotfußpunkt ausrechnen
+  	\item Bestimmung des Abstands des Hilfspunktes vom Lotfußpunkt
+  	\begin{itemize}
+  		\item Betrag der Differenz der Ortsvektoren der beiden Punkte
+  	\end{itemize}
+  \end{enumerate}
+  
+  \subsubsection{Definition: Normierter Normalenvektor}
+  Ein Normalenvektor $\vec{n}$ einer Ebene heißt normiert, genau dann wenn gilt: 
+  \begin{equation*}
+  	|\vec{n}| = 1
+  \end{equation*}
+  
+  \subsubsection{Definition: Hessesche Normalenform}
+  Ist $E:(\vec{x} - \vec{x_0}) \cdot \vec{n_0} = 0$ eine Normalenform und $\vec{n_0}$ ein normierter Normalenvektor, so heißt die gegebene Normalenform auch Hessesche Normalenform.
   
   \section{Stochastik}
   
@@ -587,9 +1056,9 @@
   	\end{equation*}
   	
   	\subsubsection{Definition: Matrix-Vektor-Multiplikation}
-  	Es sei $M \in \mathbb{R}^{a \times b}$ und $\overrightarrow{\rm v} \in \mathbb{R}^b$. Man definiert: 
+  	Es sei $M \in \mathbb{R}^{a \times b}$ und $\vec{v} \in \mathbb{R}^b$. Man definiert: 
   	\begin{equation*}
-  		M \cdot \overrightarrow{\rm v} = 
+  		M \cdot \vec{v} = 
   		\begin{pmatrix}
   			m_{11}&m_{12}&\ldots&m_{1b} \\
   			m_{21}&\ddots&&\vdots \\
@@ -605,10 +1074,10 @@
   		\end{pmatrix}
   		\coloneqq
   		\begin{pmatrix}
-  			m_{11} \cdot v_1&m_{12} \cdot v_2&\ldots&m_{1b} \cdot v_b \\
-  			m_{21} \cdot v_1&\ddots&&\vdots \\
-  			\vdots&&& \\
-  			m_{a1} \cdot v_1&\ldots&&m_{ab} \cdot v_b
+  			m_{11} \cdot v_1 &+ m_{12} \cdot v_2 &+ \ldots &+ m_{1b} \cdot v_b \\
+  			m_{21} \cdot v_1 &+ m_{22} \cdot v_2 &+ \ldots &+ m_{2b} \cdot v_b \\
+  			\vdots & \vdots & \vdots & \vdots \\
+  			m_{a1} \cdot v_1 &+ m_{a2} \cdot v_2 &+ \ldots &+ m_{ab} \cdot v_b
   		\end{pmatrix}
   	\end{equation*}
   
