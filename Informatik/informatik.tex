@@ -162,7 +162,7 @@
 	\end{equation*}
 
 	Wenn $A$ also in zwei Zelle auftritt, muss $B$ auch übereinstimmen
-	Wenn es also mehrere Zellen mit dem Wer $A$ auftreten, entstehen Redundanzen. Ein Primärschlüssel bestimmt jedes Attribut eindeutig. Dementsprechend müssen zwei Zeilen identisch sein, wenn sie den gleichen Schlüssel haben. Bei einem Datenbankentwurf ist es wichtig festzulegen, welche funktionalen Abhängigkeiten gelten sollen.
+	Wenn es also mehrere Zellen mit dem Wert $A$ auftreten, entstehen Redundanzen. Ein Primärschlüssel bestimmt jedes Attribut eindeutig. Dementsprechend müssen zwei Zeilen identisch sein, wenn sie den gleichen Schlüssel haben. Bei einem Datenbankentwurf ist es wichtig festzulegen, welche funktionalen Abhängigkeiten gelten sollen.
 
 	\subsection{SQL}
 	SQL ist die Sprache, über die wir mit einer Datenbank interagieren können. Mit SQL können wir die klassichen CRUD-Operationen (Create, Read, Update, Delete) sowie weitere Aktionen durchführen. SQL hier komplett abzubilden würde den Rahmen sprengen, daher hier nur die "Basics". Weiterführende Infos sind beispielsweise bei w3schools.com zu finden: https://www.w3schools.com/sql/
@@ -441,7 +441,7 @@
 
 	Innerhalb der ersten Klammern geben wir die Spalten ein, die wir befüllen möchten. Die zweite Klammer enthält die tatsächlichen Werte, die wir einfügen möchten. Eine Kundennummer fügen wir nicht hinzu, da wir davon ausgehen, dass unsere Tabelle so konfiguriert ist, dass sie automatisch neue Primärschlüssel hinzufügt. Wichtig ist, dass wir sicherstellen, dass es für unsere PLZ bereits einen Eintrag in der "Orte"-Tabelle gibt.
 
-	\subsection{DELETE FROM}
+	\subsubsection{DELETE FROM}
 	Mit dem DELETE FROm-Statement können wir Einträge aus unserer Tabelle entfernen:
 
 	\begin{lstlisting}[language=SQL, caption=Wir entfernen alle Jürgens aus unserer Kundentabelle]
