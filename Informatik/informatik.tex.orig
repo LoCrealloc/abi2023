@@ -65,7 +65,7 @@
 
 	\begin{figure}[h!]
 		\centering
-1		\includesvg[width=3.0cm]{entity}
+		\includesvg[width=3.0cm]{entity}
 		\caption{Eine Entität wird mit einem Rechteck dargestellt}
 	\end{figure}	
 
@@ -145,7 +145,7 @@
 	Aus diesem Grund führen wir sogenannte Normalisierungen durch, durch die solche Anomalien verhindert werden.
 
 	\subsubsection{Erste Normalform}
-	Um die erste Normalform zu erreichen, müssen alle Attribute atomisiert werden. Das bedeutet, dass alle Attribute so weit wie möglich zerlegt werden.
+	Um die erste Normalform zu erreichen, müssen alle Attribute normalisiert werden. Das bedeutet, dass alle Attribute so weit wie möglich zerlegt werden.
 	Beispielsweise könnte das Attribut "Name" in "Vorname" und "Nachname" zerlegt werden.
 
 	\subsubsection{Zweite Normalform}
@@ -162,7 +162,7 @@
 	\end{equation*}
 
 	Wenn $A$ also in zwei Zelle auftritt, muss $B$ auch übereinstimmen
-	Wenn es also mehrere Zellen mit dem Wert $A$ auftreten, entstehen Redundanzen. Ein Primärschlüssel bestimmt jedes Attribut eindeutig. Dementsprechend müssen zwei Zeilen identisch sein, wenn sie den gleichen Schlüssel haben. Bei einem Datenbankentwurf ist es wichtig festzulegen, welche funktionalen Abhängigkeiten gelten sollen.
+	Wenn es also mehrere Zellen mit dem Wer $A$ auftreten, entstehen Redundanzen. Ein Primärschlüssel bestimmt jedes Attribut eindeutig. Dementsprechend müssen zwei Zeilen identisch sein, wenn sie den gleichen Schlüssel haben. Bei einem Datenbankentwurf ist es wichtig festzulegen, welche funktionalen Abhängigkeiten gelten sollen.
 
 	\subsection{SQL}
 	SQL ist die Sprache, über die wir mit einer Datenbank interagieren können. Mit SQL können wir die klassichen CRUD-Operationen (Create, Read, Update, Delete) sowie weitere Aktionen durchführen. SQL hier komplett abzubilden würde den Rahmen sprengen, daher hier nur die "Basics". Weiterführende Infos sind beispielsweise bei w3schools.com zu finden: https://www.w3schools.com/sql/
@@ -441,7 +441,7 @@
 
 	Innerhalb der ersten Klammern geben wir die Spalten ein, die wir befüllen möchten. Die zweite Klammer enthält die tatsächlichen Werte, die wir einfügen möchten. Eine Kundennummer fügen wir nicht hinzu, da wir davon ausgehen, dass unsere Tabelle so konfiguriert ist, dass sie automatisch neue Primärschlüssel hinzufügt. Wichtig ist, dass wir sicherstellen, dass es für unsere PLZ bereits einen Eintrag in der "Orte"-Tabelle gibt.
 
-	\subsubsection{DELETE FROM}
+	\subsection{DELETE FROM}
 	Mit dem DELETE FROm-Statement können wir Einträge aus unserer Tabelle entfernen:
 
 	\begin{lstlisting}[language=SQL, caption=Wir entfernen alle Jürgens aus unserer Kundentabelle]
@@ -926,22 +926,26 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 	\end{itemize}
 	
 	\begin{figure}[H]
-		\centering
-		\includesvg[width=6.0cm]{Automats_Example}
-		\caption{Dies ist ein Beispiel für einen Automaten, das im Folgenden die Erklärung verdeutlichen soll.}
-	\end{figure}	
+			\centering
+			\includesvg[width=6.0cm]{Automats_Example}
+			\caption{Dies ist ein Beispiel für einen Automaten, das im Folgenden die Erklärung verdeutlichen soll.}
+		\end{figure}	
 		
 	\paragraph{Automat $\rightarrow$ reguläre Grammatik}
 	\begin{itemize}
 		\item die Zustände des Automaten werden zu Nichtterminalsymbolen der Grammatik
 		\item die Zeichen des Eingabealphabets des Automaten werden zu Zeichen des Alphabets bzw. Terminalsymbole der Grammatik
 		\item der Startzustand des Automaten wird zum Startsymbol der Grammatik
+<<<<<<< HEAD
+		\item die Produktionsregeln der Grammatik können aus dem visualisierten Automaten wiefolgt abgeleitet werden: 
+=======
 		\item die Produktionsregeln der Grammatik können aus dem visualisierten Automaten abgeleitet werden: 
 		\begin{figure}[H]
 			\centering
 			\includesvg[width=15.0cm]{Automats_Example}
 			\caption{Dies ist ein Beispiel für einen Automaten, das im Folgenden die Erklärung verdeutlichen soll.}
 		\end{figure}	
+>>>>>>> master
 		\begin{itemize}
 			\item kann von einem Zustand aus in den Endzustand übergegangen werden, wird der Produktionsregel für das entsprechende Nichtterminalsymbol die Umwandlung in das Terminalsymbol hinzugefügt, das dem Zeichen des Eingabealphabets entspricht, welches verwendet wird, um den Endzustand zu erreichen \\
 			Beispiel: $A \rightarrow 1$, da von A in den Endzustand B übergegangen werden kann, wenn die 1 gewählt wird.
@@ -969,57 +973,13 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 	\paragraph{NEA $\rightarrow$ DEA}
 	\begin{itemize}
 		\item bilden der Potenzmenge von $N$: es werden alle möglichen Kombinationen von Zuständen ermittelt, die in dem NEA vorkommen. Die leere Menge gehört hier theoretisch zu, hat aber keinen Nutzen
-		\item Kombinationen, die einen oder mehrere Startzustand / Startzustände enthalten werden in die linke Spalte einer Tabelle geschrieben, sodass jede Zeile der Tabelle für eine Kombination von Zuständen steht
-		\item die Menge(n), die mindestens einen Startzustand enthält / enthalten, wird / werden mit einem $>$ und die Menge(n), in denen mindestens eine Endzustand vorkommt mit * markiert
+		\item diese werden in die linke Spalte einer Tabelle geschrieben, sodass jede Zeile der Tabelle für eine Kombination von Zuständen steht
+		\item der Startzustand wird mit einem $>$ und die Mengen, in denen Endzustände vorkommen mit * markiert
 		\item in die erste Zeile werden alle Buchstaben des Eingabealphabets geschrieben, sodass jede Spalte für eines dabon steht
 		\item in die restlichen Zellen der Tabelle werden Mengen von Zuständen eingetragen, die erreicht werden können, wenn von den Zuständen in der linken Spalte ausgegangen wird und dem Pfeil mit dem Zeichen aus der ersten Zeile gefolgt wird
-		\item tritt hierbei eine Zustandskombination auf, die nicht in der Tabelle steht, wird diese in einer neuen Zeile ergänzt
 		\item nun kann diese Tabelle als Zustandstabelle für den DEA, der erzeugt werden soll, betrachtet werden. Es werden also alle in der linken Spalte stehenden Kombinationen aus Zuständen als einzelne Zustände aufgefasst und eingezeichnet. Aus der Tabelle kann nun abgelesen werden, welche Verbindungen mit welchen Zeichen des Alphabets (oberste Zeile) auf welche anderen Zustände (mittlere Zellen der Tabelle) eingezeichnet werden müssen
+		\item der entstandene Automat kann optimiert werden, indem Zustände, die nicht erreicht werden können (nicht Startzustand und kein Pfeil zeigt auf sie) entfernt werden
 	\end{itemize}
-	
-	\subsubsection{Kellerautomaten}
-	
-	\begin{itemize}
-		\item deterministischer endlicher Automat erweitert um einen Speicher (Stack / "Kellerspeicher")
-		\item Sprachen mit Kontext (Bsp.: Palindrome, Klammern)
-		\item $A = (Q, \Sigma, K, \delta, q_0, \#, F)$
-		\begin{itemize}
-			\item $Q$: nicht leere, endliche Menge von Zuständen
-			\item $\Sigma$: nicht leeres, endliches Eingabealphabet (zur besseren Unterscheidung von $K$ meist kleine Buchstaben)
-			\item $K$: nicht leeres, endliches Kelleralphabet (zur besseren Unterscheidung von $\Sigma$ meist große Buchstaben)
-			\item $\delta$: Übergangsfunktion \\
-			$\implies$ ordnet jeder Kombination aus einem Zustand, einem Eingabezeichen und einem Kellerzeichen eindeutig einen Folgezustand und eine Kelleroperation (push($k$) $\rightarrow$ $k$ zu Kellerspeicher hinzufügen ($k \in K$), pop() $\rightarrow$ oberstes Element von Kellerspeicher entfernen, nop $\rightarrow$ nichts) zu
-			\item $q_0 \in Q$: Startzustand
-			\item $\# \in K$: Anfangssymbol im Keller
-			\item $F \subseteq Q$: Menge der Endzustände
-		\end{itemize}
-	\end{itemize}
-	
-	\paragraph{Beispiel}
-	
-	\begin{center}
-		\begin{tabular}{|c|c|c|c|c|c|}
-			\hline
-			alter Zustand & Eingabezeichen & oberstes Kellerzeichen & neuer Zustand & Kellerpoeration & Nummer der Regel \\
-			\hline
-			$z_0$ & $a$ & $\#$ & $z_0$ & push($A$) & 1. Regel \\
-			\hline
-			$z_0$ & $a$ & $A$ & $z_0$ & push($A$) & 2. Regel \\
-			\hline
-			$z_0$ & $b$ & $A$ & $z_1$ & pop() & 3. Regel \\
-			\hline
-			$z_1$ & $b$ & $A$ & $z_1$ & pop() & 4. Regel \\
-			\hline
-			$z_1$ & $\epsilon$ & $\#$ & $z_2$ & nop & 5. Regel \\
-			\hline
-		\end{tabular}
-	\end{center}
-	
-	\begin{figure}[!h]
-		\centering
-		\includesvg[width=12.0cm]{Automats_Example_Kellerautomat_Visualisation}
-		\caption{Die Zustände werden als Kreise dargestellt. Dabei wird der Startzustand durch ein Dreieck und der / die Endzustand / Endzustände durch einen doppelten Kreis dargestellt. Übergänge werden durch Pfeile gekennzeichnet. An diesen stehen das oberste Kellerzeichen, das Eingabezeichen und die Kelleroperation, die diesen Übergang charakterisieren im Format $(k_0, \sigma): k_2 k_1$ für $\sigma \in \Sigma$ und $k_0, k_1, k_2 \in K$. Dabei wird $k_0$ aus dem Kellerspeicher entfernt und $k_1$ und $k_2$ von links nach rechts gelesen zum Kellerspeicher hinzugefügt. Häufig ist daher $k_0 = k_1$, um nur $k_2$ hinzuzufügen. Die Anzahl der hinzugefügten Kellerzeichen ist beliebig.}
-	\end{figure}	
 	
 	\subsection{Mengenlehre}
 	
