@@ -1034,6 +1034,62 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 		\item Potenzmenge $Pot(A)$: Menge aller Teilmengen von $A$. Dies sind $2^Q$ wenn $Q$ die Anzahl der Elemente in $A$ ist
 	\end{itemize}
 
+	\section{Netzwerke}
+	\subsection{Adressen}
+	Damit mehrere Geräte in einem Netzwerk kommunizieren können, müssen sie wissen, wie sie sich ansprechen können. Dies funktioniert über das \textit{Internet Protocol} (IP). Damit ein Computer weiß, wo es einen anderen Computer finden kann, gehört zu jedem Computer in einem Netzwerk eine IP-Adresse. Diese IP-Adresse ist quasi der Standort des Computers im Netzwerk, ähnlich wie eine Kombination aus Straße und Hausnummer in der menschlichen Welt (wobei eine IP-Adresse allerings \textbf{nicht} direkt auf eine physische Adresse zurückzuführen ist). Da ein Computer allerdings mehrere Verbindungen gleichzeitig verarbeiten kann, benötigt die Netzwerkkommunikation  auch noch sogenannte \textit{Ports}. Diese sind vergleichbar mit Türen oder Briefkästen eines hauses. Beispielsweise spricht man bei Netzwerken analog zum "Haupteingang der Adresse Hans-Brückmann-Str. 1" vom Port 8080 der Adresse 187.214.3.99.
+
+	\subsubsection{IP-Adressen}
+	Der noch-Standard bei den Internetadressen heißt "IPv4". Solche Adressen bestehen aus 4 Blöcken mit den Zahlen 0 bis 255. Folglich hat man 4 Blöcke mit 256 Zahlen, über die man einen COmputer in einem Netzwerk ansprechen kann.
+
+	\paragraph{Localhost}
+	Wenn man eine Verbindung zu einem anderen Programm auf dem eigenen Computer aufbauen möchte, kann man dies über den Hostname "localhost" oder die IP-Adresse "127.0.0.1" tun.
+
+	\subsubsection{Ports}
+	Eine Verbidnung in einem Netzwerk wird immer von einem Port zu einem anderen aufgebaut. Gültige Portnummern sind 0 bis 65.535. 
+	
+	\paragraph{System ports}
+	Die Ports 0 bis 1023 sind in der Regel für bestimmte Netzwerkdienste reserviert und sollten ihrer Spezifikation entsprechend verwendet werden. Der Port 80 ist beispielsweise der Standard für unverschlüsselte HTTP-Verbindungen (Webseitenbereitstellung), Port 22 ist reserviert für SSH-Verbindungen (Fernwartung von Computern). Eine Liste an standardisierten Ports ist auf \href{https://de.wikipedia.org/wiki/Liste_der_standardisierten_Ports}{\underline{Wikipedia}} zu finden.
+
+	\paragraph{Dynamic ports}
+	Die Ports über 49152 sollten in der Regel von Clients zum Verbindungsaufbau mit Servern reserviert sein.
+
+	\subsection{Client-Server-Architektur}
+	Eine weit verbreitete Methode zum Datenaustausch in Netzwerken ist die sogenannte Client-Server-Architektur. Hierbei verbinden sich mehrere Clients mit einem zentralen Server. Der Server kann hierbei entweder Daten für die einzelnen Clients bereitstellen (etwa ein Server, der die aktuelle Uhrzeit bereitstellt), oder den Datenaustausch zwischen einzelnen Clients managen (etwa der Server eines Messengers oder ein Emailserver). Diese Form eines Netzwerkservices ist im Alltag an vielen Stellen anzufinden, etwa:
+
+	\begin{itemize}
+		\item Das Aufrufen einer Webseite auf einem Webserver (Browser als Client, Webserver als Server)
+		\item Videospiele (Spiele auf einzelnen Computern als Client, Gameserver als Server)
+		\item Email (Email-Programm/Browser als Client, Email-Server (bspw gmail) als Server)
+	\end{itemize}
+
+	\subsubsection{Implementation in Java}
+	Zur Implementation einer Client-Server-Architektur in Java sind die abstrakten Klassen \textit{Client} und \textit{Server} sowie die Klasse \textit{Connection} vorgegeben. Alle dieser Klassen arbeiten im Hintergrund über die Java-Socket-API, die quasi die hardwarenaheste Netzwerkimplementation in Java darstellt.
+
+	\paragraph{Client}
+	Ein implementierter Client erbt von der abstrakten \textit{Client}-Klasse und implementiert mindestens die Methode \textit{processMessage} sowie den Konstruktor. Über den Konstruktor der abstrakten \textit{Client}-Klasse kann der Client mit einer IP-Adresse und einem Port eine Verbindung zu einem Server aufbauen. Die \textit{processMessage}-methode wird jedes mal aufgerufen, wenn der verbundende Server eine Nachricht an den Client schickt. 
+
+	\paragraph{Server}
+	Um einen Server zu implementieren, erstellt man eine neue Klasse, die von der abstrakten \textit{Server}-Klasse erbt. Diese Klasse muss die Methoden \textit{processNewConnection}, \textit{processMessage} und \textit{processClosingConnection} sowie den Konstruktor implementieren:
+
+	\subparagraph{Konstruktor}
+	Dem Konstruktor muss ein Port als Integer übergeben werden. Die Server-Klasse öffnet dann diesen Port für neue Verbindungen.
+
+	\subparagraph{processNewConnection}
+	Die Methode \textit{processNewConnection(String pClientIP, int pClientPort)} wird jedes Mal aufgerufen, wenn sich ein neuer Client mit dem erstellten Server verbindet. Die übergebenen Parameter sind Informationen über den verbindenden Client, mit denen dieser eindeutig identifizierbar ist, etwa, falls man eine Nachricht an diesen Client senden möchte - etwa übr die \textit{send}-Methode des abstrakten Servers.
+
+	\subparagraph{processMessage}
+	Die Methode \textit{processMessage(String pClientIP, int pClientPort, String pMessage)} wird jedes Mal ausgeführt, wenn ein verbundender Client eine Nachricht an den Server schickt. Neben den Informationen über den Client enthalten die Parameter auch die übermittelte Nachricht.
+
+	\subparagraph{processClosingConnection}
+	Über die Methode \textit{processClosingConnection(String pClientIP, int pClientPort)} wir mitgeteilt, wenn eine Verbindung zu einem Client entweder von diesem Client oder durch den Server geschlossen wurde. Auch hier werden wieder die Verbindungsinformationen des Clients übergeben.
+
+	\paragraph{Connection}
+	Die \textit{Connection}-Klasse ist eine vereinfachte Client-Implementation ohne verschiedene Threads, die bei den anderen Klassen das Aufrufen der überschriebenen methoden übernehmen. Über die Methoden der \textit{Connection}-Klasse kann man Nachrichten an den Server senden (\textit{send}), Nachrichten empfangen (\textit{receive}) und die Verbindung beenden (\textit{close}). Die Verbindung wird im Konstruktor aufgebaut, dem auch wieder die IP-Adresse und der Port eines wartenden Servers übergeben werden müssen.
+
+	\subsection{Netzwerkprotokolle}
+	Um eine ordnungsgemäße Kommunikation im Netzwerk zu gewährleisten, wird auf sogenannte \textit{Protokolle} zurückgegriffen. Ein Netzwerkprotokoll gibt feste Regeln für Kommunikationsabläufe vor. So wird beispielsweise vorgeschrieben, welche Nachrichten ein Kommunikationsteilnehmer zu welcher Zeit akzeptiert, und wie er auf solche Nachrichten antworten soll.
+
+
 	\section{Datenschutz}
 
 \end{document}
