@@ -544,6 +544,10 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 	\begin{itemize}
 		\item Ordnung (Order) eines Baums: Anzahl der Kinder, die ein Knoten höchstens haben darf
 		\item Grad (Degree) eines Knotens: Anzahl der Kinder, die ein Knoten hat
+		\item Höhe (hight) eines Baums: Länge des Pfades des Blattes, das am weitesten von der Wurzel entfernt ist ($\rightarrow$ leerer Baum: Höhe $0$; Baum mit nur Wurzel: Höhe $1$)
+		\item Tiefe (depth) eines Knotens: Anzahl der Knoten auf dem Pfad von der Wurzel zum entsprechenden Knoten
+		\item Tiefe (depth) eines Baumes: Tiefe des tiefsten Knotens dieses Baumes (gleichbedeutend mit der Höhe des Baumes)
+		\item Niveaus (level): Knoten, welche die gleiche Tiefe haben, werden zu einem Niveau zusammengefasst
 	\end{itemize}
 	
 	\subsubsection{Binärbäume}
@@ -552,6 +556,80 @@ Um durch ein Java-Programm auf eine Datenbank zugreifen zu können, benutzen wir
 		\item Baum zweiter Ordnung
 		\item effiziente Suche und Sortierung möglich
 		\item da höchstens zwei Kinderknoten vorhanden sind, werden diese als linkes (left) und rechtes (right) Kind bezeichnet
+		\item äquivalente Definition: Ein Binärbaum ist entweder leer, oder er besteht aus einer Wurzel mit einem linken und einem rechten Teilbaum, die wiederum Binärbäume sind. 
+	\end{itemize}
+	
+	\paragraph{Binärer Suchbaum}
+	
+	\begin{itemize}
+		\item sortierter Binärbaum
+		\item einfache Suche
+		\item implementation des Interfaces "ComparableContent" notwendig um Vergleichbarkeit zu garantieren und somit eine Sortierung zu ermöglichen
+		\item jeder Knoten ist größer als sein linker und kleiner als sein Rechter Nachfolger
+	\end{itemize}
+	
+	\subparagraph{Einfügen in binäre Suchbäume}
+	
+	Um die Sortierung beizubehalten ist es wichtig, wo ein neuer Knoten eingefügt wird. Der neue Knoten muss die Eigenschaft erfüllen, dass ein linker Nachfolger kleiner und ein rechter Nachfolger größer als sein Vorgänger sein muss. Um das zu gewährleisten muss Folgendes getan werden: 
+	
+	\begin{enumerate}
+		\item Das einzufügende Element wird mit der Wurzel des Suchbaumes verglichen. Ist es kleiner, wird es links einsortiert, ist es größer rechts. Die genaue Implementation des Baumes entscheidet, ob bei gleichem Wert das Objekt rechts oder links eingeordnet wird.
+		\item Im entsprechenden Teilbaum wird diese Operation wiederholt. 
+		\item Gibt es keinen weiteren Teilbaum zum Vergleich, ist die Stelle gefunden, an die das neue Element angefügt werden kann.
+	\end{enumerate}
+	
+	\subparagraph{Löschen aus binären Suchbäumen}
+	
+	Auch beim Löschen aus einem Suchbaum muss die Ordnung erhalten bleiben. Daher gibt es Folgendes zu beachten: 
+	
+	\begin{enumerate}
+		\item Der zu löschende Knoten muss identifiziert werden. 
+		\item Ist er ein Blatt, kann er ohne weitere Schritte gelöscht werden.
+		\item Besitzt er nur einen Nachfolger, wird dieser nach dem Löschen seine Stelle einnehmen.
+		\item Besitzt der rechte Nachfolger keinen linken Nachfolger, wird der zu löschende Knoten durch ihn ersätzt. Dadurch bekommt er als linken Nachfolger den linken Nachfolger des gelöschten Knotens.
+		\item Besitzt auch der rechte Nachfolger zwei Nachfolger, muss der zu löschende Knoten durch einen anderen Knoten ersätzt werden, um die Ordnung nicht zu verändern. Hierzu wird der im rechten Teilbaum der linkeste Knote gesucht (immer wieder links bis kein linker Nachfolger mehr existiert) (es wäre auch der rechteste Knoten im linken Teilbaum möglich) und an die Stelle des zu löschenden Knotens gesetzt. Danach muss er von seiner ursprünglichen Position gelöscht werden.
+	\end{enumerate}
+	
+	\paragraph{Modellierung}
+	
+	\begin{itemize}
+		\item generische Klasse
+		\item innere Klasse: Knoten
+		\item jeder Binärbaum hat genau einen Knoten (Wurzel)
+		\item jeder Knoten hat einen Inhalt, einen linken und einen rechten Nachfolger (Nachfolger sind Binärbäume)
+		\item Methoden
+		\begin{itemize}
+			\item 3 Konstruktoren (leerer Baum; übergebener Inhalt ohne Nachfolger; übergebener Inhalt und übergebene Nachfolger)
+			\item Setter und Getter für Node, linken und rechten Teilbaum
+		\end{itemize}
+	\end{itemize}
+	
+	\paragraph{Traversierung}
+	
+	\begin{itemize}
+		\item Durchlaufen des Baumes
+		\item alle Knoten werden "besucht" (z. B. um sie auszugeben)
+		\item Unterscheidung der Reihenfolge
+		\begin{enumerate}
+			\item Preorder-Traversierung
+			\begin{itemize}
+				\item Wurzelknoten wird zuerst ausgegeben
+				\item danach wird sein linker Nachfolger in der Preorder-Reihenfolge durchlaufen
+				\item zum Schluss wird der rechte Nachfolger in der Preorder-Reihenfolge durchlaufen
+			\end{itemize}
+			\item Inorder-Traversierung
+			\begin{itemize}
+				\item zuerst wird der linke Teilbaum in der Inorder-Reihenfolge durchlaufen
+				\item danach wird der Wurzelknoten ausgegeben
+				\item zum Schluss wird der rechte Teilbaum in der Inorder-Reihenfolge durchlaufen
+			\end{itemize}
+			\item Postorder-Traversierung
+			\begin{itemize}
+				\item zuerst wird der linke Teilbaum in der Postorder-Reihenfolge durchlaufen
+				\item dann wird der rechte Teilbaum in der Postorder-Reihenfolge durchlaufen
+				\item zum Schluss wird der Wurzelknoten ausgegeben
+			\end{itemize}
+		\end{enumerate}
 	\end{itemize}
 
 	\subsection{Graphen}
