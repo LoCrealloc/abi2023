@@ -52,6 +52,75 @@
 	Eine vollständige Dokumentation sämtlicher Abiturrelevanter Klassen kann \href{https://www.schulentwicklung.nrw.de/lehrplaene/upload/klp\_SII/if/Dokumentation\_ZA-IF\_GK-LK\_ab\_2018\_2021\_12\_22.pdf}{\underline{hier gefunden werden}}.
 
 	\section{OOP mit Java}
+	\subsection{Implementationsdiagramme in UML}
+	Um Objektorientierte Projekte zu modellieren, wird die Modellierungssprache UML verwendet.
+
+	\subsubsection{Klassen}
+	Klassen werden in einem dreigeteilten Rechteck dargestellt. Dieses Rechteck enthält im ersten Block den Klassennamen, im zweiten Block die Klassenattribute und im dritten Block die Klassenmethoden.
+
+	\paragraph{Attribute}
+	Die Attribute werden über ihre Sichtbarkeit, ihren Namen und ihren Datentypen beschrieben. Ein privates Attribut "x" vom Datentyp "Integer" könnte folgendermaßen aufgeschrieben werden:
+
+	\begin{center}
+		- x: int
+	\end{center}
+
+	\paragraph{Methoden}
+	Klassenmethoden werden über ihre Sichtbarkeit, ihren Namen, ihre Parameter (inklusive Datentyp) und ihren Rückgabewert beschrieben. Eine öffentliche Methode "addiere", die die Summe zweier Integer-Parameter zurückgibt, könnte wie folgt modelliert werden:
+
+	\begin{center}
+		+ addiere(a: int, b: int): int
+	\end{center}
+
+	\subparagraph{Konstruktoren}
+	Auch, wenn ein konstruktor keine Methode im eigentlichen Sinne ist, wird dieser wie eine Methode modelliert. Der einzige Unterschied besteht darin, dass er immer öffentlich (public) sein muss, den Namen der Klasse trägt und keinen Rückgabewert haben darf. Ein Konstruktor für die Klasse "Speicher", der einen double übergeben bekommt, könnte so modelliert werden:
+
+	\begin{center}
+		+ Speicher(x: double)
+	\end{center}
+
+	\begin{figure}[h!]
+		\centering
+		\includesvg[inkscapelatex=false,width=5cm]{uml_basic}
+		\caption{Ein Beispiel für die Modellierung einer einfachen Klasse}
+	\end{figure}
+
+	\subsubsection{Vererbung}
+	Um Vererbung zu modellieren, wird in UML ein Pfeil von der Unterklasse zur Oberklasse gezeichnet. Die Pfeilspitze ist abgeschlossen, aber nicht ausgefüllt.
+
+	\begin{figure}[h!]
+		\centering
+		\includesvg[inkscapelatex=false,width=9cm]{uml_inheritance}
+		\caption{Ein Beispiel für die Modellierung von Vererbung}
+	\end{figure}
+
+	\subsubsection{Assoziation}
+	Eine Assoziation beschreibt die Beziehung zwischen zwei Klassen. Eine Assoziation wird, ähnlich wie bei der Vererbung, durch einen Pfeil gekennzeichnet. Dieser ist bei Assoziationen allerdings nicht geschlossen, sondern am Ende offen. Attribute, die Instanzen/Objekte einer anderen Klasse sind, werden auch durch eine Assoziation gekennzeichnet. Auf dem Assoziationspfeil wird die Sichtbarkeit des Attributes, sein Name und seine Menge angegeben.
+
+	\begin{figure}[h!]
+		\centering
+		\includesvg[inkscapelatex=false,width=9cm]{uml_associations}
+		\caption{Ein Beispiel für die Modellierung einer Assoziation}
+	\end{figure}
+
+	\subsubsection{Datentypen bei generischen Klassen}
+	Wenn man generische Klassen in seinem Projekt verwendet, ist es häufig notwendig, den in diesen Klassen verwendeten Datentypen anzugeben. Dies wird über ein kleines Hinweisfeld realisiert, das an die Klasse angefügt wird. Die generischen Klassen, die im Unterricht behandelt wurden (Queue/List/...) müssen in der Regel bei der Benutzung nicht komplett modelliert werden. 
+
+	\begin{figure}[h!]
+		\centering
+		\includesvg[inkscapelatex=false,width=9cm]{uml_generics}
+		\caption{Ein Beispiel für die Modellierung von generischen Klassen; im Beispiel die Klasse List aus dem Unterricht}
+	\end{figure}
+
+	\subsubsection{Interfaces}
+	Wenn man ein Interface implementieren möchte, zeichnet man von der implementierenden Klasse einen einen gestrichelten Pfeil mit geschlossener Spitze zu der Modellierung des Interfaces, in welchem die implementierende Klasse auch nochmal als generischer Typ angegeben wird. Die Vorgehensweise ist also ähnlich wie bei der Vererbung.
+
+	\begin{figure}[h!]
+		\centering
+		\includesvg[inkscapelatex=false,width=9cm]{uml_interface}
+		\caption{Ein Beispiel für die Modellierung eines Interfaces und einer implementierenden Klasse}
+	\end{figure}
+	
 
 	\section{Lineare Datenstrukturen}
 
