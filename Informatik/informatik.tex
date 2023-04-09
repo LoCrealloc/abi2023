@@ -56,6 +56,160 @@
 	\section{Lineare Datenstrukturen}
 
 	\section{Algorithmen}
+	\subsection{Komplexität}
+	Um die Effizienz eines Algorithmus zu bestimmen, verwenden Informatiker den Begriff "Komplexität". Die Effizienz kann mithilfe dieses Begriffes unabhängig von Programmiersprache, Compiler, dem ausführenden Computer und Ähnlichem verglichen werden.
+	\subsubsection{Big-O-Notation}
+	Die bekannteste Methode zur Beschreibung der Komplexität ist die sogenannte \textit{Big-O-Notation}. Die Big-O-Notation gibt an, welche Komplexität ein Algorithmus \textit{höchstens} hat.
+	
+	\paragraph{Paragraph}
+	Die Funktion $T(n) \in O(g(n))$, wenn es positive Konstanten $c$ und $n_0$ gibt, so dass gilt: 
+
+	\begin{align*}
+		T(n) \leq c \cdot g(n) \\
+		n \geq n_0
+	\end{align*}
+
+	\subparagraph{Wie schnell kann ein Algorithmus sein?}
+	Zum sortieren einer Folge von n Keys mit einem allgemeinen Sortierverfahren sind im worst case sowie im average case mindestens \textit{$O(n \cdot \log{n})$} Vergleichsoperationen zwischen zwei Schlüsseln erforderlich.
+
+	\subsection{Sortieralgorithmen}
+	\subsubsection{Bubblesort}
+	\paragraph{Allgemeine Beschreibung}
+	Der vermutlich einfachste in-place Sortieralgorithmus ist der Bubblesort. Bei diesem Verfahren lässt der Algorithmus Werte innerhalb einer Werteliste, beispielsweise eines Arrays, solange "aufsteigen", bis sie an der richtigen Stelle angelangt sind. Da diese Vorgehensweise an das Aufsteigen von Luftblasen erinnert, ist der Algorithmus nach diesem Vergleich benannt.
+
+	\paragraph{Codebeispiele}
+	\begin{lstlisting}[caption=Der Bubblesort-Algorithmus in einfachem Pseudocode]
+	method bubblesort(A) {
+		l = A.length
+
+		for i = 1 to l {
+			for j = 0 to l - i {
+				if A[j] groesser A[j + 1] {
+					swap(A[j], A[j + 1])
+				}
+			}
+		}
+	}
+	\end{lstlisting}
+
+	Wie aus dem Pseudocode erkennbar ist, besteht der Pseudocode aus zwei Schleifen: die äußere Schleife arbeitet die Werteliste ab. während die innere Liste den aktuellen Wert beim Anfang des Arrays beginnend mit dem nächsten vergleicht und diese Werte, falls notwendig, vertauscht, bis die innere Schleife beim in der äußeren Schleife aktuellen Wert angelangt ist. Zum Schluss ist das Array fertig sortiert.
+
+	
+	\begin{lstlisting}[language=Java, caption=Der Bubblesort-Algorithmus in Java]
+	public static void bubblesort(int[] A) {
+		int l = A.length;
+
+		for (int i = 1; i < l; i++) {
+			for (int j = 0; j < l - i; j++) {
+				if (A[j] > A[j + 1]) {
+					int c = A[j];
+					A[j] = A[j + 1];
+					A[j + 1] = c;
+				}
+			}
+		}
+	}
+	\end{lstlisting}
+
+	\paragraph{Komplexität}
+	Aufgrund seiner Funktionsweise mit den zwei verschachtelten Schleifen läuft der Bubblesort in jedem Fall (sowohl best als auch worst case) in \textbf{$O(n^2)$}, was ihn zu einem äußerst ineffizienten Sortieralgorithmus macht.
+
+	\subsubsection{Insertionsort}
+	\paragraph{Allgemeine Beschreibung}
+	Ein weiterer einfacher Sortieralgorithmus ist der Insertionsort. Bei diesem Verfahren wird die Werteliste in zwei Teile unterteilt: den sortierten Teil und den unsortierten Teil. Der Algorithmus iteriert durch den unsortierten Teil und fügt jeden Wert an der richtigen Stelle in den sortierten Teil ein, indem er die Werte im sortierten Teil nach rechts verschiebt, um Platz für den einzufügenden Wert zu schaffen. Dieser Vorgang wird wiederholt, bis der gesamte unsortierte Teil in den sortierten Teil eingefügt wurde und die Liste vollständig sortiert ist.
+
+	\paragraph{Codebeispiele}
+	\begin{lstlisting}[caption=Der Insertionsort-Algorithmus in einfachem Pseudocode]
+	method insertionsort(A) {
+		l = A.length
+
+		for i = 1 to l - 1 {
+			key = A[i]
+			j = i - 1
+
+			while j groesser gleich 0 and A[j] groesser key {
+				A[j + 1] = A[j]
+				j = j - 1
+			}
+
+			A[j + 1] = key
+		}
+	}
+	\end{lstlisting}
+
+	Wie aus dem Pseudocode ersichtlich ist, verwendet der Insertionsort eine Schleife, um durch den unsortierten Teil der Werteliste zu iterieren. Innerhalb dieser Schleife wird der aktuelle Wert in der Variablen "key" gespeichert und mit den Werten im sortierten Teil der Liste verglichen. Solange der aktuelle Wert kleiner ist als der verglichene Wert im sortierten Teil, werden die Werte im sortierten Teil nach rechts verschoben, um Platz für den einzufügenden Wert zu schaffen. Am Ende wird der aktuelle Wert an der richtigen Stelle in den sortierten Teil eingefügt.
+
+
+	\begin{lstlisting}[language=Java, caption=Der Insertionsort-Algorithmus in Java]
+	public static void insertionsort(int[] A) {
+		int l = A.length;
+
+		for (int i = 1; i < l; i++) {
+			int key = A[i];
+			int j = i - 1;
+
+			while (j >= 0 && A[j] > key) {
+				A[j + 1] = A[j];
+				j = j - 1;
+			}
+
+			A[j + 1] = key;
+		}
+	}
+	\end{lstlisting}
+
+	\paragraph{Komplexität}
+	Die Zeitkomplexität des Insertionsort-Algorithmus beträgt im Durchschnitt \textbf{$O(n^2)$}, da im worst case-Fall jeder Wert im unsortierten Teil mit jedem Wert im sortierten Teil verglichen werden muss. Im besten Fall, wenn die Liste bereits teilweise sortiert ist, kann die Komplexität jedoch auf \textbf{$O(n)$} reduziert werden. Der Insertionsort-Algorithmus eignet sich gut für kleine Listen oder bereits teilweise sortierte Listen, aber kann ineffizient sein für große Listen mit vielen unsortierten Elementen.
+
+
+	\subsubsection{Selectionsort}
+	\paragraph{Allgemeine Beschreibung}
+Ein weiterer einfacher Sortieralgorithmus ist der Selectionsort. Bei diesem Verfahren wird die Werteliste in zwei Teile unterteilt: den sortierten Teil und den unsortierten Teil. Der Algorithmus sucht den kleinsten (oder größten, je nach Sortierreihenfolge) Wert im unsortierten Teil und tauscht ihn mit dem ersten Element im unsortierten Teil. Dieser Vorgang wird wiederholt, bis der gesamte unsortierte Teil in den sortierten Teil verschoben wurde und die Liste vollständig sortiert ist.
+
+	\paragraph{Codebeispiel}
+	\begin{lstlisting}[caption=Der Selectionsort-Algorithmus in einfachem Pseudocode]
+	method selectionsort(A) {
+		l = A.length
+
+		for i = 0 to l - 1 {
+			minIndex = i
+
+			for j = i + 1 to l {
+				if A[j] < A[minIndex] {
+					minIndex = j
+				}
+			}
+
+			swap(A[i], A[minIndex])
+		}
+	}
+	\end{lstlisting}
+
+	Wie aus dem Pseudocode ersichtlich ist, verwendet der Selectionsort zwei Schleifen. Die äußere Schleife iteriert durch den unsortierten Teil der Werteliste, während die innere Schleife den kleinsten (bzw. größten) Wert im unsortierten Teil sucht. Am Ende wird dieser Wert mit dem ersten Element im unsortierten Teil getauscht, um ihn in den sortierten Teil zu verschieben.
+
+	\begin{lstlisting}[language=Java, caption=Der Selectionsort-Algorithmus in Java]
+	public static void selectionsort(int[] A) {
+		int l = A.length;
+
+		for (int i = 0; i < l - 1; i++) {
+			int minIndex = i;
+
+			for (int j = i + 1; j < l; j++) {
+				if (A[j] < A[minIndex]) {
+					minIndex = j;
+				}
+			}
+
+			int temp = A[i];
+			A[i] = A[minIndex];
+			A[minIndex] = temp;
+		}
+	}
+	\end{lstlisting}
+
+	\paragraph{Komplexität}
+	Die Zeitkomplexität des Selectionsort-Algorithmus beträgt immer \textbf{$O(n^2)$}, da im worst case-Fall jeder Wert im unsortierten Teil mit jedem anderen Wert im unsortierten Teil verglichen werden muss, um den kleinsten (bzw. größten) Wert zu finden und zu tauschen.
+
 
 	\section{Datenbanken}
 	\subsection{Das Entity-Relationship-Modell}
