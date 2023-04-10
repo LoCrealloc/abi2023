@@ -512,7 +512,123 @@ Ein weiterer einfacher Sortieralgorithmus ist der Selectionsort. Bei diesem Verf
 
 	\paragraph{Komplexität}
 	Die Zeitkomplexität des Selectionsort-Algorithmus beträgt immer \textbf{$O(n^2)$}, da im worst case-Fall jeder Wert im unsortierten Teil mit jedem anderen Wert im unsortierten Teil verglichen werden muss, um den kleinsten (bzw. größten) Wert zu finden und zu tauschen.
-
+	
+	\subsubsection{Quicksort}
+	
+	\paragraph{Allgemeine Beschreibung}
+	
+	Ein komplexeres, aber auch schnelleres Sortierverfahren ist der Quicksort. Hier wird zuerst ein sogenanntes Pivot-Element bestimmt. Im Optimalfall ist dies der Median der Liste, da dieser aber nicht bekannt ist, wird häufig das erste, letzte oder ein zufälliges Element der Liste gewählt. Daraufhin werden alle anderen Werte anhand des Pivots vorsortiert - sind sie kleiner, werden sie links davon einsortiert, sind sie größer, kommen sie nach rechts. Somit ist das Pivot-Element an seinem richtigen Platz und alle anderen Werte in zwei Teillisten unterteilt; eine links und eine rechts vom Pivot. Mit diesen Teillisten wird nun genauso verfahren wie mit der gesamten Liste zuvor - es wird ein Pivot-Element gewählt, alle anderen Werte anhand dessen vorsortiert und somit wiederum in Teillisten aufgeteilt. Auch mit diesen wird genauso verfahren. Dies endet, wenn eine Teilliste leer ist, oder nur noch aus einem Element besteht. Gibt es nur noch solche Teillisten, ist die Liste vollständig sortiert. 
+	
+	\paragraph{Codebeispiel}
+	\begin{lstlisting}[caption=Der Quicksort-Algorithmus in einfachem Pseudocode]
+	
+	method quicksort(A, left, right) {
+	
+		if links < rechts {
+			pivotPlace = split(A, left, right)
+			
+			quicksort(A, links, pivotPlace - 1)
+			quicksort(A, pivotPlace + 1, right)
+		}
+	}
+	
+	method split(A, left, right) {
+		
+		pivot = 	A[left]
+		i = 	left + 1
+		j = right
+		
+		while i < j {
+			
+			while i < j and A[i] <= pivot {
+				i = i + 1
+			}
+			
+			while i < j and A[j] > pivot {
+				j = j - 1
+			}
+			
+			if A[i] > A[j] {
+				swap(A[i], A[j])			
+			}
+					
+		}
+		
+		if A[i] < pivot {
+			swap(A[i], A[left])
+		}
+		
+		else {
+			i = left		
+		}
+		
+		return i
+		
+	}
+	
+	\end{lstlisting}
+	
+	Wie an dem Code zu sehen ist, wird beim Quicksort-Algorithmus ein sogenanntes Pivot-Element an seinen Platz in der Liste gesetzt und dabei die gesamte Liste in zwei Teillisten unterteilt (links Werte kleiner als das Pivot-Element; rechts größere Werte als das Pivot-Element). Diese Teillisten werden dann wiederum genauso behandelt wie die gesamte Liste im ersten Schritt, der Algorithmus arbeitet also rekursiv. Das aufteilen in zwei Teillisten funtioniert dabei wiefolgt: Ein Pivot-Element wird gewählt. Hier ist es das erste Element der Liste, es kann aber auch das letzte oder ein zufällig gewähltes Element sein. Außerdem gibt es zwei Variablen, die die Liste durchlaufen, eine von links nach rechts (i) und eine von rechts nach links (j). Trifft i auf einen Wert, der größer ist als das Pivot-Element und j auf einen, der kleiner ist, werden diese beiden Werte vertauscht. Dann laufen die Zeiger weiter. Finden sie wieder Werte, die den Kriterien für einen Tausch entsprechen, werden diese wieder getauscht. Kommt es dazu, dass beide Variablen auf das selbe Element zeigen oder sich überkreuzen, sind alle Werte gefunden, die getauscht werden müssen - alle Werte, die kleiner als das Pivot-Element sind sind auf der linken Seite der Zeiger und alle Anderen auf der Rechten. Nun muss nur noch entschieden werden, ob das Pivot-Element schon an der richtigen Stelle steht oder noch mit dem Element, auf den die Zeiger zeigen getauscht werden muss. Nun ist das Pivot-Element an der richtigen Stelle einsortiert und die Teillisten links bzw. rechts des Pivot-Elements können auf die gleiche Weise sortiert werden solange sie aus mehr als einem Element bestehen (denn ein Element ist immer sortiert). 
+	
+	\paragraph{Komplexität}
+	
+	Die Zeitkomplexität des Quicksorts unterscheidet sich zwischen seinem Worst- und seinem Best- und Average-Case. Welcher davon eintritt hängt von der Wahl des Pivot-Elements ab. Im Worst-Case wird entweder das größte oder das kleinste Element der Liste als Pivot-Element gewählt und die länge der zu sortierenden Teilliste verringert sich in jedem Schritt nur um ein Element. In diesem Fall beträgt die obere Grenze der Zeitkomplexität $O(n^2)$. Tritt dieser Fall jedoch nicht ein, also kommt es zu Average- oder Best-Case, liegt die obere Grenze der Zeitkomplexität bei $O(n \cdot \log(n))$. Zum Best-Case kommt es, wenn als Pivot-Element der Median der Liste gewählt wird und somit die Teillisten im nächsten Sortierschritt nur halb so lang wie die bisherige Liste sind. 
+	
+	\subsubsection{Mergesort}
+	
+	\paragraph{Allgemeine Beschreibung}
+	
+	Wie der Name schon sagt geht es beim Mergesort-Algorithmus um das Teilen und Zusammenfügen der Liste. Anders als beim Quicksort wird aber nicht beim Teilen sondern beim Zusammenfügen sortiert. Dabei funktioniert auch dieser Algorithmus rekursiv. Eine Liste wird aufgeteilt bis alle Elemente einzeln vorliegen und so trivialerweise sortiert sind. Dann wird die Liste wieder zusammengesetzt und dabei sortiert, sodass man am Ende eine sortierte Liste erhält.
+	
+	\paragraph{Codebeispiel}
+	
+	\begin{lstlisting}[caption=Der Mergesort-Algorithmus in einfachem Pseudocode]
+	
+	method mergesort(A) {
+		if A.length <= 1 {
+			return A		
+		}
+		
+		leftList, rightList = splitHalf(A)
+		leftList = mergesort(leftList)
+		rightList = mergesort(rightList)
+		
+		return merge(leftList, rightList)
+	}
+	
+	method merge(leftList, rightList) {
+		
+		while leftList.length > 0 and rightList.length > 0 {
+			if leftList[0] <= rightList[0] {
+				list.append(leftList[0])
+				leftList.delete(leftList[0])			
+			}
+			else {
+				list.append(rightList[0])
+				rightList.delete(rightList[0])			
+			}
+		}
+		
+		while leftList.length > 0 {
+			list.append(leftList[0])
+			leftList.delete(leftList[0])		
+		}
+		
+		while rightList.length > 0 {
+			list.append(rightList[0])
+			rightList.delete(rightList[0])
+		}
+		
+		return list
+	}
+	
+	\end{lstlisting}
+	
+	Ein Aufruf des Mergesort-Algorithmus beginnt damit, dass die übergebene Liste halbiert wird bis dies nich mehr möglich ist, also bis alle Teillisten nur noch ein Element enthalten. Ist dies geschehen, liegen nur noch sortierte Teillisten vor. Diese können nun wieder zusammengefügt werden. Hierbei wird darauf geachtet, dass die entstehende Liste sortiert wird, indem immer das erste Element aus einer der beiden Teillisten eingefügt wird, das kleiner ist. Die resultierende Liste ist selbst eine Teilliste und wird mit einer anderen Teilliste auf die gleiche Weise zusammengefügt. So entsteht nach dem letzten Schritt des Zusammenfügens eine sortierte Gesamtliste.
+	
+	\paragraph{Komplexität}
+	
+	Die Zeitkomplexität des Mergesort-Algorithmus beträgt immer $O(n \cdot \log(n))$ und ist damit im Worst-Case schneller als Quicksort. Er wird trotzdem seltener verwendet, da er kein In-Place-Verfahren ist und zusätzlichen Speicherplatz in der Größenordnung $O(n)$ benötigt.
 
 	\section{Datenbanken}
 	\subsection{Das Entity-Relationship-Modell}
@@ -522,7 +638,7 @@ Ein weiterer einfacher Sortieralgorithmus ist der Selectionsort. Bei diesem Verf
 
 	\begin{figure}[h!]
 		\centering
-1		\includesvg[width=3.0cm]{entity}
+		\includesvg[width=3.0cm]{entity}
 		\caption{Eine Entität wird mit einem Rechteck dargestellt}
 	\end{figure}	
 
