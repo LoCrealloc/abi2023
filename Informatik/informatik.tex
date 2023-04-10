@@ -52,6 +52,240 @@
 	Eine vollständige Dokumentation sämtlicher Abiturrelevanter Klassen kann \href{https://www.schulentwicklung.nrw.de/lehrplaene/upload/klp\_SII/if/Dokumentation\_ZA-IF\_GK-LK\_ab\_2018\_2021\_12\_22.pdf}{\underline{hier gefunden werden}}.
 
 	\section{OOP mit Java}
+	\subsection{Java-Grundwissen}
+	\subsubsection{Variablen}
+	Variablen sind Werteplatzhalter. In Java haben Variablen einen festen Datentypen; die wichtigsten Datentypen sind 
+
+	\begin{center}
+		\def\arraystretch{1.1}
+		\begin{tabular}{ | c | c | l | }
+			\hline
+			\textbf{Datentyp} 	& \textbf{in Java} 	& \textbf{Funktion} \\
+			\hline
+			\hline
+			\textbf{Integer}	& int				& Ganze Zahlen mit 4 Byte ($\pm 2,147,483,647$) \\
+			\textbf{Long}		& int				& Ganze Zahlen mit 8 Byte ($\pm 9,223,372,036,854,775,807$) \\
+			\textbf{Double} 	& double			& Kommazahlen mit 8 Byte (bis ~ 15 Stellen) \\
+			\textbf{Float} 		& float 			& Kommazahlen mit 4 Byte (bis ~ 7 Stellen) \\
+			\textbf{Boolean}	& boolean			& Wahrheitswert (\textit{true/false}) \\
+			\textbf{Character} 	& char 				& Einzelner Buchstabe / ASCII-Wert \\
+			\textbf{String} 	& String 			& Zeichenkette; mehrere Buchstaben \\
+			\hline
+		\end{tabular}
+	\end{center}
+
+	Eine Variable wird in Java zunächst deklariert
+
+	\begin{lstlisting}[language=Java, caption=Deklarierung einer Variable in Java]
+		int x;
+	\end{lstlisting}
+
+	und anschließend initialisiert
+
+	\begin{lstlisting}[language=Java, caption=Initialisierung einer Variable in Java]
+		x = 42;
+	\end{lstlisting}
+
+	Diese zwei Schritte können auch in einem Schritt zusammengefasst werden
+
+	\begin{lstlisting}[language=Java, caption=Deklarierung und Initialisierung einer Variable]
+		int y = 42;
+	\end{lstlisting}
+
+	\paragraph{Type conversion}
+	Einen String kann man mithilfe der \textit{Integer.parseInt()}-Methode in einen Integer konvertieren.
+
+	\begin{lstlisting}[language=Java, caption=String-zu-Integer-Konvertierung]
+		int x = Integer.parseInt("1");
+	\end{lstlisting}
+
+	Einen Integer kann man mit der \textit{String.valueOf()}-Methode in einen String konvertieren.
+
+	\begin{lstlisting}[language=Java, caption=Integer-zu-String-Konvertierung]
+		String x = String.valueOf(1);
+	\end{lstlisting}
+
+	\subsubsection{Arrays}
+	Wenn man mehrere Werte auf einmal speichern möchte, so kann man dies in einem Array tun. Hierfür gibt man bei der Deklaration einer Variable neben dem Datentyp auch die (feste) Länge des Arrays an
+	
+	\begin{lstlisting}[language=Java, caption=Deklarierung eines Integer-Arrays mit 5 Feldern] 
+		int[] a = new int[5];
+	\end{lstlisting}
+
+	Auf die einzelnen Stellen eines Arrays kann über einen Index zugegriffen werden
+
+	\begin{lstlisting}[language=Java, caption=Zugriff auf ein Array] 
+		int b = a[1];
+		a[3] = 12;
+	\end{lstlisting}
+
+	Wenn man die Länge eines Arrays erhalten möchte, so kann man mit dem \textit{.length}-Attribut auf diese Zugreifen:
+
+	\begin{lstlisting}[language=Java, caption=Zugriff auf die Array-Länge] 
+		int c = a.length;
+	\end{lstlisting}
+
+	Das Array hat in Java noch viele weitere Attribute und Methoden, auf die hier nicht weiter eingegangen werden wird.
+
+	\subsubsection{Schleifen}
+	Um einzelne Codeabschnitte zu wiederholen, können Schleifen genutzt werden.
+
+	\paragraph{For-Schleife}
+	Eine for-Schleife besteht aus 5 Teilen: dem Aufruf der Schleife (\textit{for}), der Deklaration und Initialisierung der Zählvariable (\textit{int i = 0;}), der Abbruchbedingung (\textit{i < 42;}), dem Zähler (\textit{i += 1}) und dem Schleifenkörper (\textit{System.out.println(i);}).
+
+
+	\begin{lstlisting}[language=Java, caption=beispiel für eine for-Schleife] 
+		for (int  i = 0; i < 42; i += 1) {
+			System.out.println(i);
+		}
+	\end{lstlisting}
+
+	Eine for-Schleife ist insbesondere praktisch, um durch lineare Datenstrukturen wie ein Array zu iterieren:
+
+	\begin{lstlisting}[language=Java, caption=Iteration durch ein Array mit einer for-Schleife] 
+		int[] arr = {2, 3, 5, 7, 11};
+
+		for (int  i = 0; i < arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+	\end{lstlisting}
+
+	\subparagraph{For-each-Schleife}
+
+	Für die Iteration durch ein Array gibt es in Java allerdings auch die für diesen Fall besser geeignete \textit{for-each-Schleife}, bei der es keine Zählvariable gibt, sondern lediglich eine Schleifenvariable, die in jedem Durchlauf einen Wert aus dem Array beinhaltet:
+
+	\begin{lstlisting}[language=Java, caption=Iteration durch ein Array mit einer for-each-Schleife] 
+		int[] arr = {2, 3, 5, 7, 11};
+
+		for (int x : arr) {
+			System.out.println(x);
+		}	
+	\end{lstlisting}
+
+	\paragraph{While-Schleife}
+	Wenn man keine feste Anzahl an Durchläufen benötigt, benutzt man die while-Schleife, die aus 3 teilen besteht: dem Schleifenaufruf (\textit{while}), der Abbruchbedingung (\textit{x > 0}) und dem Schleifenkörper (\textit{x++}):
+
+
+	\begin{lstlisting}[language=Java, caption=Eine einfache while-Schleife]
+		int x = 100;
+		
+		while (x > 100) {
+			x++;
+		}
+	\end{lstlisting}
+
+	\subsubsection{if-Abfragen}
+	Programme müssen häufig abhängig von bestimmten Bedingungen entscheidungen treffen. Für diesen zweck gibt es in Java die if-Abfrage. Diese besteht aus dem Aufruf (\textit{if}), der Bedingung (\textit{x > 12}) und dem Körper (\textit{System.out.println("Ist größer");}). Nur, wenn die Bedingung der Abfrage zutrifft, wird der Code im Körper ausgeführt.
+
+	\begin{lstlisting}[language=Java, caption=Eine einfache if-Abfrage]
+		int x = 40;
+
+		if (x > 12) {
+			System.out.println("Ist groesser");
+		}
+	\end{lstlisting}
+
+	Wenn man weitere Abfragen oder einen Codeabschnitt, der ausgefürt wird, wenn keine Bedingung zutrifft, benötigt, so nutzt man die \textit{else} bzw. \textit{if-else}-Bedingungen.
+
+	\begin{lstlisting}[language=Java, caption=Eine einfache if-else-Kette]
+		int x = 100;
+
+		if (x > 100) {
+			System.out.println("Groesser 100")
+		} else if (x == 100) {
+			System.out.println("Gleich 100")
+		} else {
+			System.out.println("Kleiner 100")
+		}
+	\end{lstlisting}
+
+	\subsection{Objektorientierte Programmierung}
+	Java ist eine objektorientierte Programmiersprache. Das bedeutet, das jeglicher Code Teil einer größeren Klassenstruktur ist, die diesen Code verwaltet.
+
+	\subsubsection{Klassen und Objekte}
+	Eine Klasse abstrahiert in der OOP Teile oder Zusammenhänge der realen Welt. Beispielsweise kann man mit einer Klasse ein Auto beschreiben: die Klasse "Auto" ist dann quasi die Repräsentation eines Autos in einem Programm, damit der Computer mit diesem arbeiten kann. Objekte sind dann die tatsächlichen Instanzen, die ein Programm letztendlich nutzt. EIne Klasse "Auto" kann dann beispielsweise in einem Objekt "Tesla Model S" instanziiert werden
+
+	\paragraph{Attribute}
+	Um eine Abstraktion zu beschreiben, können Klassen Attribute haben. Diese sind klassenzugehörige Variablen, mit denen Eigenschaften einer Klasse beschrieben werden. In einem Objekt bekommen diese Atttribute richtige Werte. Ein Auto kann beispielsweise die Attribute "Farbe" oder "Preis" haben.
+
+	\subparagraph{Datentyp}
+	Attribute sind Variablen. Folcglich müssen auch sie mit einem Datentypen deklariert werden.
+
+	\subparagraph{Sichtbarkeit}
+	Ein Attribut hat auch eine Sichtbarkeit, die beschreibt, wie andere Klassen mit diesem Attribut interagieren können
+
+	\begin{center}
+		\def\arraystretch{1.1}
+		\begin{tabular}{ | c | l | }
+			\hline
+			\textbf{Sichtbarkeit} 	& \textbf{Arbeitsweise} \\
+			\hline
+			\hline
+			\textbf{public} 		& Jede Klasse kann auf dieses Attribut zugreifen \\
+			\textbf{protected} 		& Die eigene Klasse und Unterklassen können auf dieses Attribut zugreifen \\
+			\textbf{private} 		& Nur die eigene Klasse kann auf dieses Attribut zugreifen \\
+			\hline
+		\end{tabular}
+	\end{center}
+
+	\paragraph{Methoden}
+	Neben den Eigenschaften kann eine Klasse auch sogenannte \textit{Methoden} haben. Diese Methoden dienen dazu, Aktionen einer Klasse darzustellen. Ein Auto kann in diesem Beispiel etwa die Methoden "fahren", "lichtEinschalten" und Ähnliche haben.
+
+	\subparagraph{Parameter}
+	Methoden können auch abhängig von bestimmten Eingabeparamtern operieren. Diese Parameter werden im Methodenkopf deklariert und beim Methodenaufruf übergeben.
+
+	\subparagraph{Rückgabewerte}
+	Eine Methode kann auch einen Wert zurückgeben. Damit eine Methode etwas zurückgeben darf, muss der Rückgabetyp im Methodenkopf deklariert werden.
+
+	\subparagraph{Sichtbarkeit}
+	Genau wie ein Attribut kann auch eine methode einen der Sichtbarkeitstypen \textit{public, protected oder private} haben. Dieser wird ebenfalls im Methodenkopf angegeben.
+
+	\begin{lstlisting}[language=Java, caption=Ein Beispiel für einen Methodenkopf]
+		private int addiere(int a, int b) 
+	\end{lstlisting}
+
+	\subsubsection{Konstruktoren}
+	Ein Konstruktor ist eine Art Methode, die bei der Initialisierung eines Objektes aufgerufen wird. Diesem Konstruktor können auch Parameter übergeben werden, die etwa den Anfangzustand eines Objektes festlegen können. Ein Konstruktor hat keinen Rückgabewert, ist immer \textit{public} und hat die gleiche Bezeichnung wie die Klasse.
+
+	\begin{lstlisting}[language=Java, caption=Ein Beispiel für eine Klasse mit Konstruktor]
+		class X {
+			private int c
+
+			public X(int a, int b) {
+				this.c = a + b;
+			}
+		}
+	\end{lstlisting}
+
+	\subsubsection{Überladung}
+	In Java kann eine Methode (oder ein Konstruktor) mehrfach mit unterschiedlichen Methodenköpfen deklariert werden. Der compiler bzw die runtime entscheidet dann abhängig von den übergebenen Parametern, welche Methode eigentlich aufgerufen werden soll.
+
+	\begin{lstlisting}[language=Java, caption=Ein Beispiel für Überladung]
+		class X {
+			private int z;
+
+			public void setZ() {
+				z = 0;
+			}
+
+			public void setZ(int pZ) {
+				z = pZ;
+			}
+		}
+	\end{lstlisting}
+
+	\newpage
+
+	\subsubsection{Vererbung}
+	Eine Unterklasse kann von einer anderen Oberklasse erben. Dabei übernimmt die Unterklasse die Attribute und Methoden der Oberklasse. Dieser Mechanismus kann genutzt werden, um Code einzusparen. Eine Vererbung wird im Klassenkopf über das \textit{extends}-Keyword angegeben.
+
+	\begin{lstlisting}[language=Java, caption=Vererbung im Klassenkopf]
+		class X extends Y {}
+	\end{lstlisting}
+
+	\paragraph{Polymorphie}
+	Die Unterklasse übernimmt nach einer Vererbung auch den Datentyp ihrer Oberklasse.
+
 	\subsection{Implementationsdiagramme in UML}
 	Um Objektorientierte Projekte zu modellieren, wird die Modellierungssprache UML verwendet.
 
